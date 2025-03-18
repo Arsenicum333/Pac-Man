@@ -1,8 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 public class Game extends JPanel {
     private Maze maze;
@@ -13,12 +11,12 @@ public class Game extends JPanel {
         maze = new Maze();
     }
     public static void main(String[] args) throws Exception {
-        int gameWidth = (Maze.getColumnCount() * Maze.getTileSize()) + 16;
-        int gameHeight = (Maze.getRowCount() * Maze.getTileSize()) + 160;
+        int gameWidth = Maze.getColumnCount() * Maze.getTileSize() + 16;
+        int gameHeight = Maze.getRowCount() * Maze.getTileSize() + 160;
 
         Game game = new Game(gameWidth, gameHeight);
-
         JFrame frame = new JFrame("Pac-Man");
+
         frame.setSize(gameWidth, gameHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
@@ -35,7 +33,6 @@ public class Game extends JPanel {
         int panelHeight = getHeight();
         int mazeWidth = Maze.getColumnCount() * Maze.getTileSize();
         int mazeHeight = Maze.getRowCount() * Maze.getTileSize();
-
         int offsetX = (panelWidth - mazeWidth) / 2;
         int offsetY = (panelHeight - mazeHeight) / 2 + 16;
 
@@ -47,6 +44,11 @@ public class Game extends JPanel {
         for (GameObject dot : maze.dots) {
             g.drawImage(dot.getImage(), offsetX + dot.getX(), offsetY + dot.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
+        }
+
+        for (GameObject powerPellet : maze.powerPellets) {
+            g.drawImage(powerPellet.getImage(), offsetX + powerPellet.getX(), offsetY + powerPellet.getY(),
+                        Maze.getTileSize() - 10, Maze.getTileSize() - 10, this);
         }
 
         for (GameObject ghost : maze.ghosts) {

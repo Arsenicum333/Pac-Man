@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import java.util.HashSet;
 
@@ -37,17 +36,12 @@ public class Maze {
     private Image ClydeRight;
     private Image ClydeUp;
 
-    HashSet<GameObject> walls;
-    HashSet<GameObject> dots;
-    HashSet<GameObject> ghosts;
-    GameObject pacman;
-
-    //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot
+    //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //Ghosts: b = Blinky, p = Pinky, i = Inky, c = Clyde
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
-        "X XX XXX X XXX XX X",
+        "XEXX XXX X XXX XXEX",
         "X                 X",
         "X XX X XXXXX X XX X",
         "X    X       X    X",
@@ -59,14 +53,20 @@ public class Maze {
         "OOOX X       X XOOO",
         "XXXX X XXXXX X XXXX",
         "X        X        X",
-        "X XX XXX X XXX XX X",
+        "XEXX XXX X XXX XXEX",
         "X  X     P     X  X",
         "XX X X XXXXX X X XX",
         "X    X   X   X    X",
         "X XXXXXX X XXXXXX X",
         "X                 X",
-        "XXXXXXXXXXXXXXXXXXX"
+        "XXXXXXXXXXXXXXXXXXX" 
     };
+
+    HashSet<GameObject> walls;
+    HashSet<GameObject> dots;
+    HashSet<GameObject> powerPellets;
+    HashSet<GameObject> ghosts;
+    GameObject pacman;
 
     Maze() {
         Wall = new ImageIcon(getClass().getResource("./img/Wall.png")).getImage();
@@ -104,13 +104,13 @@ public class Maze {
     public void generateMaze() {
         walls = new HashSet<GameObject>();
         dots = new HashSet<GameObject>();
+        powerPellets = new HashSet<GameObject>();
         ghosts = new HashSet<GameObject>();
 
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
                 String row = tileMap[r];
                 char tileMapChar = row.charAt(c);
-
                 int x = c * tileSize;
                 int y = r * tileSize;
 
@@ -141,19 +141,15 @@ public class Maze {
                     GameObject dot = new GameObject(Dot, x, y, tileSize, tileSize);
                     dots.add(dot);
                 }
+                else if (tileMapChar == 'E') {
+                    GameObject powerPellet = new GameObject(PowerPellet, x + 5, y + 5, tileSize - 10, tileSize - 10);
+                    powerPellets.add(powerPellet);
+                }
             }
         }
     }
 
-    public static int getRowCount() {
-        return rowCount;
-    }
-
-    public static int getColumnCount() {
-        return columnCount;
-    }
-
-    public static int getTileSize() {
-        return tileSize;
-    }
+    public static int getRowCount() {return rowCount;}
+    public static int getColumnCount() {return columnCount;}
+    public static int getTileSize() {return tileSize;}
 }
