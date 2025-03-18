@@ -59,7 +59,7 @@ public class Maze {
         "X    X   X   X    X",
         "X XXXXXX X XXXXXX X",
         "X                 X",
-        "XXXXXXXXXXXXXXXXXXX" 
+        "XXXXXXXXXXXXXXXXXXX"
     };
 
     HashSet<GameObject> walls;

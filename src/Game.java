@@ -1,14 +1,20 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Game extends JPanel {
+public class Game extends JPanel implements ActionListener {
     private Maze maze;
+    private Timer gameLoop;
 
     Game(int gameWidth, int gameHeight) {
         setPreferredSize(new Dimension(gameWidth, gameHeight));
         setBackground(Color.BLACK);
         maze = new Maze();
+        gameLoop = new Timer(50, this);
+        gameLoop.start();
     }
     public static void main(String[] args) throws Exception {
         int gameWidth = Maze.getColumnCount() * Maze.getTileSize() + 16;
@@ -58,5 +64,10 @@ public class Game extends JPanel {
 
         g.drawImage(maze.pacman.getImage(), offsetX + maze.pacman.getX(), offsetY + maze.pacman.getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        repaint();
     }
 }
