@@ -1,5 +1,3 @@
-import java.awt.*;
-import javax.swing.*;
 import java.util.HashSet;
 
 public class Maze {
@@ -7,34 +5,11 @@ public class Maze {
     private static final int columnCount = 19;
     private static final int tileSize = 32;
 
-    private Image Wall;
-    private Image Dot;
-    private Image PowerPellet;
-
-    private Image PacManDown;
-    private Image PacManLeft;
-    private Image PacManRight;
-    private Image PacManUp;
-
-    private Image BlinkyDown;
-    private Image BlinkyLeft;
-    private Image BlinkyRight;
-    private Image BlinkyUp;
-
-    private Image PinkyDown;
-    private Image PinkyLeft;
-    private Image PinkyRight;
-    private Image PinkyUp;
-
-    private Image InkyDown;
-    private Image InkyLeft;
-    private Image InkyRight;
-    private Image InkyUp;
-
-    private Image ClydeDown;
-    private Image ClydeLeft;
-    private Image ClydeRight;
-    private Image ClydeUp;
+    HashSet<GameObject> walls;
+    HashSet<GameObject> dots;
+    HashSet<GameObject> powerPellets;
+    HashSet<GameObject> ghosts;
+    PacMan pacman;
 
     //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //Ghosts: b = Blinky, p = Pinky, i = Inky, c = Clyde
@@ -62,50 +37,15 @@ public class Maze {
         "XXXXXXXXXXXXXXXXXXX"
     };
 
-    HashSet<GameObject> walls;
-    HashSet<GameObject> dots;
-    HashSet<GameObject> powerPellets;
-    HashSet<GameObject> ghosts;
-    GameObject pacman;
-
     Maze() {
-        Wall = new ImageIcon(getClass().getResource("./img/Wall.png")).getImage();
-        Dot = new ImageIcon(getClass().getResource("./img/Dot.png")).getImage();
-        PowerPellet = new ImageIcon(getClass().getResource("./img/PowerPellet.gif")).getImage();
-
-        PacManDown = new ImageIcon(getClass().getResource("./img/PacManDown.gif")).getImage();
-        PacManLeft = new ImageIcon(getClass().getResource("./img/PacManLeft.gif")).getImage();
-        PacManRight = new ImageIcon(getClass().getResource("./img/PacManRight.gif")).getImage();
-        PacManUp = new ImageIcon(getClass().getResource("./img/PacManUp.gif")).getImage();
-
-        BlinkyDown = new ImageIcon(getClass().getResource("./img/BlinkyDown.gif")).getImage();
-        BlinkyLeft = new ImageIcon(getClass().getResource("./img/BlinkyLeft.gif")).getImage();
-        BlinkyRight = new ImageIcon(getClass().getResource("./img/BlinkyRight.gif")).getImage();
-        BlinkyUp = new ImageIcon(getClass().getResource("./img/BlinkyUp.gif")).getImage();
-
-        PinkyDown = new ImageIcon(getClass().getResource("./img/PinkyDown.gif")).getImage();
-        PinkyLeft = new ImageIcon(getClass().getResource("./img/PinkyLeft.gif")).getImage();
-        PinkyRight = new ImageIcon(getClass().getResource("./img/PinkyRight.gif")).getImage();
-        PinkyUp = new ImageIcon(getClass().getResource("./img/PinkyUp.gif")).getImage();
-
-        InkyDown = new ImageIcon(getClass().getResource("./img/InkyDown.gif")).getImage();
-        InkyLeft = new ImageIcon(getClass().getResource("./img/InkyLeft.gif")).getImage();
-        InkyRight = new ImageIcon(getClass().getResource("./img/InkyRight.gif")).getImage();
-        InkyUp = new ImageIcon(getClass().getResource("./img/InkyUp.gif")).getImage();
-
-        ClydeDown = new ImageIcon(getClass().getResource("./img/ClydeDown.gif")).getImage();
-        ClydeLeft = new ImageIcon(getClass().getResource("./img/ClydeLeft.gif")).getImage();
-        ClydeRight = new ImageIcon(getClass().getResource("./img/ClydeRight.gif")).getImage();
-        ClydeUp = new ImageIcon(getClass().getResource("./img/ClydeUp.gif")).getImage();
-
         generateMaze();
     }
 
     public void generateMaze() {
-        walls = new HashSet<GameObject>();
-        dots = new HashSet<GameObject>();
-        powerPellets = new HashSet<GameObject>();
-        ghosts = new HashSet<GameObject>();
+        walls = new HashSet<>();
+        dots = new HashSet<>();
+        powerPellets = new HashSet<>();
+        ghosts = new HashSet<>();
 
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
@@ -114,38 +54,35 @@ public class Maze {
                 int x = c * tileSize;
                 int y = r * tileSize;
 
-                if (tileMapChar == 'X') {
-                    GameObject wall = new GameObject(Wall, x, y, tileSize, tileSize);
-                    walls.add(wall);
-                }
-                else if (tileMapChar == 'P') {
-                    pacman = new GameObject(PacManLeft, x, y, tileSize, tileSize);
-                }
-                else if (tileMapChar == 'b') {
-                    GameObject ghost = new GameObject(BlinkyUp, x, y, tileSize, tileSize);
-                    ghosts.add(ghost);
-                }
-                else if (tileMapChar == 'p') {
-                    GameObject ghost = new GameObject(PinkyUp, x, y, tileSize, tileSize);
-                    ghosts.add(ghost);
-                }
-                else if (tileMapChar == 'i') {
-                    GameObject ghost = new GameObject(InkyUp, x, y, tileSize, tileSize);
-                    ghosts.add(ghost);
-                }
-                else if (tileMapChar == 'c') {
-                    GameObject ghost = new GameObject(ClydeUp, x, y, tileSize, tileSize);
-                    ghosts.add(ghost);
-                }
-                else if (tileMapChar == ' ') {
-                    GameObject dot = new GameObject(Dot, x, y, tileSize, tileSize);
-                    dots.add(dot);
-                }
-                else if (tileMapChar == 'E') {
-                    GameObject powerPellet = new GameObject(PowerPellet, x + 5, y + 5, tileSize - 10, tileSize - 10);
-                    powerPellets.add(powerPellet);
-                }
+                placeObject(tileMapChar, x, y);
             }
+        }
+    }
+
+    public void placeObject(char tileMapChar, int x, int y) {
+        if (tileMapChar == 'X') {
+            GameObject wall = new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize);
+            walls.add(wall);
+        } else if (tileMapChar == 'P') {
+            pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize);
+        } else if (tileMapChar == 'b') {
+            GameObject blinky = new GameObject(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize);
+            ghosts.add(blinky);
+        } else if (tileMapChar == 'p') {
+            GameObject pinky = new GameObject(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize);
+            ghosts.add(pinky);
+        } else if (tileMapChar == 'i') {
+            GameObject inky = new GameObject(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize);
+            ghosts.add(inky);
+        } else if (tileMapChar == 'c') {
+            GameObject clyde = new GameObject(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize);
+            ghosts.add(clyde);
+        } else if (tileMapChar == ' ') {
+            GameObject dot = new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize);
+            dots.add(dot);
+        } else if (tileMapChar == 'E') {
+            GameObject powerPellet = new GameObject(ImageLoader.getImage("PowerPellet"), x + 5, y + 5, tileSize - 10, tileSize - 10);
+            powerPellets.add(powerPellet);
         }
     }
 

@@ -1,11 +1,8 @@
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Game extends JPanel implements ActionListener {
+public class Game extends JPanel implements ActionListener, KeyListener {
     private Maze maze;
     private Timer gameLoop;
 
@@ -13,8 +10,12 @@ public class Game extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(gameWidth, gameHeight));
         setBackground(Color.BLACK);
         maze = new Maze();
-        gameLoop = new Timer(50, this);
+
+        gameLoop = new Timer(20, this);
         gameLoop.start();
+
+        addKeyListener(this);
+        setFocusable(true);
     }
     public static void main(String[] args) throws Exception {
         int gameWidth = Maze.getColumnCount() * Maze.getTileSize() + 16;
@@ -28,6 +29,7 @@ public class Game extends JPanel implements ActionListener {
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(game);
+        game.requestFocus();
         frame.setVisible(true);
     }
 
@@ -68,6 +70,38 @@ public class Game extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        maze.pacman.move();
         repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (maze.pacman instanceof PacMan) {
+            String direction = "";
+
+            PacMan pacman = (PacMan) maze.pacman;
+
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                direction = "LEFT";
+            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                direction = "RIGHT";
+            } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                direction = "UP";
+            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                direction = "DOWN";
+            }
+
+            if (!direction.isEmpty()) {
+                pacman.setDirection(direction);
+            }
+
+            repaint();
+        }
     }
 }
