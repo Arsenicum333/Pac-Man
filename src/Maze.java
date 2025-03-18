@@ -86,6 +86,21 @@ public class Maze {
         }
     }
 
+    public boolean checkCollision(GameObject a, GameObject b) {
+        return a.getX() < b.getX() + b.getWidth() &&
+               a.getX() + a.getWidth() > b.getX() &&
+               a.getY() < b.getY() + b.getHeight() &&
+               a.getY() + a.getHeight() > b.getY();
+    }
+
+    public void handleCollisions() {
+        for (GameObject wall : walls) {
+            if (checkCollision(pacman, wall)) {
+                pacman.rollbackPosition();
+            }
+        }
+    }
+
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}

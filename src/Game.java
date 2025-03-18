@@ -11,7 +11,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.BLACK);
         maze = new Maze();
 
-        gameLoop = new Timer(20, this);
+        gameLoop = new Timer(10, this);
         gameLoop.start();
 
         addKeyListener(this);
@@ -71,6 +71,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         maze.pacman.move();
+        maze.handleCollisions();
         repaint();
     }
 
