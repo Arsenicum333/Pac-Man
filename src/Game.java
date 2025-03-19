@@ -56,7 +56,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
         for (GameObject powerPellet : maze.powerPellets) {
             g.drawImage(powerPellet.getImage(), offsetX + powerPellet.getX(), offsetY + powerPellet.getY(),
-                        Maze.getTileSize() - 10, Maze.getTileSize() - 10, this);
+                        Maze.getTileSize() - 10, Maze.getTileSize() - 12, this);
         }
 
         for (GameObject ghost : maze.ghosts) {

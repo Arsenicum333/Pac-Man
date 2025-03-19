@@ -81,7 +81,7 @@ public class Maze {
             GameObject dot = new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize);
             dots.add(dot);
         } else if (tileMapChar == 'E') {
-            GameObject powerPellet = new GameObject(ImageLoader.getImage("PowerPellet"), x + 5, y + 5, tileSize - 10, tileSize - 10);
+            GameObject powerPellet = new GameObject(ImageLoader.getImage("PowerPellet"), x + 6, y + 6, tileSize - 12, tileSize - 12);
             powerPellets.add(powerPellet);
         }
     }
