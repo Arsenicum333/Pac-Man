@@ -4,6 +4,7 @@ public class Maze {
     private static final int rowCount = 21;
     private static final int columnCount = 19;
     private static final int tileSize = 32;
+    private static Maze instance;
 
     HashSet<GameObject> walls;
     HashSet<GameObject> dots;
@@ -23,7 +24,7 @@ public class Maze {
         "XXXX XXXX XXXX XXXX",
         "OOOX X       X XOOO",
         "XXXX X XXbXX X XXXX",
-        "O       ipc       O",
+        "X       ipc       X",
         "XXXX X XXXXX X XXXX",
         "OOOX X       X XOOO",
         "XXXX X XXXXX X XXXX",
@@ -93,15 +94,12 @@ public class Maze {
                a.getY() + a.getHeight() > b.getY();
     }
 
-    public void handleCollisions() {
-        for (GameObject wall : walls) {
-            if (checkCollision(pacman, wall)) {
-                pacman.rollbackPosition();
-            }
-        }
-    }
-
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
+    public static Maze getInstance() {
+        if (instance == null)
+            instance = new Maze();
+        return instance;
+    }
 }

@@ -20,18 +20,6 @@ public abstract class Entity extends GameObject {
         }
     }
 
-    public void rollbackPosition() {
-        if (direction.equals("LEFT")) {
-            setX(getX() + speed);
-        } else if (direction.equals("RIGHT")) {
-            setX(getX() - speed);
-        } else if (direction.equals("UP")) {
-            setY(getY() + speed);
-        } else if (direction.equals("DOWN")) {
-            setY(getY() - speed);
-        }
-    }
-
     public static int getSpeed() {return speed;}
     public String getDirection() {return direction;}
 
