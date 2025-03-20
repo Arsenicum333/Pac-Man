@@ -86,8 +86,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         if (maze.pacman instanceof PacMan) {
             String direction = "";
 
-            PacMan pacman = (PacMan) maze.pacman;
-
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 direction = "LEFT";
             } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -99,7 +97,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
             }
 
             if (!direction.isEmpty()) {
-                pacman.setDirection(direction);
+                maze.pacman.setDirection(direction);
             }
 
             repaint();
