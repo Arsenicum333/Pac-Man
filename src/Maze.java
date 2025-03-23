@@ -13,18 +13,18 @@ public class Maze {
     PacMan pacman;
 
     //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
-    //Ghosts: b = Blinky, p = Pinky, i = Inky, c = Clyde
+    //Ghosts: b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
         "XEXX XXX X XXX XXEX",
         "X                 X",
         "X XX X XXXXX X XX X",
-        "X    X       X    X",
-        "XXXX XXXX XXXX XXXX",
+        "X    X   X   X    X",
+        "XXXX XXX X XXX XXXX",
         "OOOX X       X XOOO",
-        "XXXX X XXbXX X XXXX",
-        "X       ipc       X",
+        "XXXX X XOb0X X XXXX",
+        "X      XipcX      X",
         "XXXX X XXXXX X XXXX",
         "OOOX X       X XOOO",
         "XXXX X XXXXX X XXXX",
