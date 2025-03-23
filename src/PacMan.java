@@ -26,29 +26,6 @@ public class PacMan extends Entity {
         }
     }
 
-    private boolean canMove(String direction) {
-        int newX = getX();
-        int newY = getY();
-
-        if (direction.equals("LEFT")) {
-            newX -= getSpeed();
-        } else if (direction.equals("RIGHT")) {
-            newX += getSpeed();
-        } else if (direction.equals("UP")) {
-            newY -= getSpeed();
-        } else if (direction.equals("DOWN")) {
-            newY += getSpeed();
-        }
-
-        for (GameObject wall : Maze.getInstance().walls) {
-            if (Maze.getInstance().checkCollision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public String getNewDirection() {return newDirection;}
 
     public void setNewDirection(String newDirection) {this.newDirection = newDirection;}
