@@ -6,9 +6,7 @@ public class ImageLoader {
     private static final String PATH = "./img/";
     private static HashMap<String, Image> images = new HashMap<>();
 
-    static {
-        loadImages();
-    }
+    static {loadImages();}
 
     private static void loadImages() {
         images.put("Wall", loadImage("Wall.png"));
@@ -41,9 +39,7 @@ public class ImageLoader {
         images.put("ClydeUp", loadImage("ClydeUp.gif"));
     }
 
-    private static Image loadImage(String fileName) {
-        return new ImageIcon(ImageLoader.class.getResource(PATH + fileName)).getImage();
-    }
+    private static Image loadImage(String fileName) {return new ImageIcon(ImageLoader.class.getResource(PATH + fileName)).getImage();}
 
     public static Image getImage(String name) {return images.get(name);}
 }

@@ -38,9 +38,7 @@ public class Maze {
         "XXXXXXXXXXXXXXXXXXX"
     };
 
-    Maze() {
-        generateMaze();
-    }
+    Maze() {generateMaze();}
 
     public void generateMaze() {
         walls = new HashSet<>();
@@ -100,6 +98,7 @@ public class Maze {
     public static Maze getInstance() {
         if (instance == null)
             instance = new Maze();
+
         return instance;
     }
 }

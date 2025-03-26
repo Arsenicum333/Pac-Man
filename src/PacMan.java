@@ -15,15 +15,14 @@ public class PacMan extends Entity {
         if (canMove(direction))
             super.move();
 
-        if (direction.equals("LEFT")) {
+        if (direction.equals("LEFT"))
             setImage(ImageLoader.getImage("PacManLeft"));
-        } else if (direction.equals("RIGHT")) {
+        else if (direction.equals("RIGHT"))
             setImage(ImageLoader.getImage("PacManRight"));
-        } else if (direction.equals("UP")) {
+        else if (direction.equals("UP"))
             setImage(ImageLoader.getImage("PacManUp"));
-        } else if (direction.equals("DOWN")) {
+        else if (direction.equals("DOWN"))
             setImage(ImageLoader.getImage("PacManDown"));
-        }
     }
 
     public String getNewDirection() {return newDirection;}

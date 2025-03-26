@@ -77,23 +77,22 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     }
 
     @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            maze.pacman.setNewDirection("LEFT");
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            maze.pacman.setNewDirection("RIGHT");
+        else if (e.getKeyCode() == KeyEvent.VK_UP)
+            maze.pacman.setNewDirection("UP");
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            maze.pacman.setNewDirection("DOWN");
+
+        repaint();
+    }
+
+    @Override
     public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {}
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            maze.pacman.setNewDirection("LEFT");
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            maze.pacman.setNewDirection("RIGHT");
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            maze.pacman.setNewDirection("UP");
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            maze.pacman.setNewDirection("DOWN");
-        }
-
-        repaint();
-    }
 }

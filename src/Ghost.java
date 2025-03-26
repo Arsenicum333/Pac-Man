@@ -10,4 +10,5 @@ public abstract class Ghost extends Entity {
         super(image, x, y, width, height);
     }
 
+    // public void moveBehaviour();
 }
