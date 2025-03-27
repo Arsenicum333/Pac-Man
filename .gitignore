@@ -1,0 +1,11 @@
+LICENSE
+
+# Maven build artifacts
+/pacman/target/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+
+# VS Code files
+.vscode/
