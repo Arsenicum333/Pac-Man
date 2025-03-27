@@ -1,6 +1,8 @@
 # Pac-Man
 
+## Project structure
 ```
+Pac-Man
 ├───.idea
 ├───.vscode
 └───pacman
