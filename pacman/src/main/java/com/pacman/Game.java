@@ -15,7 +15,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.BLACK);
         maze = new Maze();
 
-        gameLoop = new Timer(10, this);
+        gameLoop = new Timer(13, this);
         gameLoop.start();
 
         addKeyListener(this);
@@ -63,28 +63,35 @@ public class Game extends JPanel implements ActionListener, KeyListener {
                         Maze.getTileSize() - 10, Maze.getTileSize() - 12, this);
         }
 
-        for (GameObject ghost : maze.ghosts) {
-            g.drawImage(ghost.getImage(), offsetX + ghost.getX(), offsetY + ghost.getY(),
-                        Maze.getTileSize(), Maze.getTileSize(), this);
-        }
-
         g.drawImage(maze.pacman.getImage(), offsetX + maze.pacman.getX(), offsetY + maze.pacman.getY(),
+                    Maze.getTileSize(), Maze.getTileSize(), this);
+
+        g.drawImage(maze.blinky.getImage(), offsetX + maze.blinky.getX(), offsetY + maze.blinky.getY(),
+                    Maze.getTileSize(), Maze.getTileSize(), this);
+
+        g.drawImage(maze.pinky.getImage(), offsetX + maze.pinky.getX(), offsetY + maze.pinky.getY(),
+                    Maze.getTileSize(), Maze.getTileSize(), this);
+
+        g.drawImage(maze.inky.getImage(), offsetX + maze.inky.getX(), offsetY + maze.inky.getY(),
+                    Maze.getTileSize(), Maze.getTileSize(), this);
+
+        g.drawImage(maze.clyde.getImage(), offsetX + maze.clyde.getX(), offsetY + maze.clyde.getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         maze.pacman.move();
-
-        for (Ghost ghost : maze.ghosts) {
-            ghost.moveBehaviour();
-        }
+        maze.blinky.moveBehaviour();
+        maze.pinky.moveBehaviour();
+        maze.inky.moveBehaviour();
+        maze.clyde.moveBehaviour();
 
         repaint();
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT)
             maze.pacman.setNewDirection("LEFT");
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
@@ -98,8 +105,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
 }

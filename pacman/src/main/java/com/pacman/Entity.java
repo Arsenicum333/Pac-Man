@@ -3,11 +3,12 @@ package com.pacman;
 import java.awt.Image;
 
 public abstract class Entity extends GameObject {
-    private int speed = Maze.getTileSize() / 8;
+    private int speed;
     protected String direction = "";
 
-    public Entity(Image image, int x, int y, int width, int height) {
+    public Entity(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height);
+        this.speed = speed;
     }
 
     public void move() {
@@ -26,13 +27,13 @@ public abstract class Entity extends GameObject {
         int newY = getY();
 
         if (direction.equals("LEFT"))
-            newX -= getSpeed();
+            newX -= speed;
         else if (direction.equals("RIGHT"))
-            newX += getSpeed();
+            newX += speed;
         else if (direction.equals("UP"))
-            newY -= getSpeed();
+            newY -= speed;
         else if (direction.equals("DOWN"))
-            newY += getSpeed();
+            newY += speed;
 
         for (GameObject wall : Maze.getInstance().walls) {
             if (Maze.getInstance().checkCollision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall)) {
@@ -46,5 +47,6 @@ public abstract class Entity extends GameObject {
     public int getSpeed() {return speed;}
     public String getDirection() {return direction;}
 
+    public void setSpeed(int speed) {this.speed = speed;}
     public void setDirection(String direction) {this.direction = direction;}
 }

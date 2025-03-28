@@ -11,8 +11,11 @@ public class Maze {
     HashSet<GameObject> walls;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
-    HashSet<Ghost> ghosts;
     PacMan pacman;
+    Blinky blinky;
+    Pinky pinky;
+    Inky inky;
+    Clyde clyde;
 
     //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //Ghosts: b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
@@ -46,7 +49,6 @@ public class Maze {
         walls = new HashSet<>();
         dots = new HashSet<>();
         powerPellets = new HashSet<>();
-        ghosts = new HashSet<>();
 
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
@@ -65,19 +67,15 @@ public class Maze {
             GameObject wall = new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize);
             walls.add(wall);
         } else if (tileMapChar == 'P') {
-            pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize);
+            pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
         } else if (tileMapChar == 'b') {
-            Ghost blinky = new Ghost(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize);
-            ghosts.add(blinky);
+            blinky = new Blinky(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
         } else if (tileMapChar == 'p') {
-            Ghost pinky = new Ghost(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize);
-            ghosts.add(pinky);
+            pinky = new Pinky(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
         } else if (tileMapChar == 'i') {
-            Ghost inky = new Ghost(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize);
-            ghosts.add(inky);
+            inky = new Inky(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize, tileSize / 11);
         } else if (tileMapChar == 'c') {
-            Ghost clyde = new Ghost(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize);
-            ghosts.add(clyde);
+            clyde = new Clyde(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize, tileSize / 11);
         } else if (tileMapChar == ' ') {
             GameObject dot = new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize);
             dots.add(dot);

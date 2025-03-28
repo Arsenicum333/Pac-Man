@@ -8,9 +8,9 @@ public class Ghost extends Entity {
     private String newDirection = "";
     private Random random = new Random();
 
-    public Ghost(Image image, int x, int y, int width, int height) {
-        super(image, x, y, width, height);
-        super.direction = "UP";
+    public Ghost(Image image, int x, int y, int width, int height, int speed) {
+        super(image, x, y, width, height, speed);
+        direction = "UP";
     }
 
     public void moveBehaviour() {

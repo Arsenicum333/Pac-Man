@@ -5,8 +5,8 @@ import java.awt.Image;
 public class PacMan extends Entity {
     private String newDirection = "";
 
-    public PacMan(Image image, int x, int y, int width, int height) {
-        super(image, x, y, width, height);
+    public PacMan(Image image, int x, int y, int width, int height, int speed) {
+        super(image, x, y, width, height, speed);
     }
 
     @Override
