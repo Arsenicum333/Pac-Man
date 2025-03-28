@@ -1,4 +1,6 @@
-package com.pacman;
+package com.pacman.entity.ghost;
+
+import com.pacman.entity.Entity;
 
 import java.awt.Image;
 import java.util.Random;

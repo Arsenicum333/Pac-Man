@@ -1,4 +1,6 @@
-package com.pacman;
+package com.pacman.entity.ghost;
+
+import com.pacman.ImageLoader;
 
 import java.awt.Image;
 

@@ -1,4 +1,7 @@
-package com.pacman;
+package com.pacman.entity;
+
+import com.pacman.GameObject;
+import com.pacman.Maze;
 
 import java.awt.Image;
 
@@ -35,7 +38,7 @@ public abstract class Entity extends GameObject {
         else if (direction.equals("DOWN"))
             newY += speed;
 
-        for (GameObject wall : Maze.getInstance().walls) {
+        for (GameObject wall : Maze.getInstance().getWalls()) {
             if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall)) {
                 return false;
             }

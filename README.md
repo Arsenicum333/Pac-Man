@@ -11,6 +11,9 @@ Pac-Man
     │   │   ├───java
     │   │   │   └───com
     │   │   │       └───pacman
+    │   │   │           ├───entity
+    │   │   │           │   └───ghost
+    │   │   │           └───item
     │   │   └───resources
     │   │       └───img
     │   └───test
@@ -19,21 +22,15 @@ Pac-Man
         ├───classes
         │   ├───com
         │   │   └───pacman
+        │   │       ├───entity
+        │   │       │   └───ghost
+        │   │       └───item
         │   └───img
         ├───generated-sources
         │   └───annotations
-        ├───generated-test-sources
-        │   └───test-annotations
         ├───maven-status
         │   └───maven-compiler-plugin
-        │       ├───compile
-        │       │   └───default-compile
-        │       └───testCompile
-        │           └───default-testCompile
-        ├───site
-        │   └───jacoco
-        │       ├───com.pacman
-        │       └───jacoco-resources
-        ├───surefire-reports
+        │       └───compile
+        │           └───default-compile
         └───test-classes
 ```

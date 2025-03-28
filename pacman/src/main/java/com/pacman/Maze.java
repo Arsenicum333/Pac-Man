@@ -1,5 +1,11 @@
 package com.pacman;
 
+import com.pacman.entity.PacMan;
+import com.pacman.entity.ghost.Blinky;
+import com.pacman.entity.ghost.Clyde;
+import com.pacman.entity.ghost.Inky;
+import com.pacman.entity.ghost.Pinky;
+
 import java.util.HashSet;
 
 public class Maze {
@@ -88,6 +94,7 @@ public class Maze {
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
+    public HashSet<GameObject> getWalls() {return walls;}
     public static Maze getInstance() {
         if (instance == null)
             instance = new Maze();
