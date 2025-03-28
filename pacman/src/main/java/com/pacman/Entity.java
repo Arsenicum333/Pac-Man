@@ -3,7 +3,7 @@ package com.pacman;
 import java.awt.Image;
 
 public abstract class Entity extends GameObject {
-    private static int speed = Maze.getTileSize() / 8;
+    private int speed = Maze.getTileSize() / 8;
     protected String direction = "";
 
     public Entity(Image image, int x, int y, int width, int height) {
@@ -43,7 +43,7 @@ public abstract class Entity extends GameObject {
         return true;
     }
 
-    public static int getSpeed() {return speed;}
+    public int getSpeed() {return speed;}
     public String getDirection() {return direction;}
 
     public void setDirection(String direction) {this.direction = direction;}

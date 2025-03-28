@@ -75,6 +75,11 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         maze.pacman.move();
+
+        for (Ghost ghost : maze.ghosts) {
+            ghost.moveBehaviour();
+        }
+
         repaint();
     }
 

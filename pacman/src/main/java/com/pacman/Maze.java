@@ -11,7 +11,7 @@ public class Maze {
     HashSet<GameObject> walls;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
-    HashSet<GameObject> ghosts;
+    HashSet<Ghost> ghosts;
     PacMan pacman;
 
     //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
@@ -67,16 +67,16 @@ public class Maze {
         } else if (tileMapChar == 'P') {
             pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize);
         } else if (tileMapChar == 'b') {
-            GameObject blinky = new GameObject(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize);
+            Ghost blinky = new Ghost(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize);
             ghosts.add(blinky);
         } else if (tileMapChar == 'p') {
-            GameObject pinky = new GameObject(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize);
+            Ghost pinky = new Ghost(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize);
             ghosts.add(pinky);
         } else if (tileMapChar == 'i') {
-            GameObject inky = new GameObject(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize);
+            Ghost inky = new Ghost(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize);
             ghosts.add(inky);
         } else if (tileMapChar == 'c') {
-            GameObject clyde = new GameObject(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize);
+            Ghost clyde = new Ghost(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize);
             ghosts.add(clyde);
         } else if (tileMapChar == ' ') {
             GameObject dot = new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize);
