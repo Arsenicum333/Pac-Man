@@ -16,6 +16,13 @@ public class GameObject {
         this.height = height;
     }
 
+    public boolean collision(GameObject a, GameObject b) {
+        return a.getX() < b.getX() + b.getWidth() &&
+               a.getX() + a.getWidth() > b.getX() &&
+               a.getY() < b.getY() + b.getHeight() &&
+               a.getY() + a.getHeight() > b.getY();
+    }
+
     public Image getImage() {return image;}
     public int getX() {return x;}
     public int getY() {return y;}
