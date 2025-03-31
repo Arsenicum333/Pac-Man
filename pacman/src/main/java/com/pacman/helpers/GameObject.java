@@ -1,4 +1,4 @@
-package com.pacman;
+package com.pacman.helpers;
 
 import java.awt.Image;
 
@@ -14,13 +14,6 @@ public class GameObject {
         this.y = y;
         this.width = width;
         this.height = height;
-    }
-
-    public boolean collision(GameObject a, GameObject b) {
-        return a.getX() < b.getX() + b.getWidth() &&
-               a.getX() + a.getWidth() > b.getX() &&
-               a.getY() < b.getY() + b.getHeight() &&
-               a.getY() + a.getHeight() > b.getY();
     }
 
     public Image getImage() {return image;}

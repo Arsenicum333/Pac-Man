@@ -1,18 +1,20 @@
 package com.pacman;
 
-import com.pacman.entity.PacMan;
-import com.pacman.entity.ghost.Blinky;
-import com.pacman.entity.ghost.Clyde;
-import com.pacman.entity.ghost.Inky;
-import com.pacman.entity.ghost.Pinky;
+import com.pacman.entities.PacMan;
+import com.pacman.entities.ghosts.Blinky;
+import com.pacman.entities.ghosts.Clyde;
+import com.pacman.entities.ghosts.Inky;
+import com.pacman.entities.ghosts.Pinky;
+import com.pacman.helpers.GameObject;
+import com.pacman.helpers.ImageLoader;
 
 import java.util.HashSet;
 
 public class Maze {
+    private static final Maze instance = new Maze();
     private static final int rowCount = 21;
     private static final int columnCount = 19;
     private static final int tileSize = 32;
-    private static Maze instance;
 
     HashSet<GameObject> walls;
     HashSet<GameObject> dots;
@@ -24,7 +26,7 @@ public class Maze {
     Clyde clyde;
 
     //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
-    //Ghosts: b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
+    //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
@@ -49,7 +51,7 @@ public class Maze {
         "XXXXXXXXXXXXXXXXXXX"
     };
 
-    Maze() {generateMaze();}
+    private Maze() {generateMaze();}
 
     public void generateMaze() {
         walls = new HashSet<>();
@@ -94,11 +96,8 @@ public class Maze {
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
+    public static Maze getInstance() {return instance;}
     public HashSet<GameObject> getWalls() {return walls;}
-    public static Maze getInstance() {
-        if (instance == null)
-            instance = new Maze();
-
-        return instance;
-    }
+    public HashSet<GameObject> getDots() {return dots;}
+    public HashSet<GameObject> getPowerPellets() {return powerPellets;}
 }

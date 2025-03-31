@@ -1,5 +1,7 @@
-import com.pacman.GameObject;
-import com.pacman.ImageLoader;
+package helpers;
+
+import com.pacman.helpers.GameObject;
+import com.pacman.helpers.ImageLoader;
 
 import org.junit.jupiter.api.Test;
 import javax.swing.ImageIcon;
@@ -24,26 +26,34 @@ public class GameObjectTest {
     }
 
     @Test
-public void testGetImages() {
-    System.out.println("Wall: " + ImageLoader.getImage("Wall"));
-    assertNotNull(ImageLoader.getImage("Wall"));
-    System.out.println("Dot: " + ImageLoader.getImage("Dot"));
-    assertNotNull(ImageLoader.getImage("Dot"));
-    System.out.println("PowerPellet: " + ImageLoader.getImage("PowerPellet"));
-    assertNotNull(ImageLoader.getImage("PowerPellet"));
-    System.out.println("PacManUp: " + ImageLoader.getImage("PacManUp"));
-    assertNotNull(ImageLoader.getImage("PacManUp"));
-    System.out.println("BlinkyDown: " + ImageLoader.getImage("BlinkyDown"));
-    assertNotNull(ImageLoader.getImage("BlinkyDown"));
-    System.out.println("PinkyLeft: " + ImageLoader.getImage("PinkyLeft"));
-    assertNotNull(ImageLoader.getImage("PinkyLeft"));
-    System.out.println("InkyRight: " + ImageLoader.getImage("InkyRight"));
-    assertNotNull(ImageLoader.getImage("InkyRight"));
-    System.out.println("ClydeUp: " + ImageLoader.getImage("ClydeUp"));
-    assertNotNull(ImageLoader.getImage("ClydeUp"));
-    System.out.println("NonExistentImage: " + ImageLoader.getImage("NonExistentImage"));
-    assertNull(ImageLoader.getImage("NonExistentImage"));
-}
+    public void testGetImages() {
+        System.out.println("Wall: " + ImageLoader.getImage("Wall"));
+        assertNotNull(ImageLoader.getImage("Wall"));
+
+        System.out.println("Dot: " + ImageLoader.getImage("Dot"));
+        assertNotNull(ImageLoader.getImage("Dot"));
+
+        System.out.println("PowerPellet: " + ImageLoader.getImage("PowerPellet"));
+        assertNotNull(ImageLoader.getImage("PowerPellet"));
+
+        System.out.println("PacManUp: " + ImageLoader.getImage("PacManUp"));
+        assertNotNull(ImageLoader.getImage("PacManUp"));
+
+        System.out.println("BlinkyDown: " + ImageLoader.getImage("BlinkyDown"));
+        assertNotNull(ImageLoader.getImage("BlinkyDown"));
+
+        System.out.println("PinkyLeft: " + ImageLoader.getImage("PinkyLeft"));
+        assertNotNull(ImageLoader.getImage("PinkyLeft"));
+
+        System.out.println("InkyRight: " + ImageLoader.getImage("InkyRight"));
+        assertNotNull(ImageLoader.getImage("InkyRight"));
+
+        System.out.println("ClydeUp: " + ImageLoader.getImage("ClydeUp"));
+        assertNotNull(ImageLoader.getImage("ClydeUp"));
+
+        System.out.println("NonExistentImage: " + ImageLoader.getImage("NonExistentImage"));
+        assertNull(ImageLoader.getImage("NonExistentImage"));
+    }
 
     @Test
     public void testSetters() {

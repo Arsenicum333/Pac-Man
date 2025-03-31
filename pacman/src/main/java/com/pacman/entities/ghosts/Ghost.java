@@ -1,6 +1,6 @@
-package com.pacman.entity.ghost;
+package com.pacman.entities.ghosts;
 
-import com.pacman.entity.Entity;
+import com.pacman.entities.Entity;
 
 import java.awt.Image;
 import java.util.Random;
@@ -20,7 +20,7 @@ public class Ghost extends Entity {
             do {
                 newDirection = directions[random.nextInt(directions.length)];
             } while (!canMove(newDirection));
-            direction = newDirection;
+                direction = newDirection;
         }
 
         super.move();

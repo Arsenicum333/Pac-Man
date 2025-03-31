@@ -1,11 +1,11 @@
-package com.pacman;
+package com.pacman.helpers;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
 public class ImageLoader {
-    private static final String PATH = "/img/";
+    private static final String PATH = "/images/";
     private static HashMap<String, Image> images = new HashMap<>();
 
     static {loadImages();}

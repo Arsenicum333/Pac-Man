@@ -1,4 +1,4 @@
-package com.pacman.item;
+package com.pacman.items;
 
 public class PowerUp {
     

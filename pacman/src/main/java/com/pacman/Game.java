@@ -1,5 +1,7 @@
 package com.pacman;
 
+import com.pacman.helpers.GameObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +15,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     Game(int gameWidth, int gameHeight) {
         setPreferredSize(new Dimension(gameWidth, gameHeight));
         setBackground(Color.BLACK);
-        maze = new Maze();
+        maze = Maze.getInstance();
 
         gameLoop = new Timer(13, this);
         gameLoop.start();
@@ -46,7 +48,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         int mazeWidth = Maze.getColumnCount() * Maze.getTileSize();
         int mazeHeight = Maze.getRowCount() * Maze.getTileSize();
         int offsetX = (panelWidth - mazeWidth) / 2;
-        int offsetY = (panelHeight - mazeHeight) / 2 + 16;
+        int offsetY = (panelHeight - mazeHeight) / 2;
 
         for (GameObject wall : maze.walls) {
             g.drawImage(wall.getImage(), offsetX + wall.getX(), offsetY + wall.getY(),
@@ -82,6 +84,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         maze.pacman.move();
+        maze.pacman.eatItem();
         maze.blinky.moveBehaviour();
         maze.pinky.moveBehaviour();
         maze.inky.moveBehaviour();
