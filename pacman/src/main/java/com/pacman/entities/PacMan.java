@@ -42,7 +42,7 @@ public class PacMan extends Entity {
         for (GameObject dot : maze.getDots()) {
             if (itemCollision(this, dot)) {
                 eatenItem = dot;
-                gui.setCurrentScore(gui.getCurrentScore() + 10);
+                gui.setScore(gui.getScore() + 10);
                 break;
             }
         }
@@ -53,7 +53,7 @@ public class PacMan extends Entity {
         for (GameObject powerPellet : maze.getPowerPellets()) {
             if (itemCollision(this, powerPellet)) {
                 eatenItem = powerPellet;
-                gui.setCurrentScore(gui.getCurrentScore() + 50);
+                gui.setScore(gui.getScore() + 50);
                 break;
             }
         }
