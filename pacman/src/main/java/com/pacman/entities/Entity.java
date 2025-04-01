@@ -25,10 +25,10 @@ public abstract class Entity extends GameObject {
         else if (direction.equals("DOWN"))
             setY(getY() + speed);
 
-        if (getX() > 606)
-            setX(-30);
-        if (getX() < -30)
-            setX(606);
+        if (getX() > 592)
+            setX(-16);
+        if (getX() < -16)
+            setX(592);
     }
 
     public boolean canMove(String direction) {
