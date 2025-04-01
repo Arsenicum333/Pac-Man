@@ -37,7 +37,7 @@ public class Maze {
         "XXXX XXX X XXX XXXX",
         "OOOX X       X XOOO",
         "XXXX X XOb0X X XXXX",
-        "X      XipcX      X",
+        "       XipcX       ",
         "XXXX X XXXXX X XXXX",
         "OOOX X       X XOOO",
         "XXXX X XXXXX X XXXX",
