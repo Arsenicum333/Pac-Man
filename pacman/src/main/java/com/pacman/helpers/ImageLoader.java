@@ -12,9 +12,12 @@ public class ImageLoader {
 
     private static void loadImages() {
         images.put("Wall", loadImage("Wall.png"));
+        images.put("Gate", loadImage("Gate.png"));
         images.put("Dot", loadImage("Dot.png"));
         images.put("PowerPellet", loadImage("PowerPellet.gif"));
 
+        images.put("PacManIcon", loadImage("PacManIcon.png"));
+        images.put("PacManIconBorder", loadImage("PacManIconBorder.png"));
         images.put("PacManDown", loadImage("PacManDown.gif"));
         images.put("PacManLeft", loadImage("PacManLeft.gif"));
         images.put("PacManRight", loadImage("PacManRight.gif"));

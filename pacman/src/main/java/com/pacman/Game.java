@@ -1,6 +1,9 @@
 package com.pacman;
 
 import javax.swing.*;
+
+import com.pacman.helpers.ImageLoader;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -28,7 +31,9 @@ public class Game implements ActionListener, KeyListener {
 
         Game game = new Game(gameWidth, gameHeight);
         JFrame frame = new JFrame("Pac-Man");
+        ImageIcon icon = new ImageIcon(ImageLoader.getImage("PacManIconBorder"));
 
+        frame.setIconImage(icon.getImage());
         frame.setSize(gameWidth, gameHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);

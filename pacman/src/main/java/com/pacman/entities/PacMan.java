@@ -34,6 +34,32 @@ public class PacMan extends Entity {
             setImage(ImageLoader.getImage("PacManDown"));
     }
 
+    @Override
+    public boolean canMove(String direction) {
+        if (!super.canMove(direction))
+            return false;
+
+        int newX = getX();
+        int newY = getY();
+
+        if (direction.equals("LEFT"))
+            newX -= getSpeed();
+        else if (direction.equals("RIGHT"))
+            newX += getSpeed();
+        else if (direction.equals("UP"))
+            newY -= getSpeed();
+        else if (direction.equals("DOWN"))
+            newY += getSpeed();
+
+        for (GameObject gate : Maze.getInstance().getGates()) {
+            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void eatItem() {
         Maze maze = Maze.getInstance();
         GUI gui = GUI.getInstance();

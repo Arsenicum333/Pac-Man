@@ -17,6 +17,7 @@ public class Maze {
     private static final int tileSize = 32;
 
     HashSet<GameObject> walls;
+    HashSet<GameObject> gates;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
     PacMan pacman;
@@ -25,7 +26,7 @@ public class Maze {
     Inky inky;
     Clyde clyde;
 
-    //X = Wall, O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
+    //X = Wall, G = Gate O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
@@ -35,8 +36,8 @@ public class Maze {
         "X XX X XXXXX X XX X",
         "X    X   X   X    X",
         "XXXX XXX X XXX XXXX",
-        "OOOX X       X XOOO",
-        "XXXX X XObOX X XXXX",
+        "OOOX X   b   X XOOO",
+        "XXXX X XGGGX X XXXX",
         "       XipcX       ",
         "XXXX X XXXXX X XXXX",
         "OOOX X       X XOOO",
@@ -55,6 +56,7 @@ public class Maze {
 
     public void generateMaze() {
         walls = new HashSet<>();
+        gates = new HashSet<>();
         dots = new HashSet<>();
         powerPellets = new HashSet<>();
 
@@ -74,6 +76,9 @@ public class Maze {
         if (tileMapChar == 'X') {
             GameObject wall = new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize);
             walls.add(wall);
+        } else if (tileMapChar == 'G') {
+            GameObject gate = new GameObject(ImageLoader.getImage("Gate"), x, y, tileSize, tileSize);
+            gates.add(gate);
         } else if (tileMapChar == 'P') {
             pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
         } else if (tileMapChar == 'b') {
@@ -98,6 +103,7 @@ public class Maze {
     public static int getTileSize() {return tileSize;}
     public static Maze getInstance() {return instance;}
     public HashSet<GameObject> getWalls() {return walls;}
+    public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}
     public HashSet<GameObject> getPowerPellets() {return powerPellets;}
 }

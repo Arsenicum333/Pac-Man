@@ -32,6 +32,11 @@ public class GUI extends JPanel {
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
+        for (GameObject gate : maze.gates) {
+            g.drawImage(gate.getImage(), offsetX + gate.getX(), offsetY + gate.getY(),
+                        Maze.getTileSize(), Maze.getTileSize(), this);
+        }
+
         for (GameObject dot : maze.dots) {
             g.drawImage(dot.getImage(), offsetX + dot.getX(), offsetY + dot.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
@@ -75,7 +80,7 @@ public class GUI extends JPanel {
 
     public void updateHighScore() {
         if (getHighScore() < getScore())
-            setHighScore(score);
+            setHighScore(getScore());
     }
 
     public int getScore() {return score;}
