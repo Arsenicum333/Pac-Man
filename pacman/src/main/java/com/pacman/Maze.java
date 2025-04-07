@@ -20,11 +20,11 @@ public class Maze {
     HashSet<GameObject> gates;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
-    PacMan pacman;
-    Blinky blinky;
-    Pinky pinky;
-    Inky inky;
-    Clyde clyde;
+    protected PacMan pacman;
+    protected Blinky blinky;
+    protected Pinky pinky;
+    protected Inky inky;
+    protected Clyde clyde;
 
     //X = Wall, G = Gate O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
@@ -102,6 +102,11 @@ public class Maze {
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
     public static Maze getInstance() {return instance;}
+    public PacMan getPacman() {return pacman;}
+    public Blinky getBlinky() {return blinky;}
+    public Pinky getPinky() {return pinky;}
+    public Inky getInky() {return inky;}
+    public Clyde getClyde() {return clyde;}
     public HashSet<GameObject> getWalls() {return walls;}
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}

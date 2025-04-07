@@ -1,13 +1,13 @@
 package com.pacman;
 
-import javax.swing.*;
-
 import com.pacman.helpers.ImageLoader;
+import com.pacman.helpers.KeyHandler;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Game implements ActionListener, KeyListener {
+public class Game implements ActionListener {
     private Maze maze;
     private GUI gui;
     private Timer gameLoop;
@@ -22,9 +22,10 @@ public class Game implements ActionListener, KeyListener {
         gameLoop = new Timer(13, this);
         gameLoop.start();
 
-        gui.addKeyListener(this);
+        gui.addKeyListener(new KeyHandler(maze));
         gui.setFocusable(true);
     }
+
     public static void main(String[] args) throws Exception {
         int gameWidth = Maze.getColumnCount() * Maze.getTileSize() + WINDOW_OFFSET_X;
         int gameHeight = Maze.getRowCount() * Maze.getTileSize() + WINDOW_OFFSET_Y;
@@ -55,24 +56,4 @@ public class Game implements ActionListener, KeyListener {
         gui.updateHighScore();
         gui.repaint();
     }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            maze.pacman.setNewDirection("LEFT");
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            maze.pacman.setNewDirection("RIGHT");
-        else if (e.getKeyCode() == KeyEvent.VK_UP)
-            maze.pacman.setNewDirection("UP");
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-            maze.pacman.setNewDirection("DOWN");
-
-        gui.repaint();
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {}
-
-    @Override
-    public void keyTyped(KeyEvent e) {}
 }
