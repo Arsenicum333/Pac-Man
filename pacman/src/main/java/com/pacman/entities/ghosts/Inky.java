@@ -13,13 +13,12 @@ public class Inky extends Ghost {
     public void moveBehaviour() {
         super.moveBehaviour();
 
-        if (direction.equals("LEFT"))
-            setImage(ImageLoader.getImage("InkyLeft"));
-        else if (direction.equals("RIGHT"))
-            setImage(ImageLoader.getImage("InkyRight"));
-        else if (direction.equals("UP"))
-            setImage(ImageLoader.getImage("InkyUp"));
-        else if (direction.equals("DOWN"))
-            setImage(ImageLoader.getImage("InkyDown"));
+        switch (direction) {
+            case "LEFT" -> setImage(ImageLoader.getImage("InkyLeft"));
+            case "RIGHT" -> setImage(ImageLoader.getImage("InkyRight"));
+            case "UP" -> setImage(ImageLoader.getImage("InkyUp"));
+            case "DOWN" -> setImage(ImageLoader.getImage("InkyDown"));
+            default -> {}
+        }
     }
 }

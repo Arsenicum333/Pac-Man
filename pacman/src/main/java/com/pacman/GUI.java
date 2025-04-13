@@ -8,12 +8,11 @@ import java.awt.*;
 public class GUI extends JPanel {
     private static final GUI instance = new GUI();
     private Maze maze;
-    private int score = 0;
-    private int highScore = 0;
 
     private GUI() {
         maze = Maze.getInstance();
         setBackground(Color.BLACK);
+        setFocusable(true);
     }
 
     @Override
@@ -27,46 +26,46 @@ public class GUI extends JPanel {
         int offsetX = (panelWidth - mazeWidth) / 2;
         int offsetY = (panelHeight - mazeHeight) / 2;
 
-        for (GameObject wall : maze.walls) {
+        for (GameObject wall : maze.getWalls()) {
             g.drawImage(wall.getImage(), offsetX + wall.getX(), offsetY + wall.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
-        for (GameObject gate : maze.gates) {
+        for (GameObject gate : maze.getGates()) {
             g.drawImage(gate.getImage(), offsetX + gate.getX(), offsetY + gate.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
-        for (GameObject dot : maze.dots) {
+        for (GameObject dot : maze.getDots()) {
             g.drawImage(dot.getImage(), offsetX + dot.getX(), offsetY + dot.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
-        for (GameObject powerPellet : maze.powerPellets) {
+        for (GameObject powerPellet : maze.getPowerPellets()) {
             g.drawImage(powerPellet.getImage(), offsetX + powerPellet.getX(), offsetY + powerPellet.getY(),
                         Maze.getTileSize() - 10, Maze.getTileSize() - 12, this);
         }
 
-        g.drawImage(maze.pacman.getImage(), offsetX + maze.pacman.getX(), offsetY + maze.pacman.getY(),
+        g.drawImage(maze.getPacman().getImage(), offsetX + maze.getPacman().getX(), offsetY + maze.getPacman().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
-        g.drawImage(maze.blinky.getImage(), offsetX + maze.blinky.getX(), offsetY + maze.blinky.getY(),
+        g.drawImage(maze.getBlinky().getImage(), offsetX + maze.getBlinky().getX(), offsetY + maze.getBlinky().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
-        g.drawImage(maze.pinky.getImage(), offsetX + maze.pinky.getX(), offsetY + maze.pinky.getY(),
+        g.drawImage(maze.getPinky().getImage(), offsetX + maze.getPinky().getX(), offsetY + maze.getPinky().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
-        g.drawImage(maze.inky.getImage(), offsetX + maze.inky.getX(), offsetY + maze.inky.getY(),
+        g.drawImage(maze.getInky().getImage(), offsetX + maze.getInky().getX(), offsetY + maze.getInky().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
-        g.drawImage(maze.clyde.getImage(), offsetX + maze.clyde.getX(), offsetY + maze.clyde.getY(),
+        g.drawImage(maze.getClyde().getImage(), offsetX + maze.getClyde().getX(), offsetY + maze.getClyde().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 30));
 
-        String scoreText = "Score: " + score;
-        String highScoreText = "High Score: " + highScore;
+        String scoreText = "Score: " + maze.getScore();
+        String highScoreText = "High Score: " + maze.getHighScore();
         int scoreTextWidth = g.getFontMetrics().stringWidth(scoreText);
         int highScoreTextWidth = g.getFontMetrics().stringWidth(highScoreText);
         int centerX = panelWidth / 2;
@@ -78,15 +77,5 @@ public class GUI extends JPanel {
         g.drawString(highScoreText, highScoreX, textY);
     }
 
-    public void updateHighScore() {
-        if (getHighScore() < getScore())
-            setHighScore(getScore());
-    }
-
-    public int getScore() {return score;}
-    public int getHighScore() {return highScore;}
     public static GUI getInstance() {return instance;}
-
-    public void setScore(int score) {this.score = score;}
-    public void setHighScore(int highScore) {this.highScore = highScore;}
 }

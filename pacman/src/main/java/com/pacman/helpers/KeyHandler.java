@@ -14,14 +14,13 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)
-            maze.getPacman().setNewDirection("LEFT");
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)
-            maze.getPacman().setNewDirection("RIGHT");
-        else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)
-            maze.getPacman().setNewDirection("UP");
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)
-            maze.getPacman().setNewDirection("DOWN");
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> maze.getPacman().setNewDirection("LEFT");
+            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> maze.getPacman().setNewDirection("RIGHT");
+            case KeyEvent.VK_UP, KeyEvent.VK_W -> maze.getPacman().setNewDirection("UP");
+            case KeyEvent.VK_DOWN, KeyEvent.VK_S -> maze.getPacman().setNewDirection("DOWN");
+            default -> {}
+        }
     }
 
     @Override

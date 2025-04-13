@@ -15,6 +15,8 @@ public class Maze {
     private static final int rowCount = 21;
     private static final int columnCount = 19;
     private static final int tileSize = 32;
+    private int score = 0;
+    private int highScore = 0;
 
     HashSet<GameObject> walls;
     HashSet<GameObject> gates;
@@ -73,34 +75,31 @@ public class Maze {
     }
 
     public void placeObject(char tileMapChar, int x, int y) {
-        if (tileMapChar == 'X') {
-            GameObject wall = new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize);
-            walls.add(wall);
-        } else if (tileMapChar == 'G') {
-            GameObject gate = new GameObject(ImageLoader.getImage("Gate"), x, y, tileSize, tileSize);
-            gates.add(gate);
-        } else if (tileMapChar == 'P') {
-            pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
-        } else if (tileMapChar == 'b') {
-            blinky = new Blinky(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-        } else if (tileMapChar == 'p') {
-            pinky = new Pinky(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-        } else if (tileMapChar == 'i') {
-            inky = new Inky(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-        } else if (tileMapChar == 'c') {
-            clyde = new Clyde(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize, tileSize / 11);
-        } else if (tileMapChar == ' ') {
-            GameObject dot = new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize);
-            dots.add(dot);
-        } else if (tileMapChar == 'E') {
-            GameObject powerPellet = new GameObject(ImageLoader.getImage("PowerPellet"), x + 6, y + 6, tileSize - 12, tileSize - 12);
-            powerPellets.add(powerPellet);
+        switch (tileMapChar) {
+            case 'X' -> walls.add(new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize));
+            case 'G' -> gates.add(new GameObject(ImageLoader.getImage("Gate"), x, y, tileSize, tileSize));
+            case 'P' -> pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
+            case 'b' -> blinky = new Blinky(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+            case 'p' -> pinky = new Pinky(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+            case 'i' -> inky = new Inky(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+            case 'c' -> clyde = new Clyde(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize, tileSize / 11);
+            case ' ' -> dots.add(new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize));
+            case 'E' -> powerPellets.add(new GameObject(ImageLoader.getImage("PowerPellet"), x + 6, y + 6, tileSize - 12, tileSize - 12));
+            default -> {}
+        }
+    }
+
+    public void updateHighScore() {
+        if (score > highScore) {
+            highScore = score;
         }
     }
 
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
+    public int getScore() {return score;}
+    public int getHighScore() {return highScore;}
     public static Maze getInstance() {return instance;}
     public PacMan getPacman() {return pacman;}
     public Blinky getBlinky() {return blinky;}
@@ -111,4 +110,7 @@ public class Maze {
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}
     public HashSet<GameObject> getPowerPellets() {return powerPellets;}
+
+    public void setScore(int score) {this.score = score;}
+    public void setHighScore(int highScore) {this.highScore = highScore;}
 }

@@ -13,13 +13,12 @@ public class Clyde extends Ghost {
     public void moveBehaviour() {
         super.moveBehaviour();
 
-        if (direction.equals("LEFT"))
-            setImage(ImageLoader.getImage("ClydeLeft"));
-        else if (direction.equals("RIGHT"))
-            setImage(ImageLoader.getImage("ClydeRight"));
-        else if (direction.equals("UP"))
-            setImage(ImageLoader.getImage("ClydeUp"));
-        else if (direction.equals("DOWN"))
-            setImage(ImageLoader.getImage("ClydeDown"));
+        switch (direction) {
+            case "LEFT" -> setImage(ImageLoader.getImage("ClydeLeft"));
+            case "RIGHT" -> setImage(ImageLoader.getImage("ClydeRight"));
+            case "UP" -> setImage(ImageLoader.getImage("ClydeUp"));
+            case "DOWN" -> setImage(ImageLoader.getImage("ClydeDown"));
+            default -> {}
+        }
     }
 }

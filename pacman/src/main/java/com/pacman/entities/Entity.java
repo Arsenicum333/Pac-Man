@@ -16,14 +16,13 @@ public abstract class Entity extends GameObject {
     }
 
     public void move() {
-        if (direction.equals("LEFT"))
-            setX(getX() - speed);
-        else if (direction.equals("RIGHT"))
-            setX(getX() + speed);
-        else if (direction.equals("UP"))
-            setY(getY() - speed);
-        else if (direction.equals("DOWN"))
-            setY(getY() + speed);
+        switch (direction) {
+            case "LEFT" -> setX(getX() - speed);
+            case "RIGHT" -> setX(getX() + speed);
+            case "UP" -> setY(getY() - speed);
+            case "DOWN" -> setY(getY() + speed);
+            default -> {}
+        }
 
         if (getX() > 600)
             setX(-24);
@@ -35,14 +34,13 @@ public abstract class Entity extends GameObject {
         int newX = getX();
         int newY = getY();
 
-        if (direction.equals("LEFT"))
-            newX -= speed;
-        else if (direction.equals("RIGHT"))
-            newX += speed;
-        else if (direction.equals("UP"))
-            newY -= speed;
-        else if (direction.equals("DOWN"))
-            newY += speed;
+        switch (direction) {
+            case "LEFT" -> newX -= speed;
+            case "RIGHT" -> newX += speed;
+            case "UP" -> newY -= speed;
+            case "DOWN" -> newY += speed;
+            default -> {}
+        }
 
         for (GameObject wall : Maze.getInstance().getWalls()) {
             if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall)) {

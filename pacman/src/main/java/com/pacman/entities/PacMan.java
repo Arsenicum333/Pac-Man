@@ -1,7 +1,6 @@
 package com.pacman.entities;
 
 import com.pacman.Maze;
-import com.pacman.GUI;
 import com.pacman.helpers.GameObject;
 import com.pacman.helpers.ImageLoader;
 import static com.pacman.helpers.CollisionDetector.*;
@@ -24,14 +23,13 @@ public class PacMan extends Entity {
         if (canMove(direction))
             super.move();
 
-        if (direction.equals("LEFT"))
-            setImage(ImageLoader.getImage("PacManLeft"));
-        else if (direction.equals("RIGHT"))
-            setImage(ImageLoader.getImage("PacManRight"));
-        else if (direction.equals("UP"))
-            setImage(ImageLoader.getImage("PacManUp"));
-        else if (direction.equals("DOWN"))
-            setImage(ImageLoader.getImage("PacManDown"));
+        switch (direction) {
+            case "LEFT" -> setImage(ImageLoader.getImage("PacManLeft"));
+            case "RIGHT" -> setImage(ImageLoader.getImage("PacManRight"));
+            case "UP" -> setImage(ImageLoader.getImage("PacManUp"));
+            case "DOWN" -> setImage(ImageLoader.getImage("PacManDown"));
+            default -> {}
+        }
     }
 
     @Override
@@ -42,14 +40,13 @@ public class PacMan extends Entity {
         int newX = getX();
         int newY = getY();
 
-        if (direction.equals("LEFT"))
-            newX -= getSpeed();
-        else if (direction.equals("RIGHT"))
-            newX += getSpeed();
-        else if (direction.equals("UP"))
-            newY -= getSpeed();
-        else if (direction.equals("DOWN"))
-            newY += getSpeed();
+        switch (direction) {
+            case "LEFT" -> newX -= getSpeed();
+            case "RIGHT" -> newX += getSpeed();
+            case "UP" -> newY -= getSpeed();
+            case "DOWN" -> newY += getSpeed();
+            default -> {}
+        }
 
         for (GameObject gate : Maze.getInstance().getGates()) {
             if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate)) {
@@ -62,13 +59,12 @@ public class PacMan extends Entity {
 
     public void eatItem() {
         Maze maze = Maze.getInstance();
-        GUI gui = GUI.getInstance();
         GameObject eatenItem = null;
 
         for (GameObject dot : maze.getDots()) {
             if (itemCollision(this, dot)) {
                 eatenItem = dot;
-                gui.setScore(gui.getScore() + 10);
+                maze.setScore(maze.getScore() + 10);
                 break;
             }
         }
@@ -79,7 +75,7 @@ public class PacMan extends Entity {
         for (GameObject powerPellet : maze.getPowerPellets()) {
             if (itemCollision(this, powerPellet)) {
                 eatenItem = powerPellet;
-                gui.setScore(gui.getScore() + 50);
+                maze.setScore(maze.getScore() + 50);
                 break;
             }
         }

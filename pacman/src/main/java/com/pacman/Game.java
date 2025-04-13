@@ -17,13 +17,12 @@ public class Game implements ActionListener {
     Game(int gameWidth, int gameHeight) {
         maze = Maze.getInstance();
         gui = GUI.getInstance();
+
         gui.setPreferredSize(new Dimension(gameWidth, gameHeight));
+        gui.addKeyListener(new KeyHandler(maze));
 
         gameLoop = new Timer(13, this);
         gameLoop.start();
-
-        gui.addKeyListener(new KeyHandler(maze));
-        gui.setFocusable(true);
     }
 
     public static void main(String[] args) throws Exception {
@@ -52,8 +51,8 @@ public class Game implements ActionListener {
         maze.pinky.moveBehaviour();
         maze.inky.moveBehaviour();
         maze.clyde.moveBehaviour();
+        maze.updateHighScore();
 
-        gui.updateHighScore();
         gui.repaint();
     }
 }
