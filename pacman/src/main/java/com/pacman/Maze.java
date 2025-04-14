@@ -1,6 +1,7 @@
 package com.pacman;
 
 import com.pacman.entities.PacMan;
+import com.pacman.entities.ghosts.Ghost;
 import com.pacman.entities.ghosts.Blinky;
 import com.pacman.entities.ghosts.Clyde;
 import com.pacman.entities.ghosts.Inky;
@@ -9,6 +10,7 @@ import com.pacman.helpers.GameObject;
 import com.pacman.helpers.ImageLoader;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class Maze {
     private static final Maze instance = new Maze();
@@ -22,11 +24,11 @@ public class Maze {
     HashSet<GameObject> gates;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
-    protected PacMan pacman;
-    protected Blinky blinky;
-    protected Pinky pinky;
-    protected Inky inky;
-    protected Clyde clyde;
+    private PacMan pacman;
+    private Blinky blinky;
+    private Pinky pinky;
+    private Inky inky;
+    private Clyde clyde;
 
     //X = Wall, G = Gate O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
@@ -90,9 +92,8 @@ public class Maze {
     }
 
     public void updateHighScore() {
-        if (score > highScore) {
+        if (score > highScore)
             highScore = score;
-        }
     }
 
     public static int getRowCount() {return rowCount;}
@@ -106,6 +107,7 @@ public class Maze {
     public Pinky getPinky() {return pinky;}
     public Inky getInky() {return inky;}
     public Clyde getClyde() {return clyde;}
+    public List<Ghost> getGhosts() {return List.of(blinky, pinky, inky, clyde);}
     public HashSet<GameObject> getWalls() {return walls;}
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}

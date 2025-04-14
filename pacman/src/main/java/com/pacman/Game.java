@@ -45,12 +45,13 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        maze.pacman.move();
-        maze.pacman.eatItem();
-        maze.blinky.moveBehaviour();
-        maze.pinky.moveBehaviour();
-        maze.inky.moveBehaviour();
-        maze.clyde.moveBehaviour();
+        maze.getPacman().move();
+        maze.getPacman().eatItem();
+        maze.getPacman().loseLife();
+        maze.getBlinky().moveBehaviour();
+        maze.getPinky().moveBehaviour();
+        maze.getInky().moveBehaviour();
+        maze.getClyde().moveBehaviour();
         maze.updateHighScore();
 
         gui.repaint();

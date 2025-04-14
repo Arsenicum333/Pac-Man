@@ -1,6 +1,7 @@
 package com.pacman.entities;
 
 import com.pacman.Maze;
+import com.pacman.entities.ghosts.Ghost;
 import com.pacman.helpers.GameObject;
 import com.pacman.helpers.ImageLoader;
 import static com.pacman.helpers.CollisionDetector.*;
@@ -49,9 +50,8 @@ public class PacMan extends Entity {
         }
 
         for (GameObject gate : Maze.getInstance().getGates()) {
-            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate)) {
+            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate))
                 return false;
-            }
         }
 
         return true;
@@ -62,7 +62,7 @@ public class PacMan extends Entity {
         GameObject eatenItem = null;
 
         for (GameObject dot : maze.getDots()) {
-            if (itemCollision(this, dot)) {
+            if (offsetCollision(this, dot)) {
                 eatenItem = dot;
                 maze.setScore(maze.getScore() + 10);
                 break;
@@ -73,7 +73,7 @@ public class PacMan extends Entity {
             maze.getDots().remove(eatenItem);
 
         for (GameObject powerPellet : maze.getPowerPellets()) {
-            if (itemCollision(this, powerPellet)) {
+            if (offsetCollision(this, powerPellet)) {
                 eatenItem = powerPellet;
                 maze.setScore(maze.getScore() + 50);
                 break;
@@ -82,6 +82,19 @@ public class PacMan extends Entity {
 
         if (eatenItem != null)
             maze.getPowerPellets().remove(eatenItem);
+    }
+
+    public void loseLife() {
+        Maze maze = Maze.getInstance();
+
+        if (maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost))) {
+            maze.getGhosts().forEach(Ghost::resetPositions);
+            resetPositions();
+
+            direction = "";
+            newDirection = "";
+            lives--;
+        }
     }
 
     public String getNewDirection() {return newDirection;}

@@ -25,4 +25,10 @@ public class Ghost extends Entity {
 
         super.move();
     }
+
+    @Override
+    public void resetPositions() {
+        super.resetPositions();
+        direction = "UP";
+    }
 }

@@ -52,7 +52,7 @@ public class CollisionDetectorTest {
         GameObject entity = new GameObject(null, 10, 10, 20, 20);
         GameObject item = new GameObject(null, 12, 12, 20, 20);
 
-        assertTrue(CollisionDetector.itemCollision(entity, item));
+        assertTrue(CollisionDetector.offsetCollision(entity, item));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class CollisionDetectorTest {
         GameObject entity = new GameObject(null, 32, 10, 10, 10);
         GameObject item = new GameObject(null, 10, 10, 20, 20);
 
-        assertFalse(CollisionDetector.itemCollision(entity, item));
+        assertFalse(CollisionDetector.offsetCollision(entity, item));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CollisionDetectorTest {
         GameObject entity = new GameObject(null, 2, 10, 10, 10);
         GameObject item = new GameObject(null, 20, 10, 20, 20);
 
-        assertFalse(CollisionDetector.itemCollision(entity, item));
+        assertFalse(CollisionDetector.offsetCollision(entity, item));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CollisionDetectorTest {
         GameObject entity = new GameObject(null, 10, 32, 10, 10);
         GameObject item = new GameObject(null, 10, 10, 20, 20);
 
-        assertFalse(CollisionDetector.itemCollision(entity, item));
+        assertFalse(CollisionDetector.offsetCollision(entity, item));
     }
 
     @Test
@@ -84,6 +84,6 @@ public class CollisionDetectorTest {
         GameObject entity = new GameObject(null, 10, 2, 10, 10);
         GameObject item = new GameObject(null, 10, 20, 20, 20);
 
-        assertFalse(CollisionDetector.itemCollision(entity, item));
+        assertFalse(CollisionDetector.offsetCollision(entity, item));
     }
 }

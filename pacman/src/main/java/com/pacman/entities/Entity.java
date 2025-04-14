@@ -43,12 +43,16 @@ public abstract class Entity extends GameObject {
         }
 
         for (GameObject wall : Maze.getInstance().getWalls()) {
-            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall)) {
+            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), wall))
                 return false;
-            }
         }
 
         return true;
+    }
+
+    public void resetPositions() {
+        setX(getStartX());
+        setY(getStartY());
     }
 
     public int getSpeed() {return speed;}

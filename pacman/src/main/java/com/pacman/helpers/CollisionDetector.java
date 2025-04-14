@@ -10,12 +10,12 @@ public class CollisionDetector {
                a.getY() + a.getHeight() > b.getY();
     }
 
-    public static boolean itemCollision(GameObject entity, GameObject item) {
+    public static boolean offsetCollision(GameObject a, GameObject b) {
         int offset = COLLISION_OFFSET;
 
-        return entity.getX() + offset < item.getX() + item.getWidth() - offset &&
-               entity.getX() + entity.getWidth() - offset > item.getX() + offset &&
-               entity.getY() + offset < item.getY() + item.getHeight() - offset &&
-               entity.getY() + entity.getHeight() - offset > item.getY() + offset;
+        return a.getX() + offset < b.getX() + b.getWidth() - offset &&
+               a.getX() + a.getWidth() - offset > b.getX() + offset &&
+               a.getY() + offset < b.getY() + b.getHeight() - offset &&
+               a.getY() + a.getHeight() - offset > b.getY() + offset;
     }
 }

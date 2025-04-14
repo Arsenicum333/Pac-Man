@@ -14,6 +14,8 @@ public class GameObject {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.startX = x;
+        this.startY = y;
     }
 
     public Image getImage() {return image;}
