@@ -21,8 +21,8 @@ public class GameObjectTest {
         assertEquals(20, object.getY());
         assertEquals(30, object.getWidth());
         assertEquals(40, object.getHeight());
-        assertEquals(0, object.getStartX());
-        assertEquals(0, object.getStartY());
+        assertEquals(10, object.getStartX());
+        assertEquals(20, object.getStartY());
     }
 
     @Test
