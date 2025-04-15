@@ -62,14 +62,6 @@ public class Game implements ActionListener {
         }
     }
 
-    public void newLevel() {
-        if (maze.getDots().isEmpty() && maze.getPowerPellets().isEmpty()) {
-            int currentLives = maze.getPacman().getLives();
-            maze.generateMaze();
-            maze.getPacman().setLives(currentLives);
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!isGameOver && isGameOn) {
@@ -84,8 +76,7 @@ public class Game implements ActionListener {
         }
 
         gui.repaint();
-
-        newLevel();
+        maze.newLevel();
         endGame();
     }
 

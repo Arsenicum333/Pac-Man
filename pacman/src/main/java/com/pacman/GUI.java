@@ -1,6 +1,7 @@
 package com.pacman;
 
 import com.pacman.helpers.GameObject;
+import com.pacman.helpers.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,6 +76,17 @@ public class GUI extends JPanel {
 
         g.drawString(scoreText, scoreX, textY);
         g.drawString(highScoreText, highScoreX, textY);
+
+        int lives = maze.getPacman().getLives();
+        int lifeIconSize = 48;
+        int lifeIconSpacing = 10;
+        int livesY = offsetY + mazeHeight + 10;
+        int livesX = offsetX;
+
+        for (int i = 0; i < lives; i++) {
+            g.drawImage(ImageLoader.getImage("PacManIcon"), livesX + i * (lifeIconSize + lifeIconSpacing), livesY,
+                        lifeIconSize, lifeIconSize, this);
+        }
     }
 
     public static GUI getInstance() {return instance;}

@@ -96,6 +96,14 @@ public class Maze {
             highScore = score;
     }
 
+    public void newLevel() {
+        if (dots.isEmpty() && powerPellets.isEmpty()) {
+            int currentLives = pacman.getLives();
+            generateMaze();
+            pacman.setLives(currentLives);
+        }
+    }
+
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
