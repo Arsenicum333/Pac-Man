@@ -88,12 +88,14 @@ public class PacMan extends Entity {
         Maze maze = Maze.getInstance();
 
         if (maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost))) {
-            maze.getGhosts().forEach(Ghost::resetPositions);
-            resetPositions();
-
             direction = "";
             newDirection = "";
             lives--;
+
+            if (lives > 0) {
+                maze.getGhosts().forEach(Ghost::resetPositions);
+                resetPositions();
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class Game implements ActionListener {
     private Maze maze;
     private GUI gui;
     private Timer gameLoop;
+    private boolean isGameOver = false;
     private static final int WINDOW_OFFSET_X = 16;
     private static final int WINDOW_OFFSET_Y = 160;
 
@@ -43,6 +44,15 @@ public class Game implements ActionListener {
         frame.setVisible(true);
     }
 
+    public void restartGame() {}
+
+    public void endGame() {
+        if (maze.getPacman().getLives() <= 0) {
+            isGameOver = true;
+            gameLoop.stop();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         maze.getPacman().move();
@@ -55,5 +65,11 @@ public class Game implements ActionListener {
         maze.updateHighScore();
 
         gui.repaint();
+
+        endGame();
     }
+
+    public boolean isGameOver() {return isGameOver;}
+
+    public void setGameOver(boolean isGameOver) {this.isGameOver = isGameOver;}
 }
