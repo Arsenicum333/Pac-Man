@@ -12,6 +12,7 @@ public class Game implements ActionListener {
     private GUI gui;
     private Timer gameLoop;
     private boolean isGameOver = false;
+    private boolean isGameOn = false;
     private static final int WINDOW_OFFSET_X = 16;
     private static final int WINDOW_OFFSET_Y = 160;
 
@@ -20,7 +21,7 @@ public class Game implements ActionListener {
         gui = GUI.getInstance();
 
         gui.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        gui.addKeyListener(new KeyHandler(maze));
+        gui.addKeyListener(new KeyHandler(maze, this));
 
         gameLoop = new Timer(13, this);
         gameLoop.start();
@@ -44,7 +45,16 @@ public class Game implements ActionListener {
         frame.setVisible(true);
     }
 
-    public void restartGame() {}
+    public void restartGame() {
+        if (isGameOver) {
+            maze.generateMaze();
+            maze.getPacman().setLives(3);
+            maze.setScore(0);
+            isGameOver = false;
+            isGameOn = false;
+            gameLoop.start();
+        }
+    }
 
     public void endGame() {
         if (maze.getPacman().getLives() <= 0) {
@@ -55,14 +65,16 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        maze.getPacman().move();
-        maze.getPacman().eatItem();
-        maze.getPacman().loseLife();
-        maze.getBlinky().moveBehaviour();
-        maze.getPinky().moveBehaviour();
-        maze.getInky().moveBehaviour();
-        maze.getClyde().moveBehaviour();
-        maze.updateHighScore();
+        if (!isGameOver && isGameOn) {
+            maze.getPacman().move();
+            maze.getPacman().eatItem();
+            maze.getPacman().loseLife();
+            maze.getBlinky().moveBehaviour();
+            maze.getPinky().moveBehaviour();
+            maze.getInky().moveBehaviour();
+            maze.getClyde().moveBehaviour();
+            maze.updateHighScore();
+        }
 
         gui.repaint();
 
@@ -70,6 +82,8 @@ public class Game implements ActionListener {
     }
 
     public boolean isGameOver() {return isGameOver;}
+    public boolean isGameOn() {return isGameOn;}
 
     public void setGameOver(boolean isGameOver) {this.isGameOver = isGameOver;}
+    public void setGameOn(boolean isGameOn) {this.isGameOn = isGameOn;}
 }
