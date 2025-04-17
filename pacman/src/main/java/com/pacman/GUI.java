@@ -14,6 +14,7 @@ public class GUI extends JPanel {
 
     private GUI() {
         maze = Maze.getInstance();
+
         setBackground(Color.BLACK);
         setFocusable(true);
     }

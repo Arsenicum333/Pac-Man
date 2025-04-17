@@ -3,9 +3,9 @@ package com.pacman;
 import com.pacman.entities.PacMan;
 import com.pacman.entities.ghosts.Ghost;
 import com.pacman.entities.ghosts.Blinky;
-import com.pacman.entities.ghosts.Clyde;
-import com.pacman.entities.ghosts.Inky;
 import com.pacman.entities.ghosts.Pinky;
+import com.pacman.entities.ghosts.Inky;
+import com.pacman.entities.ghosts.Clyde;
 import com.pacman.helpers.GameObject;
 import com.pacman.helpers.ImageLoader;
 

@@ -19,8 +19,8 @@ public class Game implements ActionListener {
     Game(int gameWidth, int gameHeight) {
         maze = Maze.getInstance();
         gui = GUI.getInstance();
-        gui.setGame(this);
 
+        gui.setGame(this);
         gui.setPreferredSize(new Dimension(gameWidth, gameHeight));
         gui.addKeyListener(new KeyHandler(maze, this));
 
