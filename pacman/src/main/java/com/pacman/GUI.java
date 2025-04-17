@@ -79,7 +79,7 @@ public class GUI extends JPanel {
         int highScoreValueWidth = metrics.stringWidth(highScoreValue);
         int centerX = windowWidth / 2;
         int scoreX = centerX - scoreLabelWidth / 2 - 200;
-        int highScoreX = centerX - highScoreLabelWidth / 2 + 150;
+        int highScoreX = centerX - highScoreLabelWidth / 2;
         int labelY = 30;
         int valueY = labelY + metrics.getHeight();
 
@@ -107,7 +107,7 @@ public class GUI extends JPanel {
                 String gameOverText = "GAME OVER";
                 int gameOverWidth = g.getFontMetrics().stringWidth(gameOverText);
 
-                g.drawString(gameOverText, centerX - gameOverWidth / 2, windowHeight / 2);
+                g.drawString(gameOverText, centerX - gameOverWidth / 2, windowHeight / 2 + 5);
 
                 g.setFont(FontLoader.getJoystixMonospaceFont(22f));
                 g.setColor(Color.WHITE);
@@ -115,7 +115,7 @@ public class GUI extends JPanel {
                 String restartText = "PRESS SPACE TO RESTART";
                 int restartWidth = g.getFontMetrics().stringWidth(restartText);
 
-                g.drawString(restartText, centerX - restartWidth / 2, windowHeight / 2 + 50);
+                g.drawString(restartText, centerX - restartWidth / 2, windowHeight / 2 + 72);
             } else if (!game.isGameOn()) {
                 g.setFont(FontLoader.getJoystixMonospaceFont(22f));
                 g.setColor(Color.YELLOW);
@@ -123,7 +123,7 @@ public class GUI extends JPanel {
                 String startText = "PRESS ARROW KEY OR WASD TO START";
                 int startWidth = g.getFontMetrics().stringWidth(startText);
 
-                g.drawString(startText, centerX - startWidth / 2, windowHeight / 2);
+                g.drawString(startText, centerX - startWidth / 2, windowHeight / 2 + 8);
             }
         }
     }

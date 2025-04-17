@@ -33,30 +33,6 @@ public class PacMan extends Entity {
         }
     }
 
-    @Override
-    public boolean canMove(String direction) {
-        if (!super.canMove(direction))
-            return false;
-
-        int newX = getX();
-        int newY = getY();
-
-        switch (direction) {
-            case "LEFT" -> newX -= getSpeed();
-            case "RIGHT" -> newX += getSpeed();
-            case "UP" -> newY -= getSpeed();
-            case "DOWN" -> newY += getSpeed();
-            default -> {}
-        }
-
-        for (GameObject gate : Maze.getInstance().getGates()) {
-            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate))
-                return false;
-        }
-
-        return true;
-    }
-
     public void eatItem() {
         Maze maze = Maze.getInstance();
         GameObject eatenItem = null;

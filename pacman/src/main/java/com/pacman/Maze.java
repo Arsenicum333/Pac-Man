@@ -17,8 +17,8 @@ public class Maze {
     private static final int rowCount = 21;
     private static final int columnCount = 19;
     private static final int tileSize = 32;
-    private int score = 0;
-    private int highScore = 0;
+    private int score = 0; // Max Value: 2147479999
+    private int highScore = 0; // Max Value: 2147479999
 
     HashSet<GameObject> walls;
     HashSet<GameObject> gates;

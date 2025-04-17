@@ -47,6 +47,11 @@ public abstract class Entity extends GameObject {
                 return false;
         }
 
+        for (GameObject gate : Maze.getInstance().getGates()) {
+            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate) && direction == "DOWN")
+                return false;
+        }
+
         return true;
     }
 
