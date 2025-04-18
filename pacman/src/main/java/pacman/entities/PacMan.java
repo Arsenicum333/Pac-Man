@@ -1,10 +1,11 @@
-package com.pacman.entities;
+package pacman.entities;
 
-import com.pacman.Maze;
-import com.pacman.entities.ghosts.Ghost;
-import com.pacman.helpers.GameObject;
-import com.pacman.helpers.ImageLoader;
-import static com.pacman.helpers.CollisionDetector.*;
+import pacman.Maze;
+import pacman.entities.ghosts.Ghost;
+import pacman.helpers.GameObject;
+import pacman.helpers.loaders.ImageLoader;
+
+import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
 

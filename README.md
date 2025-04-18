@@ -7,15 +7,22 @@ Pac-Man
     └───src
         ├───main
         │   ├───java
-        │   │   └───com
-        │   │       └───pacman
-        │   │           ├───entities
-        │   │           │   └───ghosts
-        │   │           ├───helpers
-        │   │           └───items
+        │   │   └───pacman
+        │   │       ├───entities
+        │   │       │   └───ghosts
+        │   │       ├───helpers
+        │   │       │   ├───handlers
+        │   │       │   └───loaders
+        │   │       └───items
         │   └───resources
+        │       ├───fonts
         │       └───images
         └───test
             └───java
-                └───helpers
+                ├───entities
+                │   └───ghosts
+                ├───helpers
+                │   ├───handlers
+                │   └───loaders
+                └───items
 ```

@@ -1,4 +1,4 @@
-package com.pacman.helpers;
+package pacman.helpers;
 
 public class CollisionDetector {
     private static final int COLLISION_OFFSET = 8;

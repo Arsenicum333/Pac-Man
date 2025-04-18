@@ -1,8 +1,8 @@
-package com.pacman.entities;
+package pacman.entities;
 
-import com.pacman.Maze;
-import com.pacman.helpers.GameObject;
-import static com.pacman.helpers.CollisionDetector.*;
+import pacman.Maze;
+import pacman.helpers.GameObject;
+import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
 

@@ -1,4 +1,4 @@
-package com.pacman.helpers;
+package pacman.helpers;
 
 import java.awt.Image;
 

@@ -1,8 +1,8 @@
-package com.pacman;
+package pacman;
 
-import com.pacman.helpers.ImageLoader;
-import com.pacman.helpers.KeyHandler;
-import com.pacman.helpers.MouseHandler;
+import pacman.helpers.handlers.KeyHandler;
+import pacman.helpers.handlers.MouseHandler;
+import pacman.helpers.loaders.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;

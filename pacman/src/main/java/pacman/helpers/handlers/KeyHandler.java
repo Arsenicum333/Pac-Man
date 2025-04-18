@@ -1,7 +1,7 @@
-package com.pacman.helpers;
+package pacman.helpers.handlers;
 
-import com.pacman.Maze;
-import com.pacman.Game;
+import pacman.Maze;
+import pacman.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

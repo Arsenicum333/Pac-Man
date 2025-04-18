@@ -1,6 +1,6 @@
-package com.pacman.helpers;
+package pacman.helpers.handlers;
 
-import com.pacman.Game;
+import pacman.Game;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

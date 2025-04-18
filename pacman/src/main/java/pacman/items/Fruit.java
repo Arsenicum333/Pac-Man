@@ -1,4 +1,4 @@
-package com.pacman.items;
+package pacman.items;
 
 public class Fruit {
     

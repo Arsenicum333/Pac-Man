@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project metadata -->
-    <groupId>com.pacman</groupId>
+    <groupId>pacman</groupId>
     <artifactId>pacman</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -75,7 +75,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <mainClass>com.pacman.Game</mainClass>
+                    <mainClass>pacman.Game</mainClass>
                 </configuration>
             </plugin>
 

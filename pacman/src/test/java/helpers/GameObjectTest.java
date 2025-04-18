@@ -1,7 +1,7 @@
 package helpers;
 
-import com.pacman.helpers.GameObject;
-import com.pacman.helpers.ImageLoader;
+import pacman.helpers.GameObject;
+import pacman.helpers.loaders.ImageLoader;
 
 import org.junit.jupiter.api.Test;
 import javax.swing.ImageIcon;

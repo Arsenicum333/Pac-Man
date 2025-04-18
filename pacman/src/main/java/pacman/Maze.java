@@ -1,13 +1,13 @@
-package com.pacman;
+package pacman;
 
-import com.pacman.entities.PacMan;
-import com.pacman.entities.ghosts.Ghost;
-import com.pacman.entities.ghosts.Blinky;
-import com.pacman.entities.ghosts.Pinky;
-import com.pacman.entities.ghosts.Inky;
-import com.pacman.entities.ghosts.Clyde;
-import com.pacman.helpers.GameObject;
-import com.pacman.helpers.ImageLoader;
+import pacman.entities.PacMan;
+import pacman.entities.ghosts.Ghost;
+import pacman.entities.ghosts.Blinky;
+import pacman.entities.ghosts.Pinky;
+import pacman.entities.ghosts.Inky;
+import pacman.entities.ghosts.Clyde;
+import pacman.helpers.GameObject;
+import pacman.helpers.loaders.ImageLoader;
 
 import java.util.HashSet;
 import java.util.List;

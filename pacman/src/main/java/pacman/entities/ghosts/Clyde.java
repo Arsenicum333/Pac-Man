@@ -1,8 +1,8 @@
-package com.pacman.entities.ghosts;
-
-import com.pacman.helpers.ImageLoader;
+package pacman.entities.ghosts;
 
 import java.awt.Image;
+
+import pacman.helpers.loaders.ImageLoader;
 
 public class Clyde extends Ghost {
     public Clyde(Image image, int x, int y, int width, int height, int speed) {

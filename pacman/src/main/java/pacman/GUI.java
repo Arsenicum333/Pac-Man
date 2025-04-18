@@ -1,8 +1,8 @@
-package com.pacman;
+package pacman;
 
-import com.pacman.helpers.GameObject;
-import com.pacman.helpers.ImageLoader;
-import com.pacman.helpers.FontLoader;
+import pacman.helpers.GameObject;
+import pacman.helpers.loaders.FontLoader;
+import pacman.helpers.loaders.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,7 +73,7 @@ public class GUI extends JPanel {
                     Maze.getTileSize(), Maze.getTileSize(), this);
 
         g.setColor(Color.WHITE);
-        g.setFont(FontLoader.getJoystixMonospaceFont(22f));
+        g.setFont(FontLoader.getJoystixMonospaceFont(24f));
 
         String scoreLabel = "SCORE";
         String scoreValue = String.valueOf(maze.getScore());
@@ -86,17 +86,17 @@ public class GUI extends JPanel {
         int highScoreLabelWidth = metrics.stringWidth(highScoreLabel);
         int highScoreValueWidth = metrics.stringWidth(highScoreValue);
         int centerX = windowWidth / 2;
-        int scoreX = centerX - scoreLabelWidth / 2 - 200;
-        int highScoreX = centerX - highScoreLabelWidth / 2;
+        int scoreX = centerX - scoreLabelWidth / 2 - 180;
+        int highScoreX = centerX - highScoreLabelWidth / 2 + 50;
         int labelY = 30;
-        int valueY = labelY + metrics.getHeight();
+        int valueY = labelY + metrics.getHeight() -5;
 
         g.drawString(scoreLabel, scoreX, labelY);
         g.drawString(scoreValue, scoreX + (scoreLabelWidth - scoreValueWidth) / 2, valueY);
         g.drawString(highScoreLabel, highScoreX, labelY);
         g.drawString(highScoreValue, highScoreX + (highScoreLabelWidth - highScoreValueWidth) / 2, valueY);
 
-        int pauseX = highScoreX + highScoreLabelWidth / 2 + 250;
+        int pauseX = highScoreX + highScoreLabelWidth / 2 + 200;
         int pauseY = labelY - Maze.getTileSize() / 2;
         pauseButtonBounds.setBounds(pauseX, pauseY, Maze.getTileSize(), Maze.getTileSize());
 

@@ -1,9 +1,10 @@
-package helpers;
-
-import com.pacman.helpers.ImageLoader;
+package helpers.loaders;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import pacman.helpers.loaders.ImageLoader;
+
 import java.awt.Image;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class ImageLoaderTest {
     @BeforeAll
     static void setUp() {
         try {
-            Class.forName("com.pacman.helpers.ImageLoader");
+            Class.forName("pacman.helpers.ImageLoader");
         } catch (ClassNotFoundException e) {
             fail("ImageLoader class not found");
         }

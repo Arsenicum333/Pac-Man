@@ -1,8 +1,8 @@
-package com.pacman.entities.ghosts;
-
-import com.pacman.helpers.ImageLoader;
+package pacman.entities.ghosts;
 
 import java.awt.Image;
+
+import pacman.helpers.loaders.ImageLoader;
 
 public class Blinky extends Ghost {
     public Blinky(Image image, int x, int y, int width, int height, int speed) {

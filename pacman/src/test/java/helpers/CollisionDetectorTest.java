@@ -1,7 +1,7 @@
 package helpers;
 
-import com.pacman.helpers.GameObject;
-import com.pacman.helpers.CollisionDetector;
+import pacman.helpers.GameObject;
+import pacman.helpers.CollisionDetector;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
