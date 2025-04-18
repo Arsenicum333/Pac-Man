@@ -11,6 +11,9 @@ public class ImageLoader {
     static {loadImages();}
 
     private static void loadImages() {
+        images.put("Pause", loadImage("Pause.png"));
+        images.put("Play", loadImage("Play.png"));
+
         images.put("Wall", loadImage("Wall.png"));
         images.put("Gate", loadImage("Gate.png"));
         images.put("Dot", loadImage("Dot.png"));

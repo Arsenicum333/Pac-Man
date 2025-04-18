@@ -2,6 +2,7 @@ package com.pacman;
 
 import com.pacman.helpers.ImageLoader;
 import com.pacman.helpers.KeyHandler;
+import com.pacman.helpers.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class Game implements ActionListener {
     private Timer gameLoop;
     private boolean isGameOver = false;
     private boolean isGameOn = false;
+    private boolean isPaused = false;
     private static final int WINDOW_OFFSET_X = 16;
     private static final int WINDOW_OFFSET_Y = 160;
 
@@ -22,7 +24,8 @@ public class Game implements ActionListener {
 
         gui.setGame(this);
         gui.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        gui.addKeyListener(new KeyHandler(maze, this));
+        gui.addKeyListener(new KeyHandler(this, maze));
+        gui.addMouseListener(new MouseHandler(this, gui.getPauseButtonBounds()));
 
         gameLoop = new Timer(13, this);
         gameLoop.start();
@@ -63,9 +66,20 @@ public class Game implements ActionListener {
         }
     }
 
+    public void togglePause() {
+        if (!isGameOver) {
+            isPaused = !isPaused;
+
+            if (isPaused)
+                gameLoop.stop();
+            else
+                gameLoop.start();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!isGameOver && isGameOn) {
+        if (!isGameOver && isGameOn && !isPaused) {
             maze.getPacman().move();
             maze.getPacman().eatItem();
             maze.getPacman().loseLife();
@@ -76,13 +90,14 @@ public class Game implements ActionListener {
             maze.updateHighScore();
         }
 
-        gui.repaint();
         maze.newLevel();
         endGame();
+        gui.repaint();
     }
 
     public boolean isGameOver() {return isGameOver;}
     public boolean isGameOn() {return isGameOn;}
+    public boolean isPaused() {return isPaused;}
 
     public void setGameOver(boolean isGameOver) {this.isGameOver = isGameOver;}
     public void setGameOn(boolean isGameOn) {this.isGameOn = isGameOn;}

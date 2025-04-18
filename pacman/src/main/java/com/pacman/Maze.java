@@ -109,7 +109,6 @@ public class Maze {
     public static int getTileSize() {return tileSize;}
     public int getScore() {return score;}
     public int getHighScore() {return highScore;}
-    public static Maze getInstance() {return instance;}
     public PacMan getPacman() {return pacman;}
     public Blinky getBlinky() {return blinky;}
     public Pinky getPinky() {return pinky;}
@@ -120,6 +119,7 @@ public class Maze {
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}
     public HashSet<GameObject> getPowerPellets() {return powerPellets;}
+    public static Maze getInstance() {return instance;}
 
     public void setScore(int score) {this.score = score;}
     public void setHighScore(int highScore) {this.highScore = highScore;}
