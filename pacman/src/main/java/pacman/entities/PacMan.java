@@ -2,6 +2,7 @@ package pacman.entities;
 
 import pacman.Maze;
 import pacman.helpers.GameObject;
+import pacman.helpers.ScoreManager;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.interfaces.Ghostable;
 import static pacman.helpers.CollisionDetector.*;
@@ -40,7 +41,7 @@ public class PacMan extends Entity {
         for (GameObject dot : maze.getDots()) {
             if (offsetCollision(this, dot)) {
                 eatenItem = dot;
-                maze.setScore(maze.getScore() + 10);
+                ScoreManager.getInstance().addPoints(10);
                 break;
             }
         }
@@ -51,7 +52,7 @@ public class PacMan extends Entity {
         for (GameObject powerPellet : maze.getPowerPellets()) {
             if (offsetCollision(this, powerPellet)) {
                 eatenItem = powerPellet;
-                maze.setScore(maze.getScore() + 50);
+                ScoreManager.getInstance().addPoints(50);
                 break;
             }
         }

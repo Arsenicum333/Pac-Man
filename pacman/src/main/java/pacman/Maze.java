@@ -17,8 +17,6 @@ public class Maze {
     private static final int rowCount = 21;
     private static final int columnCount = 19;
     private static final int tileSize = 32;
-    private int score = 0; // Max Value: 2147479999
-    private int highScore = 0; // Max Value: 2147479999
 
     HashSet<GameObject> walls;
     HashSet<GameObject> gates;
@@ -91,11 +89,6 @@ public class Maze {
         }
     }
 
-    public void updateHighScore() {
-        if (score > highScore)
-            highScore = score;
-    }
-
     public void newLevel() {
         if (dots.isEmpty() && powerPellets.isEmpty()) {
             int currentLives = pacman.getLives();
@@ -107,8 +100,6 @@ public class Maze {
     public static int getRowCount() {return rowCount;}
     public static int getColumnCount() {return columnCount;}
     public static int getTileSize() {return tileSize;}
-    public int getScore() {return score;}
-    public int getHighScore() {return highScore;}
     public PacMan getPacman() {return pacman;}
     public Blinky getBlinky() {return blinky;}
     public Pinky getPinky() {return pinky;}
@@ -120,7 +111,4 @@ public class Maze {
     public HashSet<GameObject> getDots() {return dots;}
     public HashSet<GameObject> getPowerPellets() {return powerPellets;}
     public static Maze getInstance() {return instance;}
-
-    public void setScore(int score) {this.score = score;}
-    public void setHighScore(int highScore) {this.highScore = highScore;}
 }

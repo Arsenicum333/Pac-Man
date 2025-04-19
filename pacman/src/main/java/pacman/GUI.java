@@ -1,6 +1,7 @@
 package pacman;
 
 import pacman.helpers.GameObject;
+import pacman.helpers.ScoreManager;
 import pacman.helpers.loaders.FontLoader;
 import pacman.helpers.loaders.ImageLoader;
 
@@ -76,9 +77,9 @@ public class GUI extends JPanel {
         g.setFont(FontLoader.getJoystixMonospaceFont(24f));
 
         String scoreLabel = "SCORE";
-        String scoreValue = String.valueOf(maze.getScore());
+        String scoreValue = String.valueOf(ScoreManager.getInstance().getScore());
         String highScoreLabel = "HIGH SCORE";
-        String highScoreValue = String.valueOf(maze.getHighScore());
+        String highScoreValue = String.valueOf(ScoreManager.getInstance().getHighScore());
         FontMetrics metrics = g.getFontMetrics();
 
         int scoreLabelWidth = metrics.stringWidth(scoreLabel);

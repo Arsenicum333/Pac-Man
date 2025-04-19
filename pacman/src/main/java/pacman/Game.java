@@ -1,7 +1,9 @@
 package pacman;
 
+import pacman.helpers.ScoreManager;
 import pacman.helpers.handlers.KeyHandler;
 import pacman.helpers.handlers.MouseHandler;
+import pacman.helpers.handlers.WindowCloseHandler;
 import pacman.helpers.loaders.ImageLoader;
 
 import javax.swing.*;
@@ -45,6 +47,7 @@ public class Game implements ActionListener {
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(game.gui);
+        frame.addWindowListener(new WindowCloseHandler());
         game.gui.requestFocus();
         frame.setVisible(true);
     }
@@ -52,7 +55,7 @@ public class Game implements ActionListener {
     public void restartGame() {
         if (isGameOver) {
             maze.generateMaze();
-            maze.setScore(0);
+            ScoreManager.getInstance().setScore(0);
             isGameOver = false;
             isGameOn = false;
             gameLoop.start();
@@ -87,7 +90,7 @@ public class Game implements ActionListener {
             maze.getPinky().moveBehaviour();
             maze.getInky().moveBehaviour();
             maze.getClyde().moveBehaviour();
-            maze.updateHighScore();
+            ScoreManager.getInstance().updateHighScore();
         }
 
         maze.newLevel();
