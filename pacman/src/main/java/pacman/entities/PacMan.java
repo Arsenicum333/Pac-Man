@@ -1,10 +1,9 @@
 package pacman.entities;
 
 import pacman.Maze;
-import pacman.entities.ghosts.Ghost;
 import pacman.helpers.GameObject;
 import pacman.helpers.loaders.ImageLoader;
-
+import pacman.interfaces.Ghostable;
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
@@ -70,7 +69,7 @@ public class PacMan extends Entity {
             lives--;
 
             if (lives > 0) {
-                maze.getGhosts().forEach(Ghost::resetPositions);
+                maze.getGhosts().forEach(Ghostable::resetPositions);
                 resetPositions();
             }
         }

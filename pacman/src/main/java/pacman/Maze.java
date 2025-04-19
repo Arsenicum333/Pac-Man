@@ -1,13 +1,13 @@
 package pacman;
 
 import pacman.entities.PacMan;
-import pacman.entities.ghosts.Ghost;
 import pacman.entities.ghosts.Blinky;
 import pacman.entities.ghosts.Pinky;
 import pacman.entities.ghosts.Inky;
 import pacman.entities.ghosts.Clyde;
 import pacman.helpers.GameObject;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.interfaces.Ghostable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -114,7 +114,7 @@ public class Maze {
     public Pinky getPinky() {return pinky;}
     public Inky getInky() {return inky;}
     public Clyde getClyde() {return clyde;}
-    public List<Ghost> getGhosts() {return List.of(blinky, pinky, inky, clyde);}
+    public List<Ghostable> getGhosts() {return List.of(blinky, pinky, inky, clyde);}
     public HashSet<GameObject> getWalls() {return walls;}
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}

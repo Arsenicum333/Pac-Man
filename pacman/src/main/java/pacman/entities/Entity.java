@@ -2,11 +2,12 @@ package pacman.entities;
 
 import pacman.Maze;
 import pacman.helpers.GameObject;
+import pacman.interfaces.Movable;
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
 
-public abstract class Entity extends GameObject {
+public abstract class Entity extends GameObject implements Movable {
     private int speed;
     protected String direction = "";
 
@@ -15,6 +16,7 @@ public abstract class Entity extends GameObject {
         this.speed = speed;
     }
 
+    @Override
     public void move() {
         switch (direction) {
             case "LEFT" -> setX(getX() - speed);
@@ -30,6 +32,7 @@ public abstract class Entity extends GameObject {
             setX(600);
     }
 
+    @Override
     public boolean canMove(String direction) {
         int newX = getX();
         int newY = getY();
@@ -55,6 +58,7 @@ public abstract class Entity extends GameObject {
         return true;
     }
 
+    @Override
     public void resetPositions() {
         setX(getStartX());
         setY(getStartY());

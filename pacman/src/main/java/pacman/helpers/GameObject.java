@@ -1,8 +1,10 @@
 package pacman.helpers;
 
+import pacman.interfaces.Positionable;
+
 import java.awt.Image;
 
-public class GameObject {
+public class GameObject implements Positionable {
     private Image image;
     private int x, y;
     private int width, height;
@@ -19,9 +21,13 @@ public class GameObject {
     }
 
     public Image getImage() {return image;}
+    @Override
     public int getX() {return x;}
+    @Override
     public int getY() {return y;}
+    @Override
     public int getWidth() {return width;}
+    @Override
     public int getHeight() {return height;}
     public int getStartX() {return startX;}
     public int getStartY() {return startY;}

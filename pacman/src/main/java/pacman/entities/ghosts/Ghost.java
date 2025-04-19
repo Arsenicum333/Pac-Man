@@ -1,11 +1,12 @@
 package pacman.entities.ghosts;
 
 import pacman.entities.Entity;
+import pacman.interfaces.Ghostable;
 
 import java.awt.Image;
 import java.util.Random;
 
-public class Ghost extends Entity {
+public abstract class Ghost extends Entity implements Ghostable {
     private String[] directions = {"LEFT", "RIGHT", "UP", "DOWN"};
     private String newDirection = "";
     private Random random = new Random();
@@ -15,6 +16,7 @@ public class Ghost extends Entity {
         direction = "UP";
     }
 
+    @Override
     public void moveBehaviour() {
         if (!canMove(direction)) {
             do {
