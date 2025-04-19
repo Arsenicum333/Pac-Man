@@ -13,6 +13,7 @@ Pac-Man
         │   │       ├───helpers
         │   │       │   ├───handlers
         │   │       │   └───loaders
+        │   │       ├───interfaces
         │   │       └───items
         │   └───resources
         │       ├───fonts

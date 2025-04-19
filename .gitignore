@@ -1,4 +1,5 @@
 LICENSE
+highscore.data
 
 # Maven build artifacts
 /pacman/target/
