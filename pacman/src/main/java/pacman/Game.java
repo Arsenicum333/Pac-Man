@@ -1,10 +1,14 @@
 package pacman;
 
-import pacman.helpers.ScoreManager;
 import pacman.helpers.handlers.KeyHandler;
 import pacman.helpers.handlers.MouseHandler;
 import pacman.helpers.handlers.WindowCloseHandler;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.states.NotStartedState;
+import pacman.states.PlayingState;
+import pacman.states.PausedState;
+import pacman.states.GameOverState;
+import pacman.interfaces.GameState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,19 +18,18 @@ public class Game implements ActionListener {
     private Maze maze;
     private GUI gui;
     private Timer gameLoop;
-    private boolean isGameOver = false;
-    private boolean isGameOn = false;
-    private boolean isPaused = false;
+    private GameState state;
     private static final int WINDOW_OFFSET_X = 16;
     private static final int WINDOW_OFFSET_Y = 160;
 
     Game(int gameWidth, int gameHeight) {
         maze = Maze.getInstance();
         gui = GUI.getInstance();
+        state = new NotStartedState();
 
         gui.setGame(this);
         gui.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        gui.addKeyListener(new KeyHandler(this, maze));
+        gui.addKeyListener(new KeyHandler(this));
         gui.addMouseListener(new MouseHandler(this, gui.getPauseButtonBounds()));
 
         gameLoop = new Timer(13, this);
@@ -48,60 +51,31 @@ public class Game implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(game.gui);
         frame.addWindowListener(new WindowCloseHandler());
-        game.gui.requestFocus();
         frame.setVisible(true);
+        game.gui.requestFocusInWindow();
     }
 
-    public void restartGame() {
-        if (isGameOver) {
-            maze.generateMaze();
-            ScoreManager.getInstance().setScore(0);
-            isGameOver = false;
-            isGameOn = false;
-            gameLoop.start();
-        }
-    }
+    public void startGame() {state.startGame(this);}
+    public void restartGame() {state.restartGame(this);}
+    public void togglePause() {state.togglePause(this);}
 
-    public void endGame() {
+    public void checkGameOver() {
         if (maze.getPacman().getLives() <= 0) {
-            isGameOver = true;
+            setState(new GameOverState());
             gameLoop.stop();
-        }
-    }
-
-    public void togglePause() {
-        if (!isGameOver) {
-            isPaused = !isPaused;
-
-            if (isPaused)
-                gameLoop.stop();
-            else
-                gameLoop.start();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!isGameOver && isGameOn && !isPaused) {
-            maze.getPacman().move();
-            maze.getPacman().eatItem();
-            maze.getPacman().loseLife();
-            maze.getBlinky().moveBehaviour();
-            maze.getPinky().moveBehaviour();
-            maze.getInky().moveBehaviour();
-            maze.getClyde().moveBehaviour();
-            ScoreManager.getInstance().updateHighScore();
-        }
-
-        maze.newLevel();
-        endGame();
+        state.handleGameLoop(this);
         gui.repaint();
     }
 
-    public boolean isGameOver() {return isGameOver;}
-    public boolean isGameOn() {return isGameOn;}
-    public boolean isPaused() {return isPaused;}
+    public Timer getGameLoop() {return gameLoop;}
+    public boolean isGameOver() {return state instanceof GameOverState;}
+    public boolean isPlaying() {return state instanceof PlayingState;}
+    public boolean isPaused() {return state instanceof PausedState;}
 
-    public void setGameOver(boolean isGameOver) {this.isGameOver = isGameOver;}
-    public void setGameOn(boolean isGameOn) {this.isGameOn = isGameOn;}
+    public void setState(GameState state) {this.state = state;}
 }

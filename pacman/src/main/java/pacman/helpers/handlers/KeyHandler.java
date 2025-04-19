@@ -2,21 +2,21 @@ package pacman.helpers.handlers;
 
 import pacman.Game;
 import pacman.Maze;
+import pacman.entities.PacMan;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    private final Maze maze;
     private final Game game;
 
-    public KeyHandler(Game game, Maze maze) {
+    public KeyHandler(Game game) {
         this.game = game;
-        this.maze = maze;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        PacMan pacman = Maze.getInstance().getPacman();
         int key = e.getKeyCode();
 
         if (game.isGameOver() && key == KeyEvent.VK_SPACE) {
@@ -32,27 +32,24 @@ public class KeyHandler implements KeyListener {
         if (game.isPaused()) return;
 
         if (!game.isGameOver()) {
+            boolean directionSet = false;
+
             if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-                maze.getPacman().setNewDirection("LEFT");
-
-                if (!game.isGameOn())
-                    game.setGameOn(true);
+                pacman.setNewDirection("LEFT");
+                directionSet = true;
             } else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-                maze.getPacman().setNewDirection("RIGHT");
-
-                if (!game.isGameOn())
-                    game.setGameOn(true);
+                pacman.setNewDirection("RIGHT");
+                directionSet = true;
             } else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-                maze.getPacman().setNewDirection("UP");
-
-                if (!game.isGameOn())
-                    game.setGameOn(true);
+                pacman.setNewDirection("UP");
+                directionSet = true;
             } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-                maze.getPacman().setNewDirection("DOWN");
-
-                if (!game.isGameOn())
-                    game.setGameOn(true);
+                pacman.setNewDirection("DOWN");
+                directionSet = true;
             }
+
+            if (directionSet && !game.isPlaying())
+                game.startGame();
         }
     }
 

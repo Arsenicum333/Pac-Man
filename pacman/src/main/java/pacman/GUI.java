@@ -118,28 +118,12 @@ public class GUI extends JPanel {
                             lifeIconSize, lifeIconSize, this);
             }
 
-            if (!game.isGameOn() || game.isPaused() || game.isGameOver()) {
+            if (!game.isPlaying() || game.isPaused() || game.isGameOver()) {
                 g.setColor(new Color(0, 0, 0, 0.5f));
                 g.fillRect(0, 0, windowWidth, windowHeight);
             }
 
-            if (!game.isGameOn()) {
-                g.setFont(FontLoader.getJoystixMonospaceFont(22f));
-                g.setColor(Color.YELLOW);
-
-                String startText = "PRESS ARROW KEY OR WASD TO START";
-                int startWidth = g.getFontMetrics().stringWidth(startText);
-
-                g.drawString(startText, centerX - startWidth / 2, windowHeight / 2 + 8);
-            } else if (game.isPaused()) {
-                g.setFont(FontLoader.getJoystixMonospaceFont(60f));
-                g.setColor(Color.YELLOW);
-
-                String pauseText = "PAUSED";
-                int pauseWidth = g.getFontMetrics().stringWidth(pauseText);
-
-                g.drawString(pauseText, centerX - pauseWidth / 2, windowHeight / 2 + 5);
-            } else if (game.isGameOver()) {
+            if (game.isGameOver()) {
                 g.setFont(FontLoader.getJoystixMonospaceFont(60f));
                 g.setColor(Color.RED);
 
@@ -155,6 +139,22 @@ public class GUI extends JPanel {
                 int restartWidth = g.getFontMetrics().stringWidth(restartText);
 
                 g.drawString(restartText, centerX - restartWidth / 2, windowHeight / 2 + 72);
+            } else if (game.isPaused()) {
+                g.setFont(FontLoader.getJoystixMonospaceFont(60f));
+                g.setColor(Color.YELLOW);
+
+                String pauseText = "PAUSED";
+                int pauseWidth = g.getFontMetrics().stringWidth(pauseText);
+
+                g.drawString(pauseText, centerX - pauseWidth / 2, windowHeight / 2 + 5);
+            } else if (!game.isPlaying()) {
+                g.setFont(FontLoader.getJoystixMonospaceFont(22f));
+                g.setColor(Color.YELLOW);
+
+                String startText = "PRESS ARROW KEY OR WASD TO START";
+                int startWidth = g.getFontMetrics().stringWidth(startText);
+
+                g.drawString(startText, centerX - startWidth / 2, windowHeight / 2 + 8);
             }
         }
     }
