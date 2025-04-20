@@ -76,7 +76,6 @@ public class PacMan extends Entity {
         }
     }
 
-    public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}
 
     public void setNewDirection(String newDirection) {this.newDirection = newDirection;}

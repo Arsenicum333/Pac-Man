@@ -65,8 +65,6 @@ public abstract class Entity extends GameObject implements Movable {
     }
 
     public int getSpeed() {return speed;}
-    public String getDirection() {return direction;}
 
     public void setSpeed(int speed) {this.speed = speed;}
-    public void setDirection(String direction) {this.direction = direction;}
 }

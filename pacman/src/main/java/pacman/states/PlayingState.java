@@ -4,6 +4,7 @@ import pacman.Game;
 import pacman.Maze;
 import pacman.helpers.ScoreManager;
 import pacman.interfaces.GameState;
+import pacman.interfaces.Ghostable;
 
 public class PlayingState implements GameState {
     @Override
@@ -12,10 +13,7 @@ public class PlayingState implements GameState {
         maze.getPacman().move();
         maze.getPacman().eatItem();
         maze.getPacman().loseLife();
-        maze.getBlinky().moveBehaviour();
-        maze.getPinky().moveBehaviour();
-        maze.getInky().moveBehaviour();
-        maze.getClyde().moveBehaviour();
+        maze.getGhosts().forEach(Ghostable::moveBehaviour);
         ScoreManager.getInstance().updateHighScore();
         maze.newLevel();
         game.checkGameOver();

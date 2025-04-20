@@ -10,9 +10,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     private final Game game;
 
-    public KeyHandler(Game game) {
-        this.game = game;
-    }
+    public KeyHandler(Game game) {this.game = game;}
 
     @Override
     public void keyPressed(KeyEvent e) {
