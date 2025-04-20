@@ -1,5 +1,5 @@
 package pacman.items;
 
-public class PowerUp {
+public class Bomb {
     
 }
