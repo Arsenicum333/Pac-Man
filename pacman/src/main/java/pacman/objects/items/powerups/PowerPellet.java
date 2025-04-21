@@ -1,11 +1,10 @@
-package pacman.items.powerups;
-
-import pacman.entities.Entity;
-import pacman.entities.PacMan;
-import pacman.decorators.PowerPelletDecorator;
+package pacman.objects.items.powerups;
 
 import java.awt.Image;
 import java.util.TimerTask;
+
+import pacman.objects.entities.Entity;
+import pacman.objects.entities.PacMan;
 
 public class PowerPellet extends PowerUp {
     public PowerPellet(Image image, int x, int y, int width, int height, int duration) {
@@ -13,10 +12,10 @@ public class PowerPellet extends PowerUp {
     }
 
     @Override
-    public Entity applyEffect(PacMan pacman) {
-        if (!isCollected) {
-            pacman.setCanEatGhosts(true);
+    public Entity applyEffect(Entity entity) {
+        if (entity instanceof PacMan pacman && !isCollected) {
             isCollected = true;
+            pacman.setCanEatGhosts(true);
 
             effectTimer.schedule(new TimerTask() {
                 @Override
@@ -25,9 +24,9 @@ public class PowerPellet extends PowerUp {
                 }
             }, duration);
 
-            return new PowerPelletDecorator(pacman, duration);
+            return pacman;
         }
 
-        return pacman;
+        return entity;
     }
 }

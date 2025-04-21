@@ -1,6 +1,4 @@
-package pacman.helpers;
-
-import pacman.interfaces.Positionable;
+package pacman.objects;
 
 import java.awt.Image;
 

@@ -2,9 +2,7 @@ package pacman.states;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.helpers.managers.FruitManager;
 import pacman.helpers.managers.ScoreManager;
-import pacman.interfaces.GameState;
 
 public class GameOverState implements GameState {
     @Override
@@ -15,11 +13,12 @@ public class GameOverState implements GameState {
     @Override
     public void restartGame(Game game) {
         Maze maze = Maze.getInstance();
-        FruitManager fruitManager = FruitManager.getInstance();
+        ScoreManager scoreManager = ScoreManager.getInstance();
+
         maze.getCollectedFruits().clear();
+        maze.getItems().clear();
         maze.generateMaze();
-        fruitManager.startFruitCycle();
-        ScoreManager.getInstance().setScore(0);
+        scoreManager.setScore(0);
         game.setState(new NotStartedState());
         game.getGameLoop().start();
     }

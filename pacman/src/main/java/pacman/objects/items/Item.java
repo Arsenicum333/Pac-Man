@@ -1,8 +1,7 @@
-package pacman.items;
+package pacman.objects.items;
 
-import pacman.entities.PacMan;
-import pacman.entities.Entity;
-import pacman.helpers.GameObject;
+import pacman.objects.GameObject;
+import pacman.objects.entities.Entity;
 
 import java.awt.Image;
 
@@ -14,7 +13,7 @@ public abstract class Item extends GameObject {
         this.isCollected = false;
     }
 
-    public abstract Entity applyEffect(PacMan pacman);
+    public abstract Entity applyEffect(Entity entity);
 
     public boolean isCollected() {return isCollected;}
 

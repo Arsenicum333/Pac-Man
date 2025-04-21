@@ -1,9 +1,9 @@
-package pacman.items.powerups;
-
-import pacman.items.Item;
+package pacman.objects.items.powerups;
 
 import java.awt.Image;
 import java.util.Timer;
+
+import pacman.objects.items.Item;
 
 public abstract class PowerUp extends Item {
     protected int duration;

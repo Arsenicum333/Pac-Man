@@ -1,4 +1,4 @@
-package pacman.interfaces;
+package pacman.objects;
 
 public interface Positionable {
     int getX();

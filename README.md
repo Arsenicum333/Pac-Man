@@ -8,13 +8,16 @@ Pac-Man
         ├───main
         │   ├───java
         │   │   └───pacman
-        │   │       ├───entities
-        │   │       │   └───ghosts
         │   │       ├───helpers
         │   │       │   ├───handlers
-        │   │       │   └───loaders
-        │   │       ├───interfaces
-        │   │       └───items
+        │   │       │   ├───loaders
+        │   │       │   └───managers
+        │   │       ├───objects
+        │   │       │   ├───entities
+        │   │       │   │   └───ghosts
+        │   │       │   └───items
+        │   │       │       └───powerups
+        │   │       └───states
         │   └───resources
         │       ├───fonts
         │       └───images

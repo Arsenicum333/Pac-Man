@@ -1,12 +1,13 @@
-package pacman.entities;
+package pacman.objects.entities;
 
 import pacman.Maze;
-import pacman.helpers.GameObject;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.helpers.managers.ScoreManager;
-import pacman.interfaces.Ghostable;
-import pacman.items.Fruit;
-import pacman.items.Item;
+import pacman.objects.GameObject;
+import pacman.objects.entities.ghosts.Ghostable;
+import pacman.objects.items.Bomb;
+import pacman.objects.items.Fruit;
+import pacman.objects.items.Item;
 
 import static pacman.helpers.CollisionDetector.*;
 
@@ -15,13 +16,11 @@ import java.awt.Image;
 public class PacMan extends Entity {
     private String newDirection = "";
     private int lives = 3;
-    private int baseSpeed;
     private boolean canEatGhosts;
     private boolean invulnerable;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
-        this.baseSpeed = speed;
         this.canEatGhosts = false;
         this.invulnerable = false;
     }
@@ -58,16 +57,16 @@ public class PacMan extends Entity {
         if (eatenItem != null)
             maze.getDots().remove(eatenItem);
 
-        for (GameObject powerPellet : maze.getPowerPellets()) {
-            if (offsetCollision(this, powerPellet)) {
-                eatenItem = powerPellet;
-                ScoreManager.getInstance().addPoints(50);
+        for (Item item : maze.getItems()) {
+            if (!item.isCollected() && offsetCollision(this, item)) {
+                this.applyItemEffect(item);
                 break;
             }
         }
 
-        if (eatenItem != null)
-            maze.getPowerPellets().remove(eatenItem);
+        if (eatenItem != null) {
+            maze.getItems().remove(eatenItem);
+        }
 
         Fruit currentFruit = maze.getCurrentFruit();
         if (currentFruit != null && !currentFruit.isCollected() && offsetCollision(this, currentFruit)) {
@@ -80,7 +79,11 @@ public class PacMan extends Entity {
     public void loseLife() {
         Maze maze = Maze.getInstance();
 
-        if (!invulnerable && maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost))) {
+        boolean hasCollisionWithGhost = maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost));
+        boolean hasCollisionWithBomb = maze.getItems().stream()
+                .anyMatch(item -> item instanceof Bomb && !item.isCollected() && offsetCollision(this, item));
+
+        if (!invulnerable && (hasCollisionWithGhost || hasCollisionWithBomb)) {
             direction = "";
             newDirection = "";
             lives--;
@@ -104,15 +107,12 @@ public class PacMan extends Entity {
             this.lives = pacMan.lives;
             this.canEatGhosts = pacMan.canEatGhosts;
             this.invulnerable = pacMan.invulnerable;
-            this.baseSpeed = pacMan.baseSpeed;
             this.newDirection = pacMan.newDirection;
         }
     }
 
-    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
-
+    public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}
-    public int getBaseSpeed() {return baseSpeed;}
     @Override
     public boolean isInvulnerable() {return invulnerable;}
     public boolean canEatGhosts() {return canEatGhosts;}
@@ -124,4 +124,5 @@ public class PacMan extends Entity {
     @Override
     public void setInvulnerable(boolean invulnerable) {this.invulnerable = invulnerable;}
     public void setCanEatGhosts(boolean canEatGhosts) {this.canEatGhosts = canEatGhosts;}
+    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
 }

@@ -14,8 +14,6 @@ public class ScoreManager implements Serializable {
         this.highScore = loadHighScore();
     }
 
-    public void addPoints(int points) {this.score += points;}
-
     public void updateHighScore() {
         if (score > highScore)
             highScore = score;
@@ -53,4 +51,5 @@ public class ScoreManager implements Serializable {
 
     public void setScore(int score) {this.score = score;}
     public void setHighScore(int highScore) {this.highScore = highScore;}
+    public void addPoints(int points) {this.score += points;}
 }

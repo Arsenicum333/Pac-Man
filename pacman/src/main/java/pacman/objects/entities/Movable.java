@@ -1,4 +1,4 @@
-package pacman.interfaces;
+package pacman.objects.entities;
 
 public interface Movable {
     void move();

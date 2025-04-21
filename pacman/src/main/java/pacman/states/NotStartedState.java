@@ -1,7 +1,6 @@
 package pacman.states;
 
 import pacman.Game;
-import pacman.interfaces.GameState;
 
 public class NotStartedState implements GameState {
     @Override

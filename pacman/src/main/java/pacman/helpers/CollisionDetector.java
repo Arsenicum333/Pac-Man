@@ -1,6 +1,6 @@
 package pacman.helpers;
 
-import pacman.interfaces.Positionable;
+import pacman.objects.Positionable;
 
 public class CollisionDetector {
     private static final int COLLISION_OFFSET = 8;

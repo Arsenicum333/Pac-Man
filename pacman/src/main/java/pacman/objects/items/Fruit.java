@@ -1,9 +1,9 @@
-package pacman.items;
+package pacman.objects.items;
 
-import pacman.entities.PacMan;
-import pacman.entities.Entity;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.helpers.managers.ScoreManager;
+import pacman.objects.entities.Entity;
+import pacman.objects.entities.PacMan;
 
 import java.awt.Image;
 import java.util.Random;
@@ -29,13 +29,13 @@ public class Fruit extends Item {
     }
 
     @Override
-    public Entity applyEffect(PacMan pacman) {
-        if (!isCollected) {
+    public Entity applyEffect(Entity entity) {
+        if (entity instanceof PacMan pacman && !isCollected) {
             ScoreManager.getInstance().addPoints(points);
             isCollected = true;
+            return pacman;
         }
-
-        return pacman;
+        return entity;
     }
 
     public String getType() {return type;}

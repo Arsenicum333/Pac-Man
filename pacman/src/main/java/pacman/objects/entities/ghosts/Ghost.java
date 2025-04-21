@@ -1,10 +1,9 @@
-package pacman.entities.ghosts;
-
-import pacman.entities.Entity;
-import pacman.interfaces.Ghostable;
+package pacman.objects.entities.ghosts;
 
 import java.awt.Image;
 import java.util.Random;
+
+import pacman.objects.entities.Entity;
 
 public abstract class Ghost extends Entity implements Ghostable {
     private String[] directions = {"LEFT", "RIGHT", "UP", "DOWN"};

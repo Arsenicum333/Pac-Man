@@ -1,4 +1,4 @@
-package pacman.entities.ghosts;
+package pacman.objects.entities.ghosts;
 
 import java.awt.Image;
 

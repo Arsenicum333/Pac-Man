@@ -3,7 +3,6 @@ package pacman;
 import pacman.helpers.handlers.*;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.states.*;
-import pacman.interfaces.GameState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,9 +67,9 @@ public class Game implements ActionListener {
     }
 
     public Timer getGameLoop() {return gameLoop;}
-    public boolean isGameOver() {return state instanceof GameOverState;}
     public boolean isPlaying() {return state instanceof PlayingState;}
     public boolean isPaused() {return state instanceof PausedState;}
+    public boolean isGameOver() {return state instanceof GameOverState;}
 
     public void setState(GameState state) {this.state = state;}
 }

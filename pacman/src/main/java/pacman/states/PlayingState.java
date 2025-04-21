@@ -3,18 +3,19 @@ package pacman.states;
 import pacman.Game;
 import pacman.Maze;
 import pacman.helpers.managers.ScoreManager;
-import pacman.interfaces.GameState;
-import pacman.interfaces.Ghostable;
+import pacman.objects.entities.ghosts.Ghostable;
 
 public class PlayingState implements GameState {
     @Override
     public void handleGameLoop(Game game) {
         Maze maze = Maze.getInstance();
+        ScoreManager scoreManager = ScoreManager.getInstance();
+
         maze.getPacman().move();
         maze.getPacman().eatItem();
         maze.getPacman().loseLife();
         maze.getGhosts().forEach(Ghostable::moveBehaviour);
-        ScoreManager.getInstance().updateHighScore();
+        scoreManager.updateHighScore();
         maze.newLevel();
         game.checkGameOver();
     }

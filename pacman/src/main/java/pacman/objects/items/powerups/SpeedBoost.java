@@ -1,8 +1,8 @@
-package pacman.items.powerups;
+package pacman.objects.items.powerups;
 
-import pacman.entities.Entity;
-import pacman.entities.PacMan;
-import pacman.decorators.SpeedBoostDecorator;
+import pacman.Maze;
+import pacman.objects.entities.Entity;
+import pacman.objects.entities.PacMan;
 
 import java.awt.Image;
 import java.util.TimerTask;
@@ -13,21 +13,22 @@ public class SpeedBoost extends PowerUp {
     }
 
     @Override
-    public Entity applyEffect(PacMan pacman) {
-        if (!isCollected) {
-            pacman.setSpeed(pacman.getSpeed() + 2);
+    public Entity applyEffect(Entity entity) {
+        if (entity instanceof PacMan pacman && !isCollected) {
             isCollected = true;
+            int boostedSpeed = Maze.getTileSize() / 7;
+            pacman.setSpeed(boostedSpeed);
 
             effectTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    pacman.setSpeed(pacman.getBaseSpeed());
+                    pacman.setSpeed(Maze.getTileSize() / 8);
                 }
             }, duration);
 
-            return new SpeedBoostDecorator(pacman, duration);
+            return pacman;
         }
 
-        return pacman;
+        return entity;
     }
 }

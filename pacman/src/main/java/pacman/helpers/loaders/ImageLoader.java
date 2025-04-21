@@ -16,8 +16,13 @@ public class ImageLoader {
 
         images.put("Wall", loadImage("Wall.png"));
         images.put("Gate", loadImage("Gate.png"));
+
         images.put("Dot", loadImage("Dot.png"));
         images.put("PowerPellet", loadImage("PowerPellet.gif"));
+        images.put("Heart", loadImage("Heart.png"));
+        images.put("SpeedBoost", loadImage("SpeedBoost.png"));
+        images.put("Shield", loadImage("Shield.png"));
+        images.put("Bomb", loadImage("Bomb.png"));
 
         images.put("Cherry", loadImage("Cherry.png"));
         images.put("Strawberry", loadImage("Strawberry.png"));

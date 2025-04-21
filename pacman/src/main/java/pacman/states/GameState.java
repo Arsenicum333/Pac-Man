@@ -1,4 +1,4 @@
-package pacman.interfaces;
+package pacman.states;
 
 import pacman.Game;
 

@@ -2,7 +2,7 @@ package pacman.helpers.handlers;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.entities.PacMan;
+import pacman.objects.entities.PacMan;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

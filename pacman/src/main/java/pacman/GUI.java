@@ -1,11 +1,11 @@
 package pacman;
 
-import pacman.helpers.GameObject;
-import pacman.helpers.loaders.FontLoader;
-import pacman.helpers.loaders.ImageLoader;
+import pacman.helpers.loaders.*;
 import pacman.helpers.managers.ScoreManager;
-import pacman.items.Fruit;
-import pacman.items.Item;
+import pacman.objects.GameObject;
+import pacman.objects.items.Fruit;
+import pacman.objects.items.Item;
+import pacman.objects.items.powerups.PowerPellet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,13 +56,24 @@ public class GUI extends JPanel {
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
-        for (GameObject powerPellet : maze.getPowerPellets()) {
-            g.drawImage(powerPellet.getImage(), offsetX + powerPellet.getX(), offsetY + powerPellet.getY(),
-                        Maze.getTileSize() - 10, Maze.getTileSize() - 12, this);
+        for (Item item : maze.getItems()) {
+            if (!item.isCollected()) {
+                int width = Maze.getTileSize();
+                int height = Maze.getTileSize();
+
+                if (item instanceof PowerPellet) {
+                    width = Maze.getTileSize() - 12;
+                    height = Maze.getTileSize() - 12;
+                }
+
+                g.drawImage(item.getImage(), offsetX + item.getX(), offsetY + item.getY(),
+                            width, height, this);
+            }
         }
 
         if (maze.getCurrentFruit() != null && !maze.getCurrentFruit().isCollected()) {
             Item fruit = maze.getCurrentFruit();
+
             g.drawImage(fruit.getImage(), offsetX + fruit.getX(), offsetY + fruit.getY(),
                         Maze.getTileSize(), Maze.getTileSize(), this);
         }

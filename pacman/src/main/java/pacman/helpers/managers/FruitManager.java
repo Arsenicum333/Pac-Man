@@ -1,7 +1,7 @@
 package pacman.helpers.managers;
 
 import pacman.Maze;
-import pacman.items.Fruit;
+import pacman.objects.items.Fruit;
 
 import java.util.Timer;
 import java.util.TimerTask;
