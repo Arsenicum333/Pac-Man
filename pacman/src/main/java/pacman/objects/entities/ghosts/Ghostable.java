@@ -5,4 +5,5 @@ import pacman.objects.entities.Movable;
 
 public interface Ghostable extends Movable, Positionable {
     void moveBehaviour();
+    void freezeTemporarily();
 }

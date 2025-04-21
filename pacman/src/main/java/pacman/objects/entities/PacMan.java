@@ -18,7 +18,7 @@ public class PacMan extends Entity {
     private int lives = 3;
     private boolean canEatGhosts;
     private boolean invulnerable;
-    private int ghostScoreMultiplier = 200;
+    private int ghostScore = 200;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -85,9 +85,10 @@ public class PacMan extends Entity {
                 .filter(ghost -> offsetCollision(this, ghost))
                 .findFirst()
                 .ifPresent(ghost -> {
-                    ScoreManager.getInstance().addPoints(ghostScoreMultiplier);
+                    ScoreManager.getInstance().addPoints(ghostScore);
                     ghost.resetPositions();
-                    ghostScoreMultiplier *= 2;
+                    ghost.freezeTemporarily();
+                    ghostScore *= 2;
                 });
         }
     }
@@ -127,7 +128,7 @@ public class PacMan extends Entity {
         }
     }
 
-    public void resetGhostScoreMultiplier() {this.ghostScoreMultiplier = 200;}
+    public void resetGhostScore() {this.ghostScore = 200;}
 
     public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}

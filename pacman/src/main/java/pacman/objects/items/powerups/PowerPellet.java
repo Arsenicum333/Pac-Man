@@ -23,7 +23,7 @@ public class PowerPellet extends PowerUp {
                 @Override
                 public void run() {
                     pacman.setCanEatGhosts(false);
-                    pacman.resetGhostScoreMultiplier();
+                    pacman.resetGhostScore();
                 }
             }, duration);
 

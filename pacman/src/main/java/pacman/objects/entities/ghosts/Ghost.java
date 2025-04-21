@@ -9,6 +9,7 @@ public abstract class Ghost extends Entity implements Ghostable {
     private String[] directions = {"LEFT", "RIGHT", "UP", "DOWN"};
     private String newDirection = "";
     private Random random = new Random();
+    private boolean isFrozen = false;
 
     public Ghost(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -24,13 +25,26 @@ public abstract class Ghost extends Entity implements Ghostable {
                 direction = newDirection;
         }
 
-        super.move();
+        if (!isFrozen)
+            super.move();
     }
 
     @Override
     public void resetPositions() {
         super.resetPositions();
         direction = "UP";
+    }
+
+    @Override
+    public void freezeTemporarily() {
+        isFrozen = true;
+
+        new java.util.Timer().schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                isFrozen = false;
+            }
+        }, 5000);
     }
 
     @Override
