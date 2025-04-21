@@ -86,7 +86,7 @@ public class Maze {
                 int y = r * tileSize;
 
                 if (tileMapChar == 'F') {
-                    fruitManager.setSpawnCoordinates(x, y);
+                    fruitManager.setSpawnCoordinates(x + 3, y + 3);
                     fruitManager.startFruitCycle();
                 } else if (tileMapChar == 'I') {
                     itemManager.setSpawnCoordinates(x, y);

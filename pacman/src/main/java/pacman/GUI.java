@@ -75,7 +75,7 @@ public class GUI extends JPanel {
             Item fruit = maze.getCurrentFruit();
 
             g.drawImage(fruit.getImage(), offsetX + fruit.getX(), offsetY + fruit.getY(),
-                        Maze.getTileSize(), Maze.getTileSize(), this);
+                        Maze.getTileSize() - 6, Maze.getTileSize() - 6, this);
         }
 
         g.drawImage(maze.getPacman().getImage(), offsetX + maze.getPacman().getX(), offsetY + maze.getPacman().getY(),
@@ -129,7 +129,7 @@ public class GUI extends JPanel {
         if (game != null) {
             int lives = maze.getPacman().getLives();
             int lifeIconSize = 48;
-            int lifeIconSpacing = 10;
+            int lifeIconSpacing = 5;
             int livesY = offsetY + mazeHeight + 10;
             int livesX = offsetX;
 
@@ -138,13 +138,14 @@ public class GUI extends JPanel {
                             lifeIconSize, lifeIconSize, this);
             }
 
-            int fruitIconSize = 48;
+            int fruitIconSize = 40;
+            int fruitIconSpacing = 5;
             int fruitY = livesY;
             List<Fruit> collectedFruits = maze.getCollectedFruits();
 
             for (int i = 0; i < collectedFruits.size(); i++) {
                 Fruit fruit = collectedFruits.get(i);
-                int fruitX = offsetX + mazeWidth - (i + 1) * fruitIconSize;
+                int fruitX = offsetX + mazeWidth - (i + 1) * (fruitIconSize + fruitIconSpacing);
 
                 g.drawImage(fruit.getImage(), fruitX, fruitY, fruitIconSize, fruitIconSize, this);
             }
