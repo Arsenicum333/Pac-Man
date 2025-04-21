@@ -5,6 +5,7 @@ import pacman.entities.PacMan;
 import pacman.decorators.SpeedBoostDecorator;
 
 import java.awt.Image;
+import java.util.TimerTask;
 
 public class SpeedBoost extends PowerUp {
     public SpeedBoost(Image image, int x, int y, int width, int height, int duration) {
@@ -16,6 +17,14 @@ public class SpeedBoost extends PowerUp {
         if (!isCollected) {
             pacman.setSpeed(pacman.getSpeed() + 2);
             isCollected = true;
+
+            effectTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    pacman.setSpeed(pacman.getBaseSpeed());
+                }
+            }, duration);
+
             return new SpeedBoostDecorator(pacman, duration);
         }
 
