@@ -18,6 +18,7 @@ public class PacMan extends Entity {
     private int lives = 3;
     private boolean canEatGhosts;
     private boolean invulnerable;
+    private int ghostScoreMultiplier = 200;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -45,6 +46,7 @@ public class PacMan extends Entity {
     public void eatItem() {
         Maze maze = Maze.getInstance();
         GameObject eatenItem = null;
+        Fruit currentFruit = maze.getCurrentFruit();
 
         for (GameObject dot : maze.getDots()) {
             if (offsetCollision(this, dot)) {
@@ -68,11 +70,25 @@ public class PacMan extends Entity {
             maze.getItems().remove(eatenItem);
         }
 
-        Fruit currentFruit = maze.getCurrentFruit();
         if (currentFruit != null && !currentFruit.isCollected() && offsetCollision(this, currentFruit)) {
             this.applyItemEffect(currentFruit);
             maze.addCollectedFruit(currentFruit);
             maze.setCurrentFruit(null);
+        }
+    }
+
+    public void eatGhost() {
+        Maze maze = Maze.getInstance();
+
+        if (canEatGhosts) {
+            maze.getGhosts().stream()
+                .filter(ghost -> offsetCollision(this, ghost))
+                .findFirst()
+                .ifPresent(ghost -> {
+                    ScoreManager.getInstance().addPoints(ghostScoreMultiplier);
+                    ghost.resetPositions();
+                    ghostScoreMultiplier *= 2;
+                });
         }
     }
 
@@ -110,6 +126,8 @@ public class PacMan extends Entity {
             this.newDirection = pacMan.newDirection;
         }
     }
+
+    public void resetGhostScoreMultiplier() {this.ghostScoreMultiplier = 200;}
 
     public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}

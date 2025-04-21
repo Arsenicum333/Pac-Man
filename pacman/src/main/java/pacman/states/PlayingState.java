@@ -13,6 +13,7 @@ public class PlayingState implements GameState {
 
         maze.getPacman().move();
         maze.getPacman().eatItem();
+        maze.getPacman().eatGhost();
         maze.getPacman().loseLife();
         maze.getGhosts().forEach(Ghostable::moveBehaviour);
         scoreManager.updateHighScore();
