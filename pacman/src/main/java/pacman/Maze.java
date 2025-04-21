@@ -7,11 +7,13 @@ import pacman.entities.ghosts.Inky;
 import pacman.entities.ghosts.Clyde;
 import pacman.helpers.GameObject;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.helpers.managers.FruitManager;
 import pacman.interfaces.Ghostable;
 import pacman.items.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Maze {
     private static final Maze instance = new Maze();
@@ -23,15 +25,18 @@ public class Maze {
     HashSet<GameObject> gates;
     HashSet<GameObject> dots;
     HashSet<GameObject> powerPellets;
+
     private PacMan pacman;
     private Blinky blinky;
     private Pinky pinky;
     private Inky inky;
     private Clyde clyde;
 
+    private List<Fruit> collectedFruits;
+    private FruitManager fruitManager;
+
     //X = Wall, G = Gate O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
-    //F = Fruit
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
@@ -56,7 +61,12 @@ public class Maze {
         "XXXXXXXXXXXXXXXXXXX"
     };
 
-    private Maze() {generateMaze();}
+    private Maze() {
+        collectedFruits = new ArrayList<>();
+        fruitManager = FruitManager.getInstance();
+        generateMaze();
+        fruitManager.startFruitCycle();
+    }
 
     public void generateMaze() {
         walls = new HashSet<>();
@@ -71,7 +81,11 @@ public class Maze {
                 int x = c * tileSize;
                 int y = r * tileSize;
 
-                placeObject(tileMapChar, x, y);
+                if (tileMapChar == 'F') {
+                    fruitManager.setSpawnCoordinates(x, y);
+                } else {
+                    placeObject(tileMapChar, x, y);
+                }
             }
         }
     }
@@ -95,6 +109,7 @@ public class Maze {
         if (dots.isEmpty() && powerPellets.isEmpty()) {
             int currentLives = pacman.getLives();
             generateMaze();
+            fruitManager.startFruitCycle();
             pacman.setLives(currentLives);
         }
     }
@@ -112,5 +127,10 @@ public class Maze {
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}
     public HashSet<GameObject> getPowerPellets() {return powerPellets;}
+    public Fruit getCurrentFruit() {return fruitManager.getCurrentFruit();}
+    public List<Fruit> getCollectedFruits() {return collectedFruits;}
     public static Maze getInstance() {return instance;}
+
+    public void setCurrentFruit(Fruit fruit) {fruitManager.setCurrentFruit(fruit);}
+    public void addCollectedFruit(Fruit fruit) {this.collectedFruits.add(fruit);}
 }

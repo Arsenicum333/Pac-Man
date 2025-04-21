@@ -2,7 +2,7 @@ package pacman.states;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.helpers.ScoreManager;
+import pacman.helpers.managers.ScoreManager;
 import pacman.interfaces.GameState;
 import pacman.interfaces.Ghostable;
 

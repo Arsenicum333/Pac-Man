@@ -19,6 +19,12 @@ public class ImageLoader {
         images.put("Dot", loadImage("Dot.png"));
         images.put("PowerPellet", loadImage("PowerPellet.gif"));
 
+        images.put("Cherry", loadImage("Cherry.png"));
+        images.put("Strawberry", loadImage("Strawberry.png"));
+        images.put("Orange", loadImage("Orange.png"));
+        images.put("Apple", loadImage("Apple.png"));
+        images.put("Melon", loadImage("Melon.png"));
+
         images.put("PacManIcon", loadImage("PacManIcon.png"));
         images.put("PacManIconBorder", loadImage("PacManIconBorder.png"));
         images.put("PacManDown", loadImage("PacManDown.gif"));

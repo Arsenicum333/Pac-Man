@@ -1,4 +1,4 @@
-package pacman.helpers;
+package pacman.helpers.managers;
 
 import java.io.*;
 

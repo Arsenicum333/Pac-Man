@@ -1,13 +1,8 @@
 package pacman;
 
-import pacman.helpers.handlers.KeyHandler;
-import pacman.helpers.handlers.MouseHandler;
-import pacman.helpers.handlers.WindowCloseHandler;
+import pacman.helpers.handlers.*;
 import pacman.helpers.loaders.ImageLoader;
-import pacman.states.NotStartedState;
-import pacman.states.PlayingState;
-import pacman.states.PausedState;
-import pacman.states.GameOverState;
+import pacman.states.*;
 import pacman.interfaces.GameState;
 
 import javax.swing.*;

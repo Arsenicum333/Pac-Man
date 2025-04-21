@@ -1,12 +1,15 @@
 package pacman;
 
 import pacman.helpers.GameObject;
-import pacman.helpers.ScoreManager;
 import pacman.helpers.loaders.FontLoader;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.helpers.managers.ScoreManager;
+import pacman.items.Fruit;
+import pacman.items.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GUI extends JPanel {
     private static final GUI instance = new GUI();
@@ -56,6 +59,12 @@ public class GUI extends JPanel {
         for (GameObject powerPellet : maze.getPowerPellets()) {
             g.drawImage(powerPellet.getImage(), offsetX + powerPellet.getX(), offsetY + powerPellet.getY(),
                         Maze.getTileSize() - 10, Maze.getTileSize() - 12, this);
+        }
+
+        if (maze.getCurrentFruit() != null && !maze.getCurrentFruit().isCollected()) {
+            Item fruit = maze.getCurrentFruit();
+            g.drawImage(fruit.getImage(), offsetX + fruit.getX(), offsetY + fruit.getY(),
+                        Maze.getTileSize(), Maze.getTileSize(), this);
         }
 
         g.drawImage(maze.getPacman().getImage(), offsetX + maze.getPacman().getX(), offsetY + maze.getPacman().getY(),
@@ -116,6 +125,17 @@ public class GUI extends JPanel {
             for (int i = 0; i < lives; i++) {
                 g.drawImage(ImageLoader.getImage("PacManIcon"), livesX + i * (lifeIconSize + lifeIconSpacing), livesY,
                             lifeIconSize, lifeIconSize, this);
+            }
+
+            int fruitIconSize = 48;
+            int fruitY = livesY;
+            List<Fruit> collectedFruits = maze.getCollectedFruits();
+
+            for (int i = 0; i < collectedFruits.size(); i++) {
+                Fruit fruit = collectedFruits.get(i);
+                int fruitX = offsetX + mazeWidth - (i + 1) * fruitIconSize;
+
+                g.drawImage(fruit.getImage(), fruitX, fruitY, fruitIconSize, fruitIconSize, this);
             }
 
             if (!game.isPlaying() || game.isPaused() || game.isGameOver()) {

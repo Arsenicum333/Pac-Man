@@ -64,9 +64,11 @@ public abstract class Entity extends GameObject implements Movable {
         setY(getStartY());
     }
 
+    public String getDirection() {return direction;}
     public int getSpeed() {return speed;}
     public abstract boolean isInvulnerable();
 
+    public void setDirection(String direction) {this.direction = direction;}
     public void setSpeed(int speed) {this.speed = speed;}
     public abstract void setInvulnerable(boolean invulnerable);
 }

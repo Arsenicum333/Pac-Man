@@ -2,8 +2,8 @@ package pacman.items;
 
 import pacman.entities.PacMan;
 import pacman.entities.Entity;
-import pacman.helpers.ScoreManager;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.helpers.managers.ScoreManager;
 
 import java.awt.Image;
 import java.util.Random;

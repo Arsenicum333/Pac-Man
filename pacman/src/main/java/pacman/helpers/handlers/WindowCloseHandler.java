@@ -1,9 +1,9 @@
 package pacman.helpers.handlers;
 
+import pacman.helpers.managers.ScoreManager;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import pacman.helpers.ScoreManager;
 
 public class WindowCloseHandler extends WindowAdapter {
     @Override

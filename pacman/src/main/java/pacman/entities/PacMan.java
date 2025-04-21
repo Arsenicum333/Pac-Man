@@ -2,9 +2,12 @@ package pacman.entities;
 
 import pacman.Maze;
 import pacman.helpers.GameObject;
-import pacman.helpers.ScoreManager;
 import pacman.helpers.loaders.ImageLoader;
+import pacman.helpers.managers.ScoreManager;
 import pacman.interfaces.Ghostable;
+import pacman.items.Fruit;
+import pacman.items.Item;
+
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
@@ -65,6 +68,13 @@ public class PacMan extends Entity {
 
         if (eatenItem != null)
             maze.getPowerPellets().remove(eatenItem);
+
+        Fruit currentFruit = maze.getCurrentFruit();
+        if (currentFruit != null && !currentFruit.isCollected() && offsetCollision(this, currentFruit)) {
+            this.applyItemEffect(currentFruit);
+            maze.addCollectedFruit(currentFruit);
+            maze.setCurrentFruit(null);
+        }
     }
 
     public void loseLife() {
@@ -81,6 +91,25 @@ public class PacMan extends Entity {
             }
         }
     }
+
+    private void updateFromEntity(Entity entity) {
+        this.setX(entity.getX());
+        this.setY(entity.getY());
+        this.setSpeed(entity.getSpeed());
+        this.setDirection(entity.getDirection());
+        this.setImage(entity.getImage());
+        this.setWidth(entity.getWidth());
+        this.setHeight(entity.getHeight());
+        if (entity instanceof PacMan pacMan) {
+            this.lives = pacMan.lives;
+            this.canEatGhosts = pacMan.canEatGhosts;
+            this.invulnerable = pacMan.invulnerable;
+            this.baseSpeed = pacMan.baseSpeed;
+            this.newDirection = pacMan.newDirection;
+        }
+    }
+
+    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
 
     public int getLives() {return lives;}
     public int getBaseSpeed() {return baseSpeed;}
