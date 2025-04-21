@@ -33,4 +33,10 @@ public abstract class Ghost extends Entity implements Ghostable {
         super.resetPositions();
         direction = "UP";
     }
+
+    @Override
+    public boolean isInvulnerable() {return false;}
+
+    @Override
+    public void setInvulnerable(boolean invulnerable) {}
 }

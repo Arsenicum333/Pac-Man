@@ -12,9 +12,13 @@ import java.awt.Image;
 public class PacMan extends Entity {
     private String newDirection = "";
     private int lives = 3;
+    private boolean canEatGhosts;
+    private boolean invulnerable;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
+        this.canEatGhosts = false;
+        this.invulnerable = false;
     }
 
     @Override
@@ -77,7 +81,15 @@ public class PacMan extends Entity {
     }
 
     public int getLives() {return lives;}
+    @Override
+    public boolean isInvulnerable() {return invulnerable;}
+    public boolean canEatGhosts() {return canEatGhosts;}
 
     public void setNewDirection(String newDirection) {this.newDirection = newDirection;}
     public void setLives(int lives) {this.lives = lives;}
+    @Override
+    public void setSpeed(int speed) {super.setSpeed(speed);}
+    @Override
+    public void setInvulnerable(boolean invulnerable) {this.invulnerable = invulnerable;}
+    public void setCanEatGhosts(boolean canEatGhosts) {this.canEatGhosts = canEatGhosts;}
 }
