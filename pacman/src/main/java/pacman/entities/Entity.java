@@ -65,6 +65,8 @@ public abstract class Entity extends GameObject implements Movable {
     }
 
     public int getSpeed() {return speed;}
+    public abstract boolean isInvulnerable();
 
     public void setSpeed(int speed) {this.speed = speed;}
+    public abstract void setInvulnerable(boolean invulnerable);
 }
