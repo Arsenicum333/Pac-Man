@@ -12,11 +12,13 @@ import java.awt.Image;
 public class PacMan extends Entity {
     private String newDirection = "";
     private int lives = 3;
+    private int baseSpeed;
     private boolean canEatGhosts;
     private boolean invulnerable;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
+        this.baseSpeed = speed;
         this.canEatGhosts = false;
         this.invulnerable = false;
     }
@@ -68,7 +70,7 @@ public class PacMan extends Entity {
     public void loseLife() {
         Maze maze = Maze.getInstance();
 
-        if (maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost))) {
+        if (!invulnerable && maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost))) {
             direction = "";
             newDirection = "";
             lives--;
@@ -81,6 +83,7 @@ public class PacMan extends Entity {
     }
 
     public int getLives() {return lives;}
+    public int getBaseSpeed() {return baseSpeed;}
     @Override
     public boolean isInvulnerable() {return invulnerable;}
     public boolean canEatGhosts() {return canEatGhosts;}
