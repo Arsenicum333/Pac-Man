@@ -8,6 +8,7 @@ import pacman.entities.ghosts.Clyde;
 import pacman.helpers.GameObject;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.interfaces.Ghostable;
+import pacman.items.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +31,7 @@ public class Maze {
 
     //X = Wall, G = Gate O = Empty, P = Pac-Man, ' ' = Dot, E = Energizer (Power Pellet)
     //b = Blinky (Red), p = Pinky (Pink), i = Inky (Cyan), c = Clyde (Orange)
+    //F = Fruit
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
@@ -42,7 +44,7 @@ public class Maze {
         "XXXX X XGGGX X XXXX",
         "       XipcX       ",
         "XXXX X XXXXX X XXXX",
-        "OOOX X       X XOOO",
+        "OOOX X   F   X XOOO",
         "XXXX X XXXXX X XXXX",
         "X        X        X",
         "XEXX XXX X XXX XXEX",
