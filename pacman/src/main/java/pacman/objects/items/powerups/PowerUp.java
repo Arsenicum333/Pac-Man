@@ -15,5 +15,5 @@ public abstract class PowerUp extends Item {
         this.effectTimer = new Timer();
     }
 
-    public int getDuration() { return duration; }
+    public int getDuration() {return duration;}
 }

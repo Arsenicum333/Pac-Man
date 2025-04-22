@@ -17,6 +17,7 @@ public class Bomb extends Item {
             isCollected = true;
             return pacman;
         }
+
         return entity;
     }
 }

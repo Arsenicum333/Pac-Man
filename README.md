@@ -23,10 +23,14 @@ Pac-Man
         │       └───images
         └───test
             └───java
-                ├───entities
-                │   └───ghosts
                 ├───helpers
                 │   ├───handlers
-                │   └───loaders
-                └───items
+                │   ├───loaders
+                │   └───managers
+                ├───objects
+                │   ├───entities
+                │   │   └───ghosts
+                │   └───items
+                │       └───powerups
+                └───states
 ```

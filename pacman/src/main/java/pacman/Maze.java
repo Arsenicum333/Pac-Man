@@ -70,7 +70,6 @@ public class Maze {
         fruitManager = FruitManager.getInstance();
         itemManager = ItemManager.getInstance();
         generateMaze();
-        fruitManager.startFruitCycle();
     }
 
     public void generateMaze() {
@@ -118,7 +117,6 @@ public class Maze {
         if (dots.isEmpty()) {
             int currentLives = pacman.getLives();
             generateMaze();
-            fruitManager.startFruitCycle();
             pacman.setLives(currentLives);
         }
     }

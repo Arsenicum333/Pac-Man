@@ -8,7 +8,6 @@ import pacman.objects.entities.ghosts.Ghostable;
 import pacman.objects.items.Bomb;
 import pacman.objects.items.Fruit;
 import pacman.objects.items.Item;
-
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
@@ -96,7 +95,8 @@ public class PacMan extends Entity {
     public void loseLife() {
         Maze maze = Maze.getInstance();
 
-        boolean hasCollisionWithGhost = maze.getGhosts().stream().anyMatch(ghost -> offsetCollision(this, ghost));
+        boolean hasCollisionWithGhost = maze.getGhosts().stream()
+                .anyMatch(ghost -> offsetCollision(this, ghost));
         boolean hasCollisionWithBomb = maze.getItems().stream()
                 .anyMatch(item -> item instanceof Bomb && !item.isCollected() && offsetCollision(this, item));
 
@@ -120,15 +120,16 @@ public class PacMan extends Entity {
         this.setImage(entity.getImage());
         this.setWidth(entity.getWidth());
         this.setHeight(entity.getHeight());
-        if (entity instanceof PacMan pacMan) {
-            this.lives = pacMan.lives;
-            this.canEatGhosts = pacMan.canEatGhosts;
-            this.invulnerable = pacMan.invulnerable;
-            this.newDirection = pacMan.newDirection;
+        if (entity instanceof PacMan pacman) {
+            this.lives = pacman.lives;
+            this.canEatGhosts = pacman.canEatGhosts;
+            this.invulnerable = pacman.invulnerable;
+            this.newDirection = pacman.newDirection;
         }
     }
 
     public void resetGhostScore() {this.ghostScore = 200;}
+    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
 
     public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}
@@ -143,5 +144,4 @@ public class PacMan extends Entity {
     @Override
     public void setInvulnerable(boolean invulnerable) {this.invulnerable = invulnerable;}
     public void setCanEatGhosts(boolean canEatGhosts) {this.canEatGhosts = canEatGhosts;}
-    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
 }

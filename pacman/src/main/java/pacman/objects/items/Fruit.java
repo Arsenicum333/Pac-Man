@@ -35,6 +35,7 @@ public class Fruit extends Item {
             isCollected = true;
             return pacman;
         }
+
         return entity;
     }
 

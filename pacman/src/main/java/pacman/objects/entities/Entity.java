@@ -2,7 +2,6 @@ package pacman.objects.entities;
 
 import pacman.Maze;
 import pacman.objects.GameObject;
-
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;

@@ -21,7 +21,7 @@ public class ScoreManager implements Serializable {
 
     public void saveHighScore() {
         try (FileOutputStream fileOut = new FileOutputStream(HIGH_SCORE_FILE);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(this);
             System.out.println("High Score saved: " + highScore);
         } catch (IOException e) {
@@ -31,7 +31,7 @@ public class ScoreManager implements Serializable {
 
     private int loadHighScore() {
         try (FileInputStream fileIn = new FileInputStream(HIGH_SCORE_FILE);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+             ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
             ScoreManager loaded = (ScoreManager) objectIn.readObject();
             int loadedHighScore = loaded.getHighScore();
             System.out.println("High Score loaded: " + loadedHighScore);
@@ -45,11 +45,12 @@ public class ScoreManager implements Serializable {
         }
     }
 
+    public void addPoints(int points) {this.score += points;}
+
     public int getScore() {return score;}
     public int getHighScore() {return highScore;}
     public static ScoreManager getInstance() {return instance;}
 
     public void setScore(int score) {this.score = score;}
     public void setHighScore(int highScore) {this.highScore = highScore;}
-    public void addPoints(int points) {this.score += points;}
 }

@@ -13,9 +13,9 @@ import java.util.Random;
 public class ItemManager {
     private static final ItemManager instance = new ItemManager();
     private HashSet<Item> items;
-    private final int tileSize;
     private int itemSpawnX;
     private int itemSpawnY;
+    private final int tileSize;
     private final Random random;
 
     private ItemManager() {

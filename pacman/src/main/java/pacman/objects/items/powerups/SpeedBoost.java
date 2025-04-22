@@ -16,8 +16,7 @@ public class SpeedBoost extends PowerUp {
     public Entity applyEffect(Entity entity) {
         if (entity instanceof PacMan pacman && !isCollected) {
             isCollected = true;
-            int boostedSpeed = Maze.getTileSize() / 7;
-            pacman.setSpeed(boostedSpeed);
+            pacman.setSpeed(Maze.getTileSize() / 7);
 
             effectTimer.schedule(new TimerTask() {
                 @Override

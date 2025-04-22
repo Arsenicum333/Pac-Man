@@ -17,6 +17,7 @@ public class Heart extends Item {
             isCollected = true;
             return pacman;
         }
+
         return entity;
     }
 }

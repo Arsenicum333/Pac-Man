@@ -40,6 +40,7 @@ public class FruitManager {
     private void spawnFruit() {
         if (currentFruit == null || currentFruit.isCollected()) {
             currentFruit = Fruit.createRandomFruit(fruitSpawnX, fruitSpawnY, tileSize - 6, tileSize - 6);
+
             fruitDespawnTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -51,6 +52,7 @@ public class FruitManager {
 
     private void despawnFruit() {
         currentFruit = null;
+
         fruitSpawnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
