@@ -1,8 +1,8 @@
 package pacman.objects.entities;
 
 import pacman.Maze;
-import pacman.helpers.loaders.ImageLoader;
-import pacman.helpers.managers.ScoreManager;
+import pacman.loaders.ImageLoader;
+import pacman.managers.ScoreManager;
 import pacman.objects.GameObject;
 import pacman.objects.entities.ghosts.Ghostable;
 import pacman.objects.items.Bomb;

@@ -8,10 +8,11 @@ Pac-Man
         ├───main
         │   ├───java
         │   │   └───pacman
+        │   │       ├───gui
+        │   │       ├───handlers
         │   │       ├───helpers
-        │   │       │   ├───handlers
-        │   │       │   ├───loaders
-        │   │       │   └───managers
+        │   │       ├───loaders
+        │   │       ├───managers
         │   │       ├───objects
         │   │       │   ├───entities
         │   │       │   │   └───ghosts
@@ -23,10 +24,10 @@ Pac-Man
         │       └───images
         └───test
             └───java
+                ├───handlers
                 ├───helpers
-                │   ├───handlers
-                │   ├───loaders
-                │   └───managers
+                ├───loaders
+                ├───managers
                 ├───objects
                 │   ├───entities
                 │   │   └───ghosts

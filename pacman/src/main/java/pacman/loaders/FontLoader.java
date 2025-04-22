@@ -1,4 +1,4 @@
-package pacman.helpers.loaders;
+package pacman.loaders;
 
 import java.awt.*;
 import java.io.InputStream;

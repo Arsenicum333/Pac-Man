@@ -1,7 +1,7 @@
 package pacman.gui;
 
 import pacman.Maze;
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 import pacman.objects.items.Fruit;
 
 import java.awt.*;

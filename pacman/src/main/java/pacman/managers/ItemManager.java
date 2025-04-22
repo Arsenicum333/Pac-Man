@@ -1,7 +1,7 @@
-package pacman.helpers.managers;
+package pacman.managers;
 
 import pacman.Maze;
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 import pacman.objects.items.Heart;
 import pacman.objects.items.Item;
 import pacman.objects.items.powerups.Shield;

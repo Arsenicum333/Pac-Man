@@ -1,8 +1,8 @@
 package pacman;
 
-import pacman.helpers.loaders.ImageLoader;
-import pacman.helpers.managers.FruitManager;
-import pacman.helpers.managers.ItemManager;
+import pacman.loaders.ImageLoader;
+import pacman.managers.FruitManager;
+import pacman.managers.ItemManager;
 import pacman.objects.GameObject;
 import pacman.objects.entities.PacMan;
 import pacman.objects.entities.ghosts.Blinky;

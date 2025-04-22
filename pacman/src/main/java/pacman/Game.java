@@ -1,8 +1,8 @@
 package pacman;
 
 import pacman.gui.MainGUI;
-import pacman.helpers.handlers.*;
-import pacman.helpers.loaders.ImageLoader;
+import pacman.handlers.*;
+import pacman.loaders.ImageLoader;
 import pacman.states.*;
 
 import javax.swing.*;

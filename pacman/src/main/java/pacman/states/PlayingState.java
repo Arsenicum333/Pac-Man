@@ -2,7 +2,7 @@ package pacman.states;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.helpers.managers.ScoreManager;
+import pacman.managers.ScoreManager;
 import pacman.objects.entities.ghosts.Ghostable;
 
 public class PlayingState implements GameState {

@@ -1,9 +1,9 @@
-package helpers.loaders;
+package loaders;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 
 import java.awt.Image;
 import static org.junit.jupiter.api.Assertions.*;

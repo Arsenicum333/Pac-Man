@@ -1,4 +1,4 @@
-package pacman.helpers.loaders;
+package pacman.loaders;
 
 import javax.swing.*;
 import java.awt.*;

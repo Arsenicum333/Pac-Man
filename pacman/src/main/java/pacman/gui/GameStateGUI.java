@@ -1,7 +1,7 @@
 package pacman.gui;
 
 import pacman.Game;
-import pacman.helpers.loaders.FontLoader;
+import pacman.loaders.FontLoader;
 
 import java.awt.*;
 

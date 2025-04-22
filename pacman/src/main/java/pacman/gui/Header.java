@@ -2,8 +2,8 @@ package pacman.gui;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.helpers.loaders.FontLoader;
-import pacman.helpers.managers.ScoreManager;
+import pacman.loaders.FontLoader;
+import pacman.managers.ScoreManager;
 
 import java.awt.*;
 

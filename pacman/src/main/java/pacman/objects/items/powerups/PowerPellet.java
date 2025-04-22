@@ -3,7 +3,7 @@ package pacman.objects.items.powerups;
 import java.awt.Image;
 import java.util.TimerTask;
 
-import pacman.helpers.managers.ScoreManager;
+import pacman.managers.ScoreManager;
 import pacman.objects.entities.Entity;
 import pacman.objects.entities.PacMan;
 

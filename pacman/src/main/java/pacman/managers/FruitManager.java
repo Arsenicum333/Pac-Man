@@ -1,4 +1,4 @@
-package pacman.helpers.managers;
+package pacman.managers;
 
 import pacman.Maze;
 import pacman.objects.items.Fruit;

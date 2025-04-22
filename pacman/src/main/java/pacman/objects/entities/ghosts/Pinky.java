@@ -2,7 +2,7 @@ package pacman.objects.entities.ghosts;
 
 import java.awt.Image;
 
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 
 public class Pinky extends Ghost {
     public Pinky(Image image, int x, int y, int width, int height, int speed) {

@@ -1,7 +1,7 @@
 package pacman.objects.items;
 
-import pacman.helpers.loaders.ImageLoader;
-import pacman.helpers.managers.ScoreManager;
+import pacman.loaders.ImageLoader;
+import pacman.managers.ScoreManager;
 import pacman.objects.entities.Entity;
 import pacman.objects.entities.PacMan;
 

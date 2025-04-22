@@ -2,7 +2,7 @@ package pacman.gui;
 
 import pacman.Game;
 import pacman.Maze;
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
-package helpers;
+package objects;
 
-import pacman.helpers.loaders.ImageLoader;
+import pacman.loaders.ImageLoader;
 import pacman.objects.GameObject;
 
 import org.junit.jupiter.api.Test;

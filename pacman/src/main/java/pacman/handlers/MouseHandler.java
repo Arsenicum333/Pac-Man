@@ -1,4 +1,4 @@
-package pacman.helpers.handlers;
+package pacman.handlers;
 
 import pacman.Game;
 
