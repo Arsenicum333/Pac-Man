@@ -1,5 +1,6 @@
 package pacman;
 
+import pacman.gui.MainGUI;
 import pacman.helpers.handlers.*;
 import pacman.helpers.loaders.ImageLoader;
 import pacman.states.*;
@@ -10,7 +11,7 @@ import java.awt.event.*;
 
 public class Game implements ActionListener {
     private Maze maze;
-    private GUI gui;
+    private MainGUI gui;
     private Timer gameLoop;
     private GameState state;
     private static final int WINDOW_OFFSET_X = 16;
@@ -18,7 +19,7 @@ public class Game implements ActionListener {
 
     Game(int gameWidth, int gameHeight) {
         maze = Maze.getInstance();
-        gui = GUI.getInstance();
+        gui = MainGUI.getInstance();
         state = new NotStartedState();
 
         gui.setGame(this);
