@@ -2,6 +2,7 @@ package pacman.gui;
 
 import pacman.Maze;
 import pacman.objects.GameObject;
+import pacman.objects.entities.PacMan;
 import pacman.objects.items.Item;
 import pacman.objects.items.powerups.PowerPellet;
 
@@ -29,7 +30,7 @@ public class MazeGUI implements Renderable {
                         Maze.getTileSize(), Maze.getTileSize(), component);
         }
 
-        for (Item item : maze.getItems()) {
+        for (Item<PacMan> item : maze.getItems()) {
             if (!item.isCollected()) {
                 int width = Maze.getTileSize();
                 int height = Maze.getTileSize();
@@ -45,7 +46,7 @@ public class MazeGUI implements Renderable {
         }
 
         if (maze.getCurrentFruit() != null && !maze.getCurrentFruit().isCollected()) {
-            Item fruit = maze.getCurrentFruit();
+            Item<PacMan> fruit = maze.getCurrentFruit();
 
             g.drawImage(fruit.getImage(), offsetX + fruit.getX(), offsetY + fruit.getY(),
                         Maze.getTileSize() - 6, Maze.getTileSize() - 6, component);

@@ -1,11 +1,12 @@
 package pacman.objects.items.powerups;
 
+import pacman.objects.entities.Entity;
+import pacman.objects.items.Item;
+
 import java.awt.Image;
 import java.util.Timer;
 
-import pacman.objects.items.Item;
-
-public abstract class PowerUp extends Item {
+public abstract class PowerUp<T extends Entity> extends Item<T> {
     protected int duration;
     protected Timer effectTimer;
 

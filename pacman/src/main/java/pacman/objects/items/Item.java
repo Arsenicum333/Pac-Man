@@ -5,7 +5,7 @@ import pacman.objects.entities.Entity;
 
 import java.awt.Image;
 
-public abstract class Item extends GameObject {
+public abstract class Item<T extends Entity> extends GameObject {
     protected boolean isCollected;
 
     public Item(Image image, int x, int y, int width, int height) {
@@ -13,7 +13,7 @@ public abstract class Item extends GameObject {
         this.isCollected = false;
     }
 
-    public abstract Entity applyEffect(Entity entity);
+    public abstract T applyEffect(T entity);
 
     public boolean isCollected() {return isCollected;}
 

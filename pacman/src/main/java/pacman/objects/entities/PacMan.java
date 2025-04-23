@@ -44,22 +44,24 @@ public class PacMan extends Entity {
 
     public void eatItem() {
         Maze maze = Maze.getInstance();
-        GameObject eatenItem = null;
+        GameObject eatenDot = null;
+        Item<PacMan> eatenItem = null;
         Fruit currentFruit = maze.getCurrentFruit();
 
         for (GameObject dot : maze.getDots()) {
             if (offsetCollision(this, dot)) {
-                eatenItem = dot;
+                eatenDot = dot;
                 ScoreManager.getInstance().addPoints(10);
                 break;
             }
         }
 
-        if (eatenItem != null)
-            maze.getDots().remove(eatenItem);
+        if (eatenDot != null)
+            maze.getDots().remove(eatenDot);
 
-        for (Item item : maze.getItems()) {
+        for (Item<PacMan> item : maze.getItems()) {
             if (!item.isCollected() && offsetCollision(this, item)) {
+                eatenItem = item;
                 this.applyItemEffect(item);
                 break;
             }
@@ -129,7 +131,7 @@ public class PacMan extends Entity {
     }
 
     public void resetGhostScore() {this.ghostScore = 200;}
-    private void applyItemEffect(Item item) {this.updateFromEntity(item.applyEffect(this));}
+    private void applyItemEffect(Item<PacMan> item) {this.updateFromEntity(item.applyEffect(this));}
 
     public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}

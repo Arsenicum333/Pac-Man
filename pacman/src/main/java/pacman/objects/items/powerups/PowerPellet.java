@@ -1,20 +1,19 @@
 package pacman.objects.items.powerups;
 
+import pacman.managers.ScoreManager;
+import pacman.objects.entities.PacMan;
+
 import java.awt.Image;
 import java.util.TimerTask;
 
-import pacman.managers.ScoreManager;
-import pacman.objects.entities.Entity;
-import pacman.objects.entities.PacMan;
-
-public class PowerPellet extends PowerUp {
+public class PowerPellet extends PowerUp<PacMan> {
     public PowerPellet(Image image, int x, int y, int width, int height, int duration) {
         super(image, x, y, width, height, duration);
     }
 
     @Override
-    public Entity applyEffect(Entity entity) {
-        if (entity instanceof PacMan pacman && !isCollected) {
+    public PacMan applyEffect(PacMan pacman) {
+        if (!isCollected) {
             ScoreManager.getInstance().addPoints(50);
             isCollected = true;
             pacman.setCanEatGhosts(true);
@@ -26,10 +25,8 @@ public class PowerPellet extends PowerUp {
                     pacman.resetGhostScore();
                 }
             }, duration);
-
-            return pacman;
         }
 
-        return entity;
+        return pacman;
     }
 }

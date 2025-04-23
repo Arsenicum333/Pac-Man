@@ -2,6 +2,7 @@ package pacman.managers;
 
 import pacman.Maze;
 import pacman.loaders.ImageLoader;
+import pacman.objects.entities.PacMan;
 import pacman.objects.items.Heart;
 import pacman.objects.items.Item;
 import pacman.objects.items.powerups.Shield;
@@ -12,7 +13,7 @@ import java.util.Random;
 
 public class ItemManager {
     private static final ItemManager instance = new ItemManager();
-    private HashSet<Item> items;
+    private HashSet<Item<PacMan>> items;
     private int itemSpawnX;
     private int itemSpawnY;
     private final int tileSize;
@@ -30,12 +31,13 @@ public class ItemManager {
     }
 
     public void spawnRandomItem() {
-        Item newItem = createRandomItem(itemSpawnX, itemSpawnY);
+        Item<PacMan> newItem = createRandomItem(itemSpawnX, itemSpawnY);
         items.add(newItem);
     }
 
-    private Item createRandomItem(int x, int y) {
+    private Item<PacMan> createRandomItem(int x, int y) {
         int choice = random.nextInt(3);
+
         return switch (choice) {
             case 0 -> new Heart(ImageLoader.getImage("Heart"), x, y, tileSize, tileSize);
             case 1 -> new SpeedBoost(ImageLoader.getImage("SpeedBoost"), x, y, tileSize, tileSize, 5000);
@@ -44,6 +46,6 @@ public class ItemManager {
         };
     }
 
-    public HashSet<Item> getItems() {return items;}
+    public HashSet<Item<PacMan>> getItems() {return items;}
     public static ItemManager getInstance() {return instance;}
 }

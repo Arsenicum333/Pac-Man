@@ -133,7 +133,7 @@ public class Maze {
     public HashSet<GameObject> getWalls() {return walls;}
     public HashSet<GameObject> getGates() {return gates;}
     public HashSet<GameObject> getDots() {return dots;}
-    public HashSet<Item> getItems() {return itemManager.getItems();}
+    public HashSet<Item<PacMan>> getItems() {return itemManager.getItems();}
     public Fruit getCurrentFruit() {return fruitManager.getCurrentFruit();}
     public List<Fruit> getCollectedFruits() {return collectedFruits;}
     public static Maze getInstance() {return instance;}
