@@ -5,20 +5,29 @@ import pacman.Maze;
 import pacman.managers.ScoreManager;
 import pacman.objects.entities.ghosts.Ghostable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PlayingState implements GameState {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayingState.class);
+
     @Override
     public void handleGameLoop(Game game) {
-        Maze maze = Maze.getInstance();
-        ScoreManager scoreManager = ScoreManager.getInstance();
+        try {
+            Maze maze = Maze.getInstance();
+            ScoreManager scoreManager = ScoreManager.getInstance();
 
-        maze.getPacman().move();
-        maze.getPacman().eatItem();
-        maze.getPacman().eatGhost();
-        maze.getPacman().loseLife();
-        maze.getGhosts().forEach(Ghostable::moveBehaviour);
-        scoreManager.updateHighScore();
-        maze.newLevel();
-        game.checkGameOver();
+            maze.getPacman().move();
+            maze.getPacman().eatItem();
+            maze.getPacman().eatGhost();
+            maze.getPacman().loseLife();
+            maze.getGhosts().forEach(Ghostable::moveBehaviour);
+            scoreManager.updateHighScore();
+            maze.newLevel();
+            game.checkGameOver();
+        } catch (Exception e) {
+            LOGGER.error("Error during game loop in PlayingState", e);
+        }
     }
 
     @Override

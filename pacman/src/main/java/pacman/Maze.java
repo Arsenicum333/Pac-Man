@@ -16,8 +16,11 @@ import pacman.objects.items.powerups.PowerPellet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Maze {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Maze.class);
     private static final Maze instance = new Maze();
     private static final int rowCount = 21;
     private static final int columnCount = 19;
@@ -66,50 +69,67 @@ public class Maze {
     };
 
     private Maze() {
-        collectedFruits = new ArrayList<>();
-        fruitManager = FruitManager.getInstance();
-        itemManager = ItemManager.getInstance();
-        generateMaze();
+        try {
+            collectedFruits = new ArrayList<>();
+            fruitManager = FruitManager.getInstance();
+            itemManager = ItemManager.getInstance();
+            generateMaze();
+            LOGGER.info("Maze initialized successfully");
+        } catch (Exception e) {
+            LOGGER.error("Failed to initialize Maze", e);
+            throw new RuntimeException("Maze initialization failed", e);
+        }
     }
 
     public void generateMaze() {
-        walls = new HashSet<>();
-        gates = new HashSet<>();
-        dots = new HashSet<>();
+        try {
+            walls = new HashSet<>();
+            gates = new HashSet<>();
+            dots = new HashSet<>();
 
-        for (int r = 0; r < rowCount; r++) {
-            for (int c = 0; c < columnCount; c++) {
-                String row = tileMap[r];
-                char tileMapChar = row.charAt(c);
-                int x = c * tileSize;
-                int y = r * tileSize;
+            for (int r = 0; r < rowCount; r++) {
+                for (int c = 0; c < columnCount; c++) {
+                    String row = tileMap[r];
+                    char tileMapChar = row.charAt(c);
+                    int x = c * tileSize;
+                    int y = r * tileSize;
 
-                if (tileMapChar == 'F') {
-                    fruitManager.setSpawnCoordinates(x + 3, y + 3);
-                    fruitManager.startFruitCycle();
-                } else if (tileMapChar == 'I') {
-                    itemManager.setSpawnCoordinates(x, y);
-                    itemManager.spawnRandomItem();
-                } else {
-                    placeObject(tileMapChar, x, y);
+                    if (tileMapChar == 'F') {
+                        fruitManager.setSpawnCoordinates(x + 3, y + 3);
+                        fruitManager.startFruitCycle();
+                    } else if (tileMapChar == 'I') {
+                        itemManager.setSpawnCoordinates(x, y);
+                        itemManager.spawnRandomItem();
+                    } else {
+                        placeObject(tileMapChar, x, y);
+                    }
                 }
             }
+            LOGGER.info("Maze generated successfully");
+        } catch (Exception e) {
+            LOGGER.error("Failed to generate maze.", e);
+            throw new RuntimeException("Maze generation failed", e);
         }
     }
 
     public void placeObject(char tileMapChar, int x, int y) {
-        switch (tileMapChar) {
-            case 'X' -> walls.add(new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize));
-            case 'G' -> gates.add(new GameObject(ImageLoader.getImage("Gate"), x, y, tileSize, tileSize));
-            case 'P' -> pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
-            case 'b' -> blinky = new Blinky(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-            case 'p' -> pinky = new Pinky(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-            case 'i' -> inky = new Inky(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize, tileSize / 11);
-            case 'c' -> clyde = new Clyde(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize, tileSize / 11);
-            case ' ' -> dots.add(new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize));
-            case 'E' -> itemManager.getItems().add(new PowerPellet(ImageLoader.getImage("PowerPellet"), x + 6, y + 6, tileSize - 12, tileSize - 12, 5000));
-            case 'B' -> itemManager.getItems().add(new Bomb(ImageLoader.getImage("Bomb"), x, y, tileSize, tileSize));
-            default -> {}
+        try {
+            switch (tileMapChar) {
+                case 'X' -> walls.add(new GameObject(ImageLoader.getImage("Wall"), x, y, tileSize, tileSize));
+                case 'G' -> gates.add(new GameObject(ImageLoader.getImage("Gate"), x, y, tileSize, tileSize));
+                case 'P' -> pacman = new PacMan(ImageLoader.getImage("PacManLeft"), x, y, tileSize, tileSize, tileSize / 8);
+                case 'b' -> blinky = new Blinky(ImageLoader.getImage("BlinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+                case 'p' -> pinky = new Pinky(ImageLoader.getImage("PinkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+                case 'i' -> inky = new Inky(ImageLoader.getImage("InkyUp"), x, y, tileSize, tileSize, tileSize / 11);
+                case 'c' -> clyde = new Clyde(ImageLoader.getImage("ClydeUp"), x, y, tileSize, tileSize, tileSize / 11);
+                case ' ' -> dots.add(new GameObject(ImageLoader.getImage("Dot"), x, y, tileSize, tileSize));
+                case 'E' -> itemManager.getItems().add(new PowerPellet(ImageLoader.getImage("PowerPellet"), x + 6, y + 6, tileSize - 12, tileSize - 12, 5000));
+                case 'B' -> itemManager.getItems().add(new Bomb(ImageLoader.getImage("Bomb"), x, y, tileSize, tileSize));
+                default -> {}
+            }
+        } catch (Exception e) {
+            LOGGER.error("Failed to place object for tile '{}'", tileMapChar, e);
+            throw new RuntimeException("Failed to place object in maze", e);
         }
     }
 

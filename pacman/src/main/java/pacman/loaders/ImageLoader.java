@@ -3,8 +3,11 @@ package pacman.loaders;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ImageLoader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageLoader.class);
     private static final String PATH = "/images/";
     private static HashMap<String, Image> images = new HashMap<>();
 
@@ -58,7 +61,14 @@ public class ImageLoader {
         images.put("ClydeUp", loadImage("ClydeUp.gif"));
     }
 
-    private static Image loadImage(String fileName) {return new ImageIcon(ImageLoader.class.getResource(PATH + fileName)).getImage();}
+    private static Image loadImage(String fileName) {
+        try {
+            return new ImageIcon(ImageLoader.class.getResource(PATH + fileName)).getImage();
+        } catch (Exception e) {
+            LOGGER.warn("Failed to load image: {}", fileName);
+            return null;
+        }
+    }
 
     public static Image getImage(String name) {return images.get(name);}
 }

@@ -1,8 +1,11 @@
 package pacman.managers;
 
 import java.io.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ScoreManager implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScoreManager.class);
     private static final ScoreManager instance = new ScoreManager();
     private static final long serialVersionUID = 1L;
     private static final String HIGH_SCORE_FILE = "highscore.data";
@@ -23,9 +26,9 @@ public class ScoreManager implements Serializable {
         try (FileOutputStream fileOut = new FileOutputStream(HIGH_SCORE_FILE);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(this);
-            System.out.println("High Score saved: " + highScore);
+            LOGGER.info("High Score saved: " + highScore);
         } catch (IOException e) {
-            System.err.println("Error saving High Score: " + e.getMessage());
+            LOGGER.error("Error saving High Score: " + e.getMessage(), e);
         }
     }
 
@@ -34,13 +37,13 @@ public class ScoreManager implements Serializable {
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
             ScoreManager loaded = (ScoreManager) objectIn.readObject();
             int loadedHighScore = loaded.getHighScore();
-            System.out.println("High Score loaded: " + loadedHighScore);
+            LOGGER.info("High Score loaded: " + loadedHighScore);
             return loadedHighScore;
         } catch (FileNotFoundException e) {
-            System.out.println("High Score file not found, starting with 0");
+            LOGGER.warn("High Score file not found, starting with 0");
             return 0;
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error loading High Score: " + e.getMessage());
+            LOGGER.error("Error loading High Score: " + e.getMessage(), e);
             return 0;
         }
     }

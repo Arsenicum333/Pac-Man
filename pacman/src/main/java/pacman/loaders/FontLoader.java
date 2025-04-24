@@ -3,7 +3,11 @@ package pacman.loaders;
 import java.awt.*;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FontLoader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FontLoader.class);
     private static Font pressStart2PFont;
     private static Font arcadeClassicFont;
     private static Font joystixMonospaceFont;
@@ -19,14 +23,13 @@ public class FontLoader {
             InputStream is = FontLoader.class.getClassLoader().getResourceAsStream(path);
 
             if (is == null) {
-                System.err.println("Could not find font: " + path);
+                LOGGER.warn("Could not find font: {}", path);
                 return new Font("Arial", Font.PLAIN, 12);
             }
 
             return Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
-            System.err.println("Failed to load font: " + path);
-            e.printStackTrace();
+            LOGGER.error("Failed to load font: {}", path, e);
             return new Font("Arial", Font.PLAIN, 12);
         }
     }
