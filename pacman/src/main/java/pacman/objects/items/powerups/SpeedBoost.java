@@ -1,10 +1,8 @@
 package pacman.objects.items.powerups;
 
-import pacman.Maze;
 import pacman.objects.entities.PacMan;
 
 import java.awt.Image;
-import java.util.TimerTask;
 
 public class SpeedBoost extends PowerUp<PacMan> {
     public SpeedBoost(Image image, int x, int y, int width, int height, int duration) {
@@ -12,19 +10,8 @@ public class SpeedBoost extends PowerUp<PacMan> {
     }
 
     @Override
-    public PacMan applyEffect(PacMan pacman) {
-        if (!isCollected) {
-            isCollected = true;
-            pacman.setSpeed(Maze.getTileSize() / 7);
+    protected void activate(PacMan pacman) {pacman.addSpeedBoost();}
 
-            effectTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    pacman.setSpeed(Maze.getTileSize() / 8);
-                }
-            }, duration);
-        }
-
-        return pacman;
-    }
+    @Override
+    protected void deactivate(PacMan pacman) {pacman.removeSpeedBoost();}
 }

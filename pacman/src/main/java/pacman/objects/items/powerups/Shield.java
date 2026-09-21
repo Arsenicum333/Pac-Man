@@ -3,7 +3,6 @@ package pacman.objects.items.powerups;
 import pacman.objects.entities.PacMan;
 
 import java.awt.Image;
-import java.util.TimerTask;
 
 public class Shield extends PowerUp<PacMan> {
     public Shield(Image image, int x, int y, int width, int height, int duration) {
@@ -11,19 +10,8 @@ public class Shield extends PowerUp<PacMan> {
     }
 
     @Override
-    public PacMan applyEffect(PacMan pacman) {
-        if (!isCollected) {
-            isCollected = true;
-            pacman.setInvulnerable(true);
+    protected void activate(PacMan pacman) {pacman.addShield();}
 
-            effectTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    pacman.setInvulnerable(false);
-                }
-            }, duration);
-        }
-
-        return pacman;
-    }
+    @Override
+    protected void deactivate(PacMan pacman) {pacman.removeShield();}
 }

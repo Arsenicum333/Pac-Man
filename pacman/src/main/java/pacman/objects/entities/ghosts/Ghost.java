@@ -14,6 +14,7 @@ public abstract class Ghost extends Entity implements Ghostable {
     private boolean invulnerable = false;
     private boolean blinkState = false;
     private int blinkCounter = 0;
+    private int vulnerabilityCount = 0;
 
 
     public Ghost(Image image, int x, int y, int width, int height, int speed) {
@@ -70,6 +71,7 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public void eatenByPacMan() {
+        vulnerabilityCount = 0;
         setInvulnerable(false);
         setImage(resetImage());
         blinkCounter = 0;
@@ -80,6 +82,17 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public boolean isInvulnerable() {return invulnerable;}
+
+    public void addVulnerability() {
+        vulnerabilityCount++;
+        setInvulnerable(true);
+    }
+
+    public void removeVulnerability() {
+        vulnerabilityCount = Math.max(0, vulnerabilityCount - 1);
+        if (vulnerabilityCount == 0)
+            setInvulnerable(false);
+    }
 
     @Override
     public void setInvulnerable(boolean invulnerable) {

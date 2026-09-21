@@ -6,7 +6,6 @@ import pacman.objects.entities.PacMan;
 import pacman.objects.entities.ghosts.Ghost;
 
 import java.awt.Image;
-import java.util.TimerTask;
 
 public class PowerPellet extends PowerUp<PacMan> {
     public PowerPellet(Image image, int x, int y, int width, int height, int duration) {
@@ -14,33 +13,23 @@ public class PowerPellet extends PowerUp<PacMan> {
     }
 
     @Override
-    public PacMan applyEffect(PacMan pacman) {
-        if (!isCollected) {
-            ScoreManager.getInstance().addPoints(50);
-            isCollected = true;
-            pacman.setCanEatGhosts(true);
+    protected void activate(PacMan pacman) {
+        ScoreManager.getInstance().addPoints(50);
+        pacman.addGhostEating();
 
-            Maze.getInstance().getGhosts().forEach(ghostable -> {
-                if (ghostable instanceof Ghost ghost) {
-                    ghost.setInvulnerable(true);
-                }
-            });
+        Maze.getInstance().getGhosts().forEach(ghostable -> {
+            if (ghostable instanceof Ghost ghost)
+                ghost.addVulnerability();
+        });
+    }
 
-            effectTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    pacman.setCanEatGhosts(false);
-                    pacman.resetGhostScore();
+    @Override
+    protected void deactivate(PacMan pacman) {
+        pacman.removeGhostEating();
 
-                    Maze.getInstance().getGhosts().forEach(ghostable -> {
-                        if (ghostable instanceof Ghost ghost) {
-                            ghost.setInvulnerable(false);
-                        }
-                    });
-                }
-            }, duration);
-        }
-
-        return pacman;
+        Maze.getInstance().getGhosts().forEach(ghostable -> {
+            if (ghostable instanceof Ghost ghost)
+                ghost.removeVulnerability();
+        });
     }
 }

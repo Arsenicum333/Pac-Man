@@ -18,6 +18,9 @@ public class PacMan extends Entity {
     private boolean canEatGhosts;
     private boolean invulnerable;
     private int ghostScore = 200;
+    private int speedBoostCount;
+    private int ghostEatingCount;
+    private int shieldCount;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -126,10 +129,51 @@ public class PacMan extends Entity {
             this.canEatGhosts = pacman.canEatGhosts;
             this.invulnerable = pacman.invulnerable;
             this.newDirection = pacman.newDirection;
+            this.speedBoostCount = pacman.speedBoostCount;
+            this.ghostEatingCount = pacman.ghostEatingCount;
+            this.shieldCount = pacman.shieldCount;
         }
     }
 
     public void resetGhostScore() {this.ghostScore = 200;}
+
+    public void addSpeedBoost() {
+        speedBoostCount++;
+        setSpeed(Maze.getTileSize() / 7);
+    }
+
+    public void removeSpeedBoost() {
+        speedBoostCount = Math.max(0, speedBoostCount - 1);
+        if (speedBoostCount == 0)
+            setSpeed(Maze.getTileSize() / 8);
+    }
+
+    public void addGhostEating() {
+        ghostEatingCount++;
+        canEatGhosts = true;
+    }
+
+    public void removeGhostEating() {
+        ghostEatingCount = Math.max(0, ghostEatingCount - 1);
+
+        if (ghostEatingCount == 0) {
+            canEatGhosts = false;
+            resetGhostScore();
+        }
+    }
+
+    public void addShield() {
+        shieldCount++;
+        invulnerable = true;
+    }
+
+    public void removeShield() {
+        shieldCount = Math.max(0, shieldCount - 1);
+
+        if (shieldCount == 0)
+            invulnerable = false;
+    }
+
     private void applyItemEffect(Item<PacMan> item) {this.updateFromEntity(item.applyEffect(this));}
 
     public String getNewDirection() {return newDirection;}
