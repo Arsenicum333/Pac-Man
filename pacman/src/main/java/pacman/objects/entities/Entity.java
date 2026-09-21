@@ -17,11 +17,15 @@ public abstract class Entity extends GameObject implements Movable {
 
     @Override
     public void move() {
+        moveBy(speed);
+    }
+
+    protected void moveBy(int distance) {
         switch (direction) {
-            case "LEFT" -> setX(getX() - speed);
-            case "RIGHT" -> setX(getX() + speed);
-            case "UP" -> setY(getY() - speed);
-            case "DOWN" -> setY(getY() + speed);
+            case "LEFT" -> setX(getX() - distance);
+            case "RIGHT" -> setX(getX() + distance);
+            case "UP" -> setY(getY() - distance);
+            case "DOWN" -> setY(getY() + distance);
             default -> {}
         }
 
@@ -33,14 +37,18 @@ public abstract class Entity extends GameObject implements Movable {
 
     @Override
     public boolean canMove(String direction) {
+        return canMove(direction, speed);
+    }
+
+    protected boolean canMove(String direction, int distance) {
         int newX = getX();
         int newY = getY();
 
         switch (direction) {
-            case "LEFT" -> newX -= speed;
-            case "RIGHT" -> newX += speed;
-            case "UP" -> newY -= speed;
-            case "DOWN" -> newY += speed;
+            case "LEFT" -> newX -= distance;
+            case "RIGHT" -> newX += distance;
+            case "UP" -> newY -= distance;
+            case "DOWN" -> newY += distance;
             default -> {}
         }
 

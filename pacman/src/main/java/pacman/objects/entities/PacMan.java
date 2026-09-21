@@ -30,11 +30,15 @@ public class PacMan extends Entity {
 
     @Override
     public void move() {
-        if (!newDirection.isEmpty() && canMove (newDirection))
-            direction = newDirection;
+        for (int step = 0; step < getSpeed(); step++) {
+            if (!newDirection.isEmpty() && canMove(newDirection, 1))
+                direction = newDirection;
 
-        if (canMove(direction))
-            super.move();
+            if (canMove(direction, 1))
+                moveBy(1);
+            else
+                break;
+        }
 
         switch (direction) {
             case "LEFT" -> setImage(ImageLoader.getImage("PacManLeft"));
@@ -139,7 +143,7 @@ public class PacMan extends Entity {
 
     public void addSpeedBoost() {
         speedBoostCount++;
-        setSpeed(Maze.getTileSize() / 7);
+        setSpeed(Maze.getTileSize() / 5);
     }
 
     public void removeSpeedBoost() {
