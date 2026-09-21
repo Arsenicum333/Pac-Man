@@ -35,7 +35,7 @@ public class Game implements ActionListener {
             gameLoop.start();
             LOGGER.info("Game initialized successfully");
         } catch (Exception e) {
-            LOGGER.error("Failed to initialize game.", e);
+            LOGGER.error("Failed to initialize game", e);
             throw new RuntimeException("Game initialization failed", e);
         }
     }

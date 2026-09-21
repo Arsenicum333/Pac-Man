@@ -87,8 +87,7 @@ public class PacMan extends Entity {
                 .findFirst()
                 .ifPresent(ghost -> {
                     ScoreManager.getInstance().addPoints(ghostScore);
-                    ghost.resetPositions();
-                    ghost.freezeTemporarily();
+                    ghost.eatenByPacMan();
                     ghostScore *= 2;
                 });
         }

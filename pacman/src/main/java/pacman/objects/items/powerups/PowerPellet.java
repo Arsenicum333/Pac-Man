@@ -1,7 +1,9 @@
 package pacman.objects.items.powerups;
 
+import pacman.Maze;
 import pacman.managers.ScoreManager;
 import pacman.objects.entities.PacMan;
+import pacman.objects.entities.ghosts.Ghost;
 
 import java.awt.Image;
 import java.util.TimerTask;
@@ -18,11 +20,23 @@ public class PowerPellet extends PowerUp<PacMan> {
             isCollected = true;
             pacman.setCanEatGhosts(true);
 
+            Maze.getInstance().getGhosts().forEach(ghostable -> {
+                if (ghostable instanceof Ghost ghost) {
+                    ghost.setInvulnerable(true);
+                }
+            });
+
             effectTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     pacman.setCanEatGhosts(false);
                     pacman.resetGhostScore();
+
+                    Maze.getInstance().getGhosts().forEach(ghostable -> {
+                        if (ghostable instanceof Ghost ghost) {
+                            ghost.setInvulnerable(false);
+                        }
+                    });
                 }
             }, duration);
         }

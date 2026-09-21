@@ -13,12 +13,19 @@ public class Pinky extends Ghost {
     public void moveBehaviour() {
         super.moveBehaviour();
 
-        switch (direction) {
-            case "LEFT" -> setImage(ImageLoader.getImage("PinkyLeft"));
-            case "RIGHT" -> setImage(ImageLoader.getImage("PinkyRight"));
-            case "UP" -> setImage(ImageLoader.getImage("PinkyUp"));
-            case "DOWN" -> setImage(ImageLoader.getImage("PinkyDown"));
-            default -> {}
+        if (!isInvulnerable()) {
+            setImage(resetImage());
         }
+    }
+
+    @Override
+    public Image resetImage() {
+        return switch (direction) {
+            case "LEFT" -> ImageLoader.getImage("PinkyLeft");
+            case "RIGHT" -> ImageLoader.getImage("PinkyRight");
+            case "UP" -> ImageLoader.getImage("PinkyUp");
+            case "DOWN" -> ImageLoader.getImage("PinkyDown");
+            default -> ImageLoader.getImage("PinkyUp");
+        };
     }
 }

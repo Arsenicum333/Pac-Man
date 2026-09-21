@@ -3,6 +3,7 @@ package pacman.objects.entities.ghosts;
 import java.awt.Image;
 import java.util.Random;
 
+import pacman.loaders.ImageLoader;
 import pacman.objects.entities.Entity;
 
 public abstract class Ghost extends Entity implements Ghostable {
@@ -10,6 +11,10 @@ public abstract class Ghost extends Entity implements Ghostable {
     private String newDirection = "";
     private Random random = new Random();
     private boolean isFrozen = false;
+    private boolean invulnerable = false;
+    private boolean blinkState = false;
+    private int blinkCounter = 0;
+
 
     public Ghost(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -35,7 +40,6 @@ public abstract class Ghost extends Entity implements Ghostable {
         direction = "UP";
     }
 
-    @Override
     public void freezeTemporarily() {
         isFrozen = true;
 
@@ -48,8 +52,45 @@ public abstract class Ghost extends Entity implements Ghostable {
     }
 
     @Override
-    public boolean isInvulnerable() {return false;}
+    public void monitorVulnerability() {
+        if (!isInvulnerable()) {
+            setImage(resetImage());
+            return;
+        }
+
+        blinkCounter++;
+
+        if (blinkCounter >= 50) {
+            blinkState = !blinkState;
+            setImage(blinkState ? ImageLoader.getImage("VulnerableBlue")
+                                : ImageLoader.getImage("VulnerableWhite"));
+            blinkCounter = 0;
+        }
+    }
 
     @Override
-    public void setInvulnerable(boolean invulnerable) {}
+    public void eatenByPacMan() {
+        setInvulnerable(false);
+        setImage(resetImage());
+        blinkCounter = 0;
+        blinkState = false;
+        resetPositions();
+        freezeTemporarily();
+    }
+
+    @Override
+    public boolean isInvulnerable() {return invulnerable;}
+
+    @Override
+    public void setInvulnerable(boolean invulnerable) {
+        this.invulnerable = invulnerable;
+
+        if (invulnerable) {
+            blinkState = true;
+            blinkCounter = 0;
+            setImage(ImageLoader.getImage("VulnerableBlue"));
+        } else {
+            setImage(resetImage());
+        }
+    }
 }

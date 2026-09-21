@@ -107,7 +107,7 @@ public class Maze {
             }
             LOGGER.info("Maze generated successfully");
         } catch (Exception e) {
-            LOGGER.error("Failed to generate maze.", e);
+            LOGGER.error("Failed to generate maze", e);
             throw new RuntimeException("Maze generation failed", e);
         }
     }

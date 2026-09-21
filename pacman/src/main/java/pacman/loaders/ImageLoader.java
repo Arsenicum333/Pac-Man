@@ -40,6 +40,9 @@ public class ImageLoader {
         images.put("PacManRight", loadImage("PacManRight.gif"));
         images.put("PacManUp", loadImage("PacManUp.gif"));
 
+        images.put("VulnerableBlue", loadImage("VulnerableBlue.gif"));
+        images.put("VulnerableWhite", loadImage("VulnerableWhite.gif"));
+
         images.put("BlinkyDown", loadImage("BlinkyDown.gif"));
         images.put("BlinkyLeft", loadImage("BlinkyLeft.gif"));
         images.put("BlinkyRight", loadImage("BlinkyRight.gif"));

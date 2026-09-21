@@ -13,12 +13,19 @@ public class Blinky extends Ghost {
     public void moveBehaviour() {
         super.moveBehaviour();
 
-        switch (direction) {
-            case "LEFT" -> setImage(ImageLoader.getImage("BlinkyLeft"));
-            case "RIGHT" -> setImage(ImageLoader.getImage("BlinkyRight"));
-            case "UP" -> setImage(ImageLoader.getImage("BlinkyUp"));
-            case "DOWN" -> setImage(ImageLoader.getImage("BlinkyDown"));
-            default -> {}
+        if (!isInvulnerable()) {
+            setImage(resetImage());
         }
+    }
+
+    @Override
+    public Image resetImage() {
+        return switch (direction) {
+            case "LEFT" -> ImageLoader.getImage("BlinkyLeft");
+            case "RIGHT" -> ImageLoader.getImage("BlinkyRight");
+            case "UP" -> ImageLoader.getImage("BlinkyUp");
+            case "DOWN" -> ImageLoader.getImage("BlinkyDown");
+            default -> ImageLoader.getImage("BlinkyUp");
+        };
     }
 }

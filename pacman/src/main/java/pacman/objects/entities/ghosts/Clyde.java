@@ -13,12 +13,19 @@ public class Clyde extends Ghost {
     public void moveBehaviour() {
         super.moveBehaviour();
 
+        if (!isInvulnerable()) {
+            setImage(resetImage());
+        }
+    }
+
+    @Override
+    public Image resetImage() {
         switch (direction) {
-            case "LEFT" -> setImage(ImageLoader.getImage("ClydeLeft"));
-            case "RIGHT" -> setImage(ImageLoader.getImage("ClydeRight"));
-            case "UP" -> setImage(ImageLoader.getImage("ClydeUp"));
-            case "DOWN" -> setImage(ImageLoader.getImage("ClydeDown"));
-            default -> {}
+            case "LEFT": return ImageLoader.getImage("ClydeLeft");
+            case "RIGHT": return ImageLoader.getImage("ClydeRight");
+            case "UP": return ImageLoader.getImage("ClydeUp");
+            case "DOWN": return ImageLoader.getImage("ClydeDown");
+            default: return ImageLoader.getImage("ClydeUp");
         }
     }
 }
