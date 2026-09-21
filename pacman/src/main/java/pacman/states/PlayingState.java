@@ -23,6 +23,7 @@ public class PlayingState implements GameState {
             maze.getPacman().loseLife();
             maze.getGhosts().forEach(Ghostable::moveBehaviour);
             maze.getGhosts().forEach(Ghostable::monitorVulnerability);
+            maze.updateFruit();
             scoreManager.updateHighScore();
             maze.newLevel();
             game.checkGameOver();
@@ -38,6 +39,7 @@ public class PlayingState implements GameState {
 
     @Override
     public void togglePause(Game game) {
+        Maze.getInstance().resetFruitClock();
         game.setState(new PausedState());
         game.getGameLoop().stop();
     }

@@ -81,7 +81,7 @@ public class PacMan extends Entity {
         if (currentFruit != null && !currentFruit.isCollected() && offsetCollision(this, currentFruit)) {
             this.applyItemEffect(currentFruit);
             maze.addCollectedFruit(currentFruit);
-            maze.setCurrentFruit(null);
+            maze.collectFruit();
         }
     }
 

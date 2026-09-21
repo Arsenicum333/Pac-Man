@@ -159,6 +159,9 @@ public class Maze {
     public List<Fruit> getCollectedFruits() {return collectedFruits;}
     public static Maze getInstance() {return instance;}
 
+    public void updateFruit() {fruitManager.update();}
+    public void resetFruitClock() {fruitManager.resetClock();}
     public void setCurrentFruit(Fruit fruit) {fruitManager.setCurrentFruit(fruit);}
+    public void collectFruit() {fruitManager.collectFruit();}
     public void addCollectedFruit(Fruit fruit) {this.collectedFruits.add(fruit);}
 }

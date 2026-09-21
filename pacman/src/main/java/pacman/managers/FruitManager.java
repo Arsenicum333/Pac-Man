@@ -3,14 +3,12 @@ package pacman.managers;
 import pacman.Maze;
 import pacman.objects.items.Fruit;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class FruitManager {
     private static final FruitManager instance = new FruitManager();
     private Fruit currentFruit;
-    private Timer fruitSpawnTimer;
-    private Timer fruitDespawnTimer;
+    private boolean cycleStarted;
+    private long fruitTimer;
+    private long lastUpdateTime;
     private int fruitSpawnX;
     private int fruitSpawnY;
     private final int tileSize;
@@ -18,8 +16,6 @@ public class FruitManager {
     private static final long FRUIT_DESPAWN_DELAY = 10000;
 
     private FruitManager() {
-        fruitSpawnTimer = new Timer();
-        fruitDespawnTimer = new Timer();
         this.tileSize = Maze.getTileSize();
     }
 
@@ -29,37 +25,55 @@ public class FruitManager {
     }
 
     public void startFruitCycle() {
-        fruitSpawnTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                spawnFruit();
-            }
-        }, FRUIT_SPAWN_DELAY);
+        if (cycleStarted)
+            return;
+
+        cycleStarted = true;
+    }
+
+    public void update() {
+        if (!cycleStarted)
+            return;
+
+        long currentTime = System.nanoTime();
+
+        if (lastUpdateTime == 0) {
+            lastUpdateTime = currentTime;
+            return;
+        }
+
+        fruitTimer += (currentTime - lastUpdateTime) / 1_000_000;
+        lastUpdateTime = currentTime;
+
+        if (currentFruit == null && fruitTimer >= FRUIT_SPAWN_DELAY) {
+            spawnFruit();
+        } else if (currentFruit != null && fruitTimer >= FRUIT_DESPAWN_DELAY) {
+            despawnFruit();
+        }
     }
 
     private void spawnFruit() {
-        if (currentFruit == null || currentFruit.isCollected()) {
-            currentFruit = Fruit.createRandomFruit(fruitSpawnX, fruitSpawnY, tileSize - 6, tileSize - 6);
+        if (currentFruit != null)
+            return;
 
-            fruitDespawnTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    despawnFruit();
-                }
-            }, FRUIT_DESPAWN_DELAY);
-        }
+        currentFruit = Fruit.createRandomFruit(fruitSpawnX, fruitSpawnY, tileSize - 6, tileSize - 6);
+        fruitTimer = 0;
     }
 
     private void despawnFruit() {
         currentFruit = null;
-
-        fruitSpawnTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                spawnFruit();
-            }
-        }, FRUIT_SPAWN_DELAY);
+        fruitTimer = 0;
     }
+
+    public void collectFruit() {
+        if (currentFruit == null)
+            return;
+
+        currentFruit = null;
+        fruitTimer = 0;
+    }
+
+    public void resetClock() {lastUpdateTime = 0;}
 
     public Fruit getCurrentFruit() {return currentFruit;}
     public static FruitManager getInstance() {return instance;}
