@@ -14,6 +14,7 @@ public class PausedState implements GameState {
     @Override
     public void togglePause(Game game) {
         Maze.getInstance().resetFruitClock();
+        Maze.getInstance().getPacman().resetPowerUpClock();
         game.setState(new PlayingState());
         game.getGameLoop().start();
     }

@@ -11,6 +11,10 @@ import pacman.objects.items.Item;
 import static pacman.helpers.CollisionDetector.*;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import pacman.objects.items.powerups.PowerUp;
 
 public class PacMan extends Entity {
     private static final int MAX_LIVES = 99;
@@ -22,6 +26,8 @@ public class PacMan extends Entity {
     private int speedBoostCount;
     private int ghostEatingCount;
     private int shieldCount;
+    private final List<PowerUp<PacMan>> activePowerUps = new ArrayList<>();
+    private long lastPowerUpUpdate;
 
     public PacMan(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
@@ -122,6 +128,24 @@ public class PacMan extends Entity {
         }
     }
 
+    public void updatePowerUps() {
+        long currentTime = System.nanoTime();
+        if (lastPowerUpUpdate == 0) {
+            lastPowerUpUpdate = currentTime;
+            return;
+        }
+
+        long elapsedMillis = (currentTime - lastPowerUpUpdate) / 1_000_000;
+        lastPowerUpUpdate = currentTime;
+        Iterator<PowerUp<PacMan>> iterator = activePowerUps.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().update(this, elapsedMillis))
+                iterator.remove();
+        }
+    }
+
+    public void resetPowerUpClock() {lastPowerUpUpdate = 0;}
+
     private void updateFromEntity(Entity entity) {
         this.setX(entity.getX());
         this.setY(entity.getY());
@@ -180,7 +204,11 @@ public class PacMan extends Entity {
             invulnerable = false;
     }
 
-    private void applyItemEffect(Item<PacMan> item) {this.updateFromEntity(item.applyEffect(this));}
+    private void applyItemEffect(Item<PacMan> item) {
+        this.updateFromEntity(item.applyEffect(this));
+        if (item instanceof PowerUp<PacMan> powerUp)
+            activePowerUps.add(powerUp);
+    }
 
     public String getNewDirection() {return newDirection;}
     public int getLives() {return lives;}

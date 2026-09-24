@@ -40,8 +40,8 @@ public class ItemManager {
 
         return switch (choice) {
             case 0 -> new Heart(ImageLoader.getImage("Heart"), x, y, tileSize, tileSize);
-            case 1 -> new SpeedBoost(ImageLoader.getImage("SpeedBoost"), x, y, tileSize, tileSize, 5000);
-            case 2 -> new Shield(ImageLoader.getImage("Shield"), x, y, tileSize, tileSize, 5000);
+            case 1 -> new SpeedBoost(ImageLoader.getImage("SpeedBoost"), x, y, tileSize, tileSize, 10000);
+            case 2 -> new Shield(ImageLoader.getImage("Shield"), x, y, tileSize, tileSize, 10000);
             default -> throw new IllegalStateException("Unexpected random value: " + choice);
         };
     }

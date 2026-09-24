@@ -19,6 +19,7 @@ public class PlayingState implements GameState {
 
             maze.getPacman().move();
             maze.getPacman().eatItem();
+            maze.getPacman().updatePowerUps();
             maze.getPacman().eatGhost();
             maze.getPacman().loseLife();
             maze.getGhosts().forEach(Ghostable::moveBehaviour);
@@ -40,6 +41,7 @@ public class PlayingState implements GameState {
     @Override
     public void togglePause(Game game) {
         Maze.getInstance().resetFruitClock();
+        Maze.getInstance().getPacman().resetPowerUpClock();
         game.setState(new PausedState());
         game.getGameLoop().stop();
     }

@@ -4,17 +4,15 @@ import pacman.objects.entities.Entity;
 import pacman.objects.items.Item;
 
 import java.awt.Image;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public abstract class PowerUp<T extends Entity> extends Item<T> {
     protected int duration;
-    protected Timer effectTimer;
+    private long elapsed;
+    private boolean active;
 
     public PowerUp(Image image, int x, int y, int width, int height, int duration) {
         super(image, x, y, width, height);
         this.duration = duration;
-        this.effectTimer = new Timer();
     }
 
     @Override
@@ -24,15 +22,22 @@ public abstract class PowerUp<T extends Entity> extends Item<T> {
 
         isCollected = true;
         activate(entity);
-
-        effectTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                deactivate(entity);
-            }
-        }, duration);
+        active = true;
 
         return entity;
+    }
+
+    public boolean update(T entity, long elapsedMillis) {
+        if (!active)
+            return true;
+
+        elapsed += elapsedMillis;
+        if (elapsed < duration)
+            return false;
+
+        active = false;
+        deactivate(entity);
+        return true;
     }
 
     protected abstract void activate(T entity);
