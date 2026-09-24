@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Maze {
+    private static final int MAX_FRUITS_PER_TYPE = 99;
     private static final Logger LOGGER = LoggerFactory.getLogger(Maze.class);
     private static final Maze instance = new Maze();
     private static final int rowCount = 21;
@@ -163,5 +164,16 @@ public class Maze {
     public void resetFruitClock() {fruitManager.resetClock();}
     public void setCurrentFruit(Fruit fruit) {fruitManager.setCurrentFruit(fruit);}
     public void collectFruit() {fruitManager.collectFruit();}
-    public void addCollectedFruit(Fruit fruit) {this.collectedFruits.add(fruit);}
+    public boolean addCollectedFruit(Fruit fruit) {
+        long count = collectedFruits.stream()
+                .filter(collectedFruit -> collectedFruit.getType().equals(fruit.getType()))
+                .count();
+
+        if (count >= MAX_FRUITS_PER_TYPE)
+            return false;
+
+        collectedFruits.add(fruit);
+        return true;
+    }
+
 }

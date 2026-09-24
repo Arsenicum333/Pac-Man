@@ -13,6 +13,7 @@ import static pacman.helpers.CollisionDetector.*;
 import java.awt.Image;
 
 public class PacMan extends Entity {
+    private static final int MAX_LIVES = 99;
     private String newDirection = "";
     private int lives = 3;
     private boolean canEatGhosts;
@@ -79,9 +80,10 @@ public class PacMan extends Entity {
         }
 
         if (currentFruit != null && !currentFruit.isCollected() && offsetCollision(this, currentFruit)) {
-            this.applyItemEffect(currentFruit);
-            maze.addCollectedFruit(currentFruit);
-            maze.collectFruit();
+            if (maze.addCollectedFruit(currentFruit)) {
+                this.applyItemEffect(currentFruit);
+                maze.collectFruit();
+            }
         }
     }
 
@@ -187,7 +189,7 @@ public class PacMan extends Entity {
     public boolean canEatGhosts() {return canEatGhosts;}
 
     public void setNewDirection(String newDirection) {this.newDirection = newDirection;}
-    public void setLives(int lives) {this.lives = lives;}
+    public void setLives(int lives) {this.lives = Math.min(MAX_LIVES, Math.max(0, lives));}
     @Override
     public void setSpeed(int speed) {super.setSpeed(speed);}
     @Override

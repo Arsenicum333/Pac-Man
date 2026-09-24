@@ -1,11 +1,15 @@
 package pacman.gui;
 
 import pacman.Maze;
+import pacman.loaders.FontLoader;
 import pacman.loaders.ImageLoader;
 import pacman.objects.items.Fruit;
 
 import java.awt.*;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Footer implements Renderable {
     private final Maze maze;
@@ -23,21 +27,42 @@ public class Footer implements Renderable {
         int livesY = offsetY + mazeHeight + 10;
         int livesX = offsetX;
 
-        for (int i = 0; i < lives; i++) {
-            g.drawImage(ImageLoader.getImage("PacManIcon"), livesX + i * (lifeIconSize + lifeIconSpacing), livesY,
-                        lifeIconSize, lifeIconSize, component);
-        }
+        g.setColor(Color.WHITE);
+        g.setFont(FontLoader.getJoystixMonospaceFont(18f));
+
+        g.drawImage(ImageLoader.getImage("PacManIcon"), livesX, livesY,
+                    lifeIconSize, lifeIconSize, component);
+        g.drawString("x" + lives, livesX + lifeIconSize + lifeIconSpacing, livesY + 30);
 
         int fruitIconSize = 40;
         int fruitIconSpacing = 5;
         int fruitY = livesY;
         List<Fruit> collectedFruits = maze.getCollectedFruits();
 
-        for (int i = 0; i < collectedFruits.size(); i++) {
-            Fruit fruit = collectedFruits.get(i);
-            int fruitX = offsetX + mazeWidth - (i + 1) * (fruitIconSize + fruitIconSpacing);
+        Map<String, Fruit> representativeFruits = new LinkedHashMap<>();
+        Map<String, Integer> fruitCounts = new LinkedHashMap<>();
 
-            g.drawImage(fruit.getImage(), fruitX, fruitY, fruitIconSize, fruitIconSize, component);
-        }
+            for (Fruit fruit : collectedFruits) {
+                representativeFruits.putIfAbsent(fruit.getType(), fruit);
+                fruitCounts.merge(fruit.getType(), 1, Integer::sum);
+            }
+
+        int rightEdge = offsetX + mazeWidth;
+
+        List<String> sortedFruitTypes = fruitCounts.keySet().stream()
+            .sorted(Comparator.comparingInt((String fruitType) ->
+                representativeFruits.get(fruitType).getPoints()).reversed())
+            .toList();
+
+        for (String fruitType : sortedFruitTypes) {
+                String fruitCount = "x" + fruitCounts.get(fruitType);
+                int textWidth = g.getFontMetrics().stringWidth(fruitCount);
+                int fruitX = rightEdge - textWidth - fruitIconSpacing - fruitIconSize;
+
+                g.drawImage(representativeFruits.get(fruitType).getImage(), fruitX, fruitY,
+                            fruitIconSize, fruitIconSize, component);
+                g.drawString(fruitCount, fruitX + fruitIconSize + fruitIconSpacing, fruitY + 26);
+                rightEdge = fruitX - fruitIconSpacing;
+            }
     }
 }

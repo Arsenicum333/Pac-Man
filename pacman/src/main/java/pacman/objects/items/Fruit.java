@@ -38,4 +38,5 @@ public class Fruit extends Item<PacMan> {
     }
 
     public String getType() {return type;}
+    public int getPoints() {return points;}
 }
