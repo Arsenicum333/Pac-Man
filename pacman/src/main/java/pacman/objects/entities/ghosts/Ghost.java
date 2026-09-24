@@ -15,24 +15,33 @@ public abstract class Ghost extends Entity implements Ghostable {
     private boolean blinkState = false;
     private int blinkCounter = 0;
     private int vulnerabilityCount = 0;
+    private final int normalSpeed;
 
 
     public Ghost(Image image, int x, int y, int width, int height, int speed) {
         super(image, x, y, width, height, speed);
+        normalSpeed = speed;
         direction = "UP";
     }
 
     @Override
     public void moveBehaviour() {
-        if (!canMove(direction)) {
-            do {
-                newDirection = directions[random.nextInt(directions.length)];
-            } while (!canMove(newDirection));
-                direction = newDirection;
-        }
+        if (isFrozen)
+            return;
 
-        if (!isFrozen)
-            super.move();
+        for (int step = 0; step < getSpeed(); step++) {
+            if (!canMove(direction, 1)) {
+                do {
+                    newDirection = directions[random.nextInt(directions.length)];
+                } while (!canMove(newDirection, 1));
+                direction = newDirection;
+            }
+
+            if (canMove(direction, 1))
+                moveBy(1);
+            else
+                break;
+        }
     }
 
     @Override
@@ -84,14 +93,19 @@ public abstract class Ghost extends Entity implements Ghostable {
     public boolean isInvulnerable() {return invulnerable;}
 
     public void addVulnerability() {
+        if (vulnerabilityCount == 0)
+            setSpeed(Math.max(1, normalSpeed - 1));
+
         vulnerabilityCount++;
         setInvulnerable(true);
     }
 
     public void removeVulnerability() {
         vulnerabilityCount = Math.max(0, vulnerabilityCount - 1);
-        if (vulnerabilityCount == 0)
+        if (vulnerabilityCount == 0) {
+            setSpeed(normalSpeed);
             setInvulnerable(false);
+        }
     }
 
     @Override
