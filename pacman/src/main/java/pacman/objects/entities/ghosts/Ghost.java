@@ -10,7 +10,7 @@ public abstract class Ghost extends Entity implements Ghostable {
     private String[] directions = {"LEFT", "RIGHT", "UP", "DOWN"};
     private String newDirection = "";
     private Random random = new Random();
-    private boolean isFrozen = false;
+    private long frozenUntil;
     private boolean invulnerable = false;
     private boolean blinkState = false;
     private int blinkCounter = 0;
@@ -26,7 +26,7 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public void moveBehaviour() {
-        if (isFrozen)
+        if (System.nanoTime() < frozenUntil)
             return;
 
         for (int step = 0; step < getSpeed(); step++) {
@@ -51,14 +51,7 @@ public abstract class Ghost extends Entity implements Ghostable {
     }
 
     public void freezeTemporarily() {
-        isFrozen = true;
-
-        new java.util.Timer().schedule(new java.util.TimerTask() {
-            @Override
-            public void run() {
-                isFrozen = false;
-            }
-        }, 5000);
+        frozenUntil = System.nanoTime() + 5_000_000_000L;
     }
 
     @Override
