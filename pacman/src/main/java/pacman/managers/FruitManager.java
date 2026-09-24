@@ -73,7 +73,19 @@ public class FruitManager {
         fruitTimer = 0;
     }
 
+    public void resetCycle() {
+        currentFruit = null;
+        cycleStarted = false;
+        fruitTimer = 0;
+        lastUpdateTime = 0;
+    }
+
     public void resetClock() {lastUpdateTime = 0;}
+
+    public void resetTimer() {
+        fruitTimer = 0;
+        lastUpdateTime = 0;
+    }
 
     public Fruit getCurrentFruit() {return currentFruit;}
     public static FruitManager getInstance() {return instance;}

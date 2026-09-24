@@ -88,6 +88,7 @@ public class Maze {
             gates = new HashSet<>();
             dots = new HashSet<>();
             itemManager.getItems().clear();
+            fruitManager.resetCycle();
 
             for (int r = 0; r < rowCount; r++) {
                 for (int c = 0; c < columnCount; c++) {
@@ -162,6 +163,7 @@ public class Maze {
 
     public void updateFruit() {fruitManager.update();}
     public void resetFruitClock() {fruitManager.resetClock();}
+    public void resetFruitTimer() {fruitManager.resetTimer();}
     public void setCurrentFruit(Fruit fruit) {fruitManager.setCurrentFruit(fruit);}
     public void collectFruit() {fruitManager.collectFruit();}
     public boolean addCollectedFruit(Fruit fruit) {

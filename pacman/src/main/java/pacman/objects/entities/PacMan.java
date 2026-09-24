@@ -122,6 +122,7 @@ public class PacMan extends Entity {
             direction = "";
             newDirection = "";
             lives--;
+            maze.resetFruitTimer();
 
             if (lives > 0) {
                 maze.getGhosts().forEach(Ghostable::resetPositions);
