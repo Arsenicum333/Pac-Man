@@ -19,6 +19,7 @@ import pacman.objects.items.powerups.PowerPellet;
 
 public class PacMan extends Entity {
     private static final int MAX_LIVES = 99;
+    private static final int MAX_GHOST_SCORE = 1600;
     private String newDirection = "";
     private int lives = 3;
     private boolean canEatGhosts;
@@ -104,7 +105,7 @@ public class PacMan extends Entity {
                 .ifPresent(ghost -> {
                     ScoreManager.getInstance().addPoints(ghostScore);
                     ghost.eatenByPacMan();
-                    ghostScore *= 2;
+                    ghostScore = Math.min(MAX_GHOST_SCORE, ghostScore * 2);
                 });
         }
     }

@@ -58,7 +58,7 @@ public abstract class Entity extends GameObject implements Movable {
         }
 
         for (GameObject gate : Maze.getInstance().getGates()) {
-            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate) && direction == "DOWN")
+            if (collision(new GameObject(null, newX, newY, getWidth(), getHeight()), gate) && "DOWN".equals(direction))
                 return false;
         }
 
