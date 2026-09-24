@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import pacman.objects.items.powerups.PowerUp;
+import pacman.objects.items.powerups.PowerPellet;
 
 public class PacMan extends Entity {
     private static final int MAX_LIVES = 99;
@@ -205,6 +206,16 @@ public class PacMan extends Entity {
     }
 
     private void applyItemEffect(Item<PacMan> item) {
+        if (item instanceof PowerPellet) {
+            for (PowerUp<PacMan> activePowerUp : activePowerUps) {
+                if (activePowerUp instanceof PowerPellet powerPellet) {
+                    powerPellet.collectWhileActive();
+                    item.setCollected(true);
+                    return;
+                }
+            }
+        }
+
         this.updateFromEntity(item.applyEffect(this));
         if (item instanceof PowerUp<PacMan> powerUp)
             activePowerUps.add(powerUp);

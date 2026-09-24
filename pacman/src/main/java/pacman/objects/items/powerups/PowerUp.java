@@ -40,6 +40,8 @@ public abstract class PowerUp<T extends Entity> extends Item<T> {
         return true;
     }
 
+    protected void resetTimer() {elapsed = 0;}
+
     protected abstract void activate(T entity);
     protected abstract void deactivate(T entity);
 

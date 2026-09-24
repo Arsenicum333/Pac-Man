@@ -32,4 +32,14 @@ public class PowerPellet extends PowerUp<PacMan> {
                 ghost.removeVulnerability();
         });
     }
+
+    public void collectWhileActive() {
+        resetTimer();
+        ScoreManager.getInstance().addPoints(50);
+
+        Maze.getInstance().getGhosts().forEach(ghostable -> {
+            if (ghostable instanceof Ghost ghost)
+                ghost.restoreVulnerability();
+        });
+    }
 }

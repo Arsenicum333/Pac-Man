@@ -80,7 +80,6 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public void eatenByPacMan() {
-        vulnerabilityCount = 0;
         setInvulnerable(false);
         setImage(resetImage());
         blinkCounter = 0;
@@ -97,6 +96,10 @@ public abstract class Ghost extends Entity implements Ghostable {
             setSpeed(Math.max(1, normalSpeed - 1));
 
         vulnerabilityCount++;
+        setInvulnerable(true);
+    }
+
+    public void restoreVulnerability() {
         setInvulnerable(true);
     }
 
