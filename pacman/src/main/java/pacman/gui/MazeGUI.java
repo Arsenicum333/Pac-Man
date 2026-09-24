@@ -52,6 +52,20 @@ public class MazeGUI implements Renderable {
                         Maze.getTileSize() - 6, Maze.getTileSize() - 6, component);
         }
 
+        if (maze.getPacman().isInvulnerable()) {
+            Graphics2D shieldGraphics = (Graphics2D) g.create();
+            double pulse = (Math.sin(System.nanoTime() / 180_000_000.0) + 1) / 2;
+            int shieldSize = Maze.getTileSize() + 6;
+            int shieldX = offsetX + maze.getPacman().getX() - 3;
+            int shieldY = offsetY + maze.getPacman().getY() - 3;
+            int alpha = 150 + (int) (pulse * 80);
+
+            shieldGraphics.setColor(new Color(80, 180, 255, alpha));
+            shieldGraphics.setStroke(new BasicStroke(2.0f + (float) pulse));
+            shieldGraphics.drawOval(shieldX, shieldY, shieldSize, shieldSize);
+            shieldGraphics.dispose();
+        }
+
         g.drawImage(maze.getPacman().getImage(), offsetX + maze.getPacman().getX(), offsetY + maze.getPacman().getY(),
                     Maze.getTileSize(), Maze.getTileSize(), component);
 
