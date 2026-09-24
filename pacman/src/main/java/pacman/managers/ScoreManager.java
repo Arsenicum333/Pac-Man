@@ -9,8 +9,8 @@ public class ScoreManager implements Serializable {
     private static final ScoreManager instance = new ScoreManager();
     private static final long serialVersionUID = 1L;
     private static final String HIGH_SCORE_FILE = "highscore.data";
-    private int score; // Max Value: 2147479999
-    private int highScore; // Max Value: 2147479999
+    private long score;
+    private long highScore;
 
     public ScoreManager() {
         this.score = 0;
@@ -32,11 +32,11 @@ public class ScoreManager implements Serializable {
         }
     }
 
-    private int loadHighScore() {
+    private long loadHighScore() {
         try (FileInputStream fileIn = new FileInputStream(HIGH_SCORE_FILE);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
             ScoreManager loaded = (ScoreManager) objectIn.readObject();
-            int loadedHighScore = loaded.getHighScore();
+            long loadedHighScore = loaded.getHighScore();
             LOGGER.info("High Score loaded: " + loadedHighScore);
             return loadedHighScore;
         } catch (FileNotFoundException e) {
@@ -48,12 +48,12 @@ public class ScoreManager implements Serializable {
         }
     }
 
-    public void addPoints(int points) {this.score += points;}
+    public void addPoints(long points) {this.score += points;}
 
-    public int getScore() {return score;}
-    public int getHighScore() {return highScore;}
+    public long getScore() {return score;}
+    public long getHighScore() {return highScore;}
     public static ScoreManager getInstance() {return instance;}
 
-    public void setScore(int score) {this.score = score;}
-    public void setHighScore(int highScore) {this.highScore = highScore;}
+    public void setScore(long score) {this.score = score;}
+    public void setHighScore(long highScore) {this.highScore = highScore;}
 }

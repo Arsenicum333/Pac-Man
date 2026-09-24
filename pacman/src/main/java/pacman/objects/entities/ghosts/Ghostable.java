@@ -7,6 +7,7 @@ import java.awt.Image;
 
 public interface Ghostable extends Movable, Positionable {
     void moveBehaviour();
+    void updateFreeze(long elapsedMillis);
     void monitorVulnerability();
     void eatenByPacMan();
     Image resetImage();

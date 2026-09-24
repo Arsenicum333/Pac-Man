@@ -22,6 +22,7 @@ public class PlayingState implements GameState {
             maze.getPacman().updatePowerUps();
             maze.getPacman().eatGhost();
             maze.getPacman().loseLife();
+            maze.getGhosts().forEach(ghost -> ghost.updateFreeze(game.getGameLoop().getDelay()));
             maze.getGhosts().forEach(Ghostable::moveBehaviour);
             maze.getGhosts().forEach(Ghostable::monitorVulnerability);
             maze.updateFruit();

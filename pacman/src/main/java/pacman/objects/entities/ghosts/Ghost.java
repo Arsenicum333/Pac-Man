@@ -10,7 +10,7 @@ public abstract class Ghost extends Entity implements Ghostable {
     private String[] directions = {"LEFT", "RIGHT", "UP", "DOWN"};
     private String newDirection = "";
     private Random random = new Random();
-    private long frozenUntil;
+    private long frozenMillis;
     private boolean invulnerable = false;
     private boolean blinkState = false;
     private int blinkCounter = 0;
@@ -26,7 +26,7 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public void moveBehaviour() {
-        if (System.nanoTime() < frozenUntil)
+        if (frozenMillis > 0)
             return;
 
         for (int step = 0; step < getSpeed(); step++) {
@@ -51,7 +51,11 @@ public abstract class Ghost extends Entity implements Ghostable {
     }
 
     public void freezeTemporarily() {
-        frozenUntil = System.nanoTime() + 5_000_000_000L;
+        frozenMillis = 5000;
+    }
+
+    public void updateFreeze(long elapsedMillis) {
+        frozenMillis = Math.max(0, frozenMillis - elapsedMillis);
     }
 
     @Override
@@ -73,6 +77,8 @@ public abstract class Ghost extends Entity implements Ghostable {
 
     @Override
     public void eatenByPacMan() {
+        vulnerabilityCount = 0;
+        setSpeed(normalSpeed);
         setInvulnerable(false);
         setImage(resetImage());
         blinkCounter = 0;
@@ -93,6 +99,11 @@ public abstract class Ghost extends Entity implements Ghostable {
     }
 
     public void restoreVulnerability() {
+        if (vulnerabilityCount == 0) {
+            vulnerabilityCount = 1;
+            setSpeed(Math.max(1, normalSpeed - 1));
+        }
+
         setInvulnerable(true);
     }
 
