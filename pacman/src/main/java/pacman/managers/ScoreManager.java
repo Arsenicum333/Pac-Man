@@ -8,6 +8,7 @@ public class ScoreManager implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScoreManager.class);
     private static final ScoreManager instance = new ScoreManager();
     private static final long serialVersionUID = 1L;
+    private static final long MAX_SCORE = 9_999_999_999L;
     private static final String HIGH_SCORE_FILE = "highscore.data";
     private long score;
     private long highScore;
@@ -48,12 +49,12 @@ public class ScoreManager implements Serializable {
         }
     }
 
-    public void addPoints(long points) {this.score += points;}
+    public void addPoints(long points) {score = Math.min(MAX_SCORE, Math.max(0, score + points));}
 
     public long getScore() {return score;}
     public long getHighScore() {return highScore;}
     public static ScoreManager getInstance() {return instance;}
 
-    public void setScore(long score) {this.score = score;}
-    public void setHighScore(long highScore) {this.highScore = highScore;}
+    public void setScore(long score) {this.score = Math.min(MAX_SCORE, Math.max(0, score));}
+    public void setHighScore(long highScore) {this.highScore = Math.min(MAX_SCORE, Math.max(0, highScore));}
 }
